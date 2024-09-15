@@ -10,6 +10,8 @@ public class hello {
         in.close();
         System.out.println("byee g khan g what is yor name");
         System.out.println("lol gahyur khani my name whats your  name");
+        in.close();
+    
 
         
     }
