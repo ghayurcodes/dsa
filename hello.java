@@ -9,6 +9,8 @@ public class hello {
         System.out.println("your name is "+name);
         in.close();
         System.out.println("byee g khan g what is yor name");
-        System.out.println("lol nbhjgyjgghjf");
+        System.out.println("lol gahyur khani my name whats your  name");
+
+        
     }
 }
