@@ -8,6 +8,6 @@ public class hello {
         String name=in.next();
         System.out.println("your name is "+name);
         in.close();
-        System.out.println("byee");
+        System.out.println("byee g khan g");
     }
 }
