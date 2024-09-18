@@ -17,18 +17,21 @@ public class fibonaci_1st_day {
     public static void main(String[] args) {
         int a = 0;
         int b = 1;
+        int c=0;
         System.out.println("How many Fibonacci numbers do you want?");
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
-        System.out.println("press 1 for nirmal method press 2 for recursive functon");
+        System.out.println("press 1 for normal method press 2 for recursive functon");
         int opt=in.nextInt();
 
         if(opt==1){
+            System.out.println("0\t1\t");
             for (int i = 0; i < n; i++) {
-                System.out.print(a + "\t");
-                int c = a + b; // Calculate next Fibonacci number
+                
+                c= a + b; // Calculate next Fibonacci number
                 a = b;         // Update a to the next number
-                b = c;         // Update b to the next number
+                b = c;   
+                System.out.print(c + "\t");      // Update b to the next number
             }
 
         }
