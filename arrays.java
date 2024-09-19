@@ -21,14 +21,8 @@ public class arrays{
         for (int i = 0; i < numbers.size(); i++) {
             System.out.println("Element at index " + i + ": " + numbers.get(i));
         }
-        
-       
     
-        
-        System.out.println("Modified array:");
-        for (int number : numbers) {
-            System.out.println(number);
-        }
+       
         }
 
         else if(opt==2){
@@ -38,7 +32,7 @@ public class arrays{
         }
         else{
             System.out.println("Please chose correct option 1 or 2!");
-            return;
+        
         }
         
     }
