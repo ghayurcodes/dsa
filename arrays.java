@@ -6,7 +6,7 @@ public class arrays{
         ArrayList<Integer> numbers = new ArrayList<>();
         int[] snumbers={2,44,5,6,7,8,8};//static
 
-        System.out.println("Do you want to use dynamic(1) or static(2)?");
+        System.out.println("Do you want to use dynamic(1) or static(2) Press 3 to bubble sort?");
         Scanner in =new Scanner(System.in);
         int opt=in.nextInt();
 
@@ -27,11 +27,28 @@ public class arrays{
 
         else if(opt==2){
             for (int i = 0; i < snumbers.length; i++) {
-                System.out.println("Element at index " + i + ": " + numbers.get(i));
+                System.out.println("Element at index " + i + ": " + snumbers[i]);
+            }
+        }
+
+        else if(opt==3){
+            for(int i=0;i<snumbers.length-1;i++){
+                for(int j=0;j<snumbers.length-i-1;j++){
+                        if(snumbers[j]>snumbers[j+1]){
+                            int temp=snumbers[j+1];
+                            snumbers[j+1]=snumbers[j];
+                            snumbers[j]=temp;
+                        }
+                }
+            }
+            System.out.println("Now Displaying---\n");
+            for (int i = 0; i < snumbers.length; i++) {
+                System.out.println("Element at index " + i + ": " + snumbers[i]);
             }
         }
         else{
             System.out.println("Please chose correct option 1 or 2!");
+        
         
         }
         
