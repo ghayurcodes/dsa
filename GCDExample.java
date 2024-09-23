@@ -23,5 +23,6 @@ public class GCDExample {
         int[] array=new int[2];
         int gcd = findGCD(num1, num2);
         System.out.println("GCD of " + num1 + " and " + num2 + " is: " + gcd);
+        in.close();
     }
 }
