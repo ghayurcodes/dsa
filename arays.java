@@ -13,14 +13,31 @@ public class arays {
         //     System.out.println(arr[i]);
         // }
 
-        String first="ghayur";
+        String first="ghayur";//string in java are immutable
         String last="ahayur";
-        System.out.println(first.substring(3, 6));
-        // System.out.println("pls enter something");
-        // Scanner in=new Scanner(System.in);
-        // String g=in.nextLine();
-        // System.out.println("you typed : "+g);
+        // System.out.println(first.substring(3, 6));
+        //just use string builder for more efficent code
+        StringBuilder s=new StringBuilder("hello");
+        System.out.println(s);
+        
 
+        // for(int i=0;i<s.length()/2;i++){
+        //   int front=i;
+        //   int back=s.length()-1-i;
+
+        //   char atfront=s.charAt(front);         //reverse a string
+        //   char atback=s.charAt(back);
+
+        //   s.setCharAt(front, atback);
+        //   s.setCharAt(back, atfront);
+        // }
+        // System.err.println();
+
+        // StringBuilder se=new StringBuilder();
+        // for (int i = 0; i < s.length(); i++) {
+        //     se.append(s.charAt(s.length()-1-i));          //own method
+        // }
+        // System.out.println(se);
         
 
     }
