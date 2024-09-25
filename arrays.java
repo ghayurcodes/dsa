@@ -21,6 +21,7 @@ public class arrays{
         for (int i = 0; i < numbers.size(); i++) {
             System.out.println("Element at index " + i + ": " + numbers.get(i));
         }
+        
     
        
         }
