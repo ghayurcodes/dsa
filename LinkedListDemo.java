@@ -1,74 +1,73 @@
-// class Node {
-//     int data;
-//     Node next;
+class Node {
+    int data;
+    Node next;
 
-//     // Constructor to initialize a new node
-//     Node(int data) {
-//         this.data = data;
-//         this.next = null;
-//     }
-// }
+    // Constructor to initialize a new node
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
 
-// class LinkedList {
-//     Node head;
+class LinkedList {
+    Node head;
 
-//     // Function to reverse the linked list
-//     public void reverse() {
-//         Node previous = null;
-//         Node current = head;
-//         Node next = null;
+   
+    public void reverse() {
+        Node previous = null;
+        Node current = head;
+        Node next = null;
 
-//         while (current != null) {
-//             next = current.next;  // Save the next node
-//             current.next = previous;  // Reverse the link
-//             previous = current;  // Move the 'previous' pointer forward
-//             current = next;  // Move to the next node
-//         }
-//         head = previous;  // Update the head to the new first node
-//     }
+        while (current != null) {
+            next = current.next;  // Save the next node
+            current.next = previous;  // Reverse the link
+            previous = current;  // Move the 'previous' pointer forward
+            current = next;  // Move to the next node
+        }
+        head = previous;  // Update the head to the new first node
+    }
 
-//     // Function to add a new node at the end of the list
-//     public void append(int data) {
-//         if (head == null) {
-//             head = new Node(data);
-//             return;
-//         }
-//         Node temp = head;
-//         while (temp.next != null) {
-//             temp = temp.next;
-//         }
-//         temp.next = new Node(data);
-//     }
+    
+    public void append(int data) {
+        if (head == null) {
+            head = new Node(data);
+            return;
+        }
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = new Node(data);
+    }
 
-//     // Function to print the linked list
-//     public void printList() {
-//         Node temp = head;
-//         while (temp != null) {
-//             System.out.print(temp.data + " ");
-//             temp = temp.next;
-//         }
-//         System.out.println();
-//     }
-// }
+    public void printList() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+}
 
-// public class LinkedListDemo {
-//     public static void main(String[] args) {
-//         LinkedList list = new LinkedList();
+public class LinkedListDemo {
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
 
-//         // Adding elements to the list
-//         list.append(1);
-//         list.append(2);
-//         list.append(3);
-//         list.append(4);
-//         list.append(5);
+        // Adding elements to the list
+        list.append(1);
+        list.append(2);
+        list.append(3);
+        list.append(4);
+        list.append(5);
 
-//         System.out.println("Original List:");
-//         list.printList();
+        System.out.println("Original List:");
+        list.printList();
 
-//         // Reversing the list
-//         list.reverse();
+      
+        list.reverse();
 
-//         System.out.println("Reversed List:");
-//         list.printList();
-//     }
-// }
+        System.out.println("Reversed List:");
+        list.printList();
+    }
+}
