@@ -72,7 +72,7 @@ class LinkedList {
             temp=temp.next;//indexx 1  2
             i++;//i=1 i=2
         }
-        temp.next=temp.next.next;
+        temp.next=temp.next.next;//skiping teh moiddle one
     }
 }
 
