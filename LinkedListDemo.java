@@ -2,7 +2,7 @@ class Node {
     int data;
     Node next;
 
-    // Constructor to initialize a new node
+    
     Node(int data) {
         this.data = data;
         this.next = null;
@@ -14,6 +14,10 @@ class LinkedList {
 
    
     public void reverse() {
+
+        if(head.next==null){
+            return ;
+        }
         Node previous = null;
         Node current = head;
         Node next = null;
@@ -27,7 +31,6 @@ class LinkedList {
         head = previous;  // Update the head to the new first node
     }
 
-    
     public void append(int data) {
         if (head == null) {
             head = new Node(data);
@@ -41,6 +44,8 @@ class LinkedList {
     }
 
     public void printList() {
+
+
         Node temp = head;
         while (temp != null) {
             System.out.print(temp.data + " ");
@@ -48,7 +53,29 @@ class LinkedList {
         }
         System.out.println();
     }
+
+    public int size(){
+        int size=0;
+        Node temp=head;
+        while(temp!=null){
+            temp=temp.next;//2,3,4,5,6
+            size++;//1,2,3,4,5
+        }
+        return size;
+    }
+
+    void remove(int index){//3 index value 4
+        Node temp=head;
+        int i=0;
+
+        while(i<size()-index){//0<2   1<2
+            temp=temp.next;//indexx 1  2
+            i++;//i=1 i=2
+        }
+        temp.next=temp.next.next;
+    }
 }
+
 
 public class LinkedListDemo {
     public static void main(String[] args) {
@@ -69,5 +96,15 @@ public class LinkedListDemo {
 
         System.out.println("Reversed List:");
         list.printList();
+
+        System.out.println(list.size());
+
+
+        list.remove(3);
+        list.printList();
+
+
+
+
     }
 }
