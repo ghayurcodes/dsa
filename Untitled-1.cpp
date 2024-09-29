@@ -7,7 +7,7 @@ public:
     Node* next;
 
     Node(int data) {
-        this->data = data;
+       (*this).data = data;
         this->next = nullptr;
     }
 };
@@ -89,9 +89,9 @@ public:
 
         Node* temp = head;
         int i = 0;
-        while (i < size() - index - 1) {
-            temp = temp->next;
-            i++;
+        while (i < size() - index) {//2 
+            temp = temp->next;//index 1 val 2   index 2 val 3
+            i++;  
         }
 
         Node* toDelete = temp->next;
