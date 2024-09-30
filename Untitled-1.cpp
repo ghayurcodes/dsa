@@ -10,6 +10,10 @@ public:
        (*this).data = data;
         this->next = nullptr;
     }
+
+    ~Node(){
+        cout<<"index deleted with value :"<<this->data<<endl;
+    }
 };
 
 class LinkedList {
@@ -19,6 +23,8 @@ public:
     LinkedList() {
         head = nullptr;
     }
+
+    
 
     // Function to reverse the linked list
     void reverse() {
@@ -56,7 +62,7 @@ public:
     // Function to print the linked list
     void printList() {
         Node* temp = head;
-        while (temp->next != nullptr) { 
+        while (temp != nullptr) { 
             cout << temp->data << " "; 
             temp = temp->next;//2 
         }
@@ -147,14 +153,14 @@ int main() {
     // list.printList();
 
     // Print the size of the list
-    cout << list.size() << endl;
+    cout <<"Size of List is :"<< list.size() << endl;
 
     // Remove an element by index
-    list.remove(4);
+    list.remove(2);
     list.printList();
 
-    list.inser_middle(44,3);
-    list.printList();
+    // list.inser_middle(44,3);
+    // list.printList();
 
     return 0;
 }
