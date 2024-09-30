@@ -87,16 +87,18 @@ public:
             return;
         }
 
-        Node* temp = head;
-        int i = 0;
-        while (i < size() - index) {//2 
-            temp = temp->next;//index 1 val 2   index 2 val 3
-            i++;  
-        }
+       Node* temp = head;
+    int i = 0;
+    while (i < index - 1) {
+        temp = temp->next;
+        i++;
+    }
 
-        Node* toDelete = temp->next;
-        temp->next = temp->next->next;
-        delete toDelete;
+    // `temp` now points to the node before the one we want to delete
+    Node* toDelete = temp->next;
+    temp->next = temp->next->next;
+    delete toDelete;
+
     }
 };
 
@@ -114,16 +116,16 @@ int main() {
     list.printList();
 
     // Reverse the list
-    list.reverse();
+    // list.reverse();
 
-    cout << "Reversed List:" << endl;
-    list.printList();
+    // cout << "Reversed List:" << endl;
+    // list.printList();
 
     // Print the size of the list
     cout << list.size() << endl;
 
     // Remove an element by index
-    list.remove(3);
+    list.remove(4);
     list.printList();
 
     return 0;
