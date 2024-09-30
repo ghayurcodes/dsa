@@ -94,7 +94,7 @@ public:
         i++;
     }
 
-    // `temp` now points to the node before the one we want to delete
+    
     Node* toDelete = temp->next;
     temp->next = temp->next->next;
     delete toDelete;
