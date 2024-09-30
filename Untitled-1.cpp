@@ -56,9 +56,9 @@ public:
     // Function to print the linked list
     void printList() {
         Node* temp = head;
-        while (temp != nullptr) {
-            cout << temp->data << " ";
-            temp = temp->next;
+        while (temp->next != nullptr) { 
+            cout << temp->data << " "; 
+            temp = temp->next;//2 
         }
         cout << endl;
     }
@@ -100,6 +100,31 @@ public:
     delete toDelete;
 
     }
+
+    void inser_middle(int val, int index) {
+    if (index <= 0 || index > size()) {
+        cout << "Invalid index" << endl;
+        return;
+    }
+
+    Node* temp = head;
+    int i = 0;
+
+    // Traverse to the node before the insertion point
+    while (i < index - 1 && temp != nullptr) {
+        temp = temp->next;
+        i++;
+    }
+
+    // Insert the new node
+    Node* newNode = new Node(val);
+    newNode->next = temp->next; // New node should point to the current next node
+    temp->next = newNode; // Current node should point to the new node
+    delete newNode;
+}
+
+
+
 };
 
 int main() {
@@ -126,6 +151,9 @@ int main() {
 
     // Remove an element by index
     list.remove(4);
+    list.printList();
+
+    list.inser_middle(44,3);
     list.printList();
 
     return 0;
