@@ -22,6 +22,7 @@ int main() {
 
     ptr1 = nullptr;
     ptr2 = nullptr;  // Set both to nullptr to avoid dangling pointers
+    cout<<*ptr1<<" "<<*ptr2<<endl;
 
     return 0;
 }
