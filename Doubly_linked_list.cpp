@@ -6,11 +6,12 @@ class Node{
     public:
     int data;
     Node* next;
-    Node* prev
+     Node* previous;
 
     Node(int data){
         this->data=data;
         this->next=nullptr;
+        this->previous=nullptr;
     }
 
     ~Node(){
@@ -37,7 +38,7 @@ class Linked_list{
                 temp=temp->next;
             }
             temp->next=new Node(val);
-            temp->next.
+            temp->next->previous=temp;
 
         }
     }

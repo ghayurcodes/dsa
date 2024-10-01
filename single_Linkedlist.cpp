@@ -5,12 +5,12 @@ class Node {
 public:
     int data;
     Node* next;
-    Node* previous;
+   
 
     Node(int data) {
        (*this).data = data;
         this->next = nullptr;
-        this->previous=nullptr;
+        
     }
 
     ~Node(){
@@ -59,7 +59,7 @@ public:
             temp = temp->next;
         }
         temp->next = new Node(data);
-        temp->next->previous=temp->next;
+        
     }
 
     // Function to print the linked list
