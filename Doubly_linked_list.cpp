@@ -42,6 +42,25 @@ public:
         }
     }
 
+    int size(){
+        int size=0;
+        Node* temp=head;
+        while(temp!=nullptr){
+            temp=temp->next;
+            size++;
+
+        }
+        return size;
+    }
+
+
+    void addat(int val,int index){
+        Node* temp=head;
+        while(temp){
+
+        }
+    }
+
     // Printing the list from the head to the end
     void print() {
         Node* temp = head;
@@ -79,6 +98,8 @@ public:
             temp = nextNode;
         }
     }
+
+    
 };
 
 int main() {
@@ -94,8 +115,10 @@ int main() {
     list.print();
 
     // Printing the list from end to head (reverse order)
-    cout << "List in reverse order: ";
-    list.printReverse();
+    // cout << "List in reverse order: ";
+    // list.printReverse();
+
+    cout<<"size: "<<list.size()<<endl;
 
     return 0;
 }

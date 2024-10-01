@@ -1,3 +1,1 @@
-LinkedList() {
-        head = nullptr;
-    }
+    void addat(int val,int index){
