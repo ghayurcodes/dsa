@@ -56,7 +56,7 @@ public:
 
     void addat(int val,int index){
         Node* temp=head;
-        while(temp){
+        while(size()-index){
 
         }
     }
