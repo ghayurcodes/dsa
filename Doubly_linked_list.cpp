@@ -2,68 +2,100 @@
 
 using namespace std;
 
-class Node{
-    public:
+class Node {
+public:
     int data;
     Node* next;
-     Node* previous;
+    Node* prev; // Pointer to the previous node
 
-    Node(int data){
-        this->data=data;
-        this->next=nullptr;
-        this->previous=nullptr;
+    Node(int data) {
+        this->data = data;
+        this->next = nullptr;
+        this->prev = nullptr; // Initialize prev as nullptr
     }
 
-    ~Node(){
-        cout<<"index deleted with value :"<<this->data<<endl;
+    ~Node() {
+        cout << "Node deleted with value: " << this->data << endl;
     }
 };
 
-class Linked_list{
-    public:
+class DoublyLinkedList {
+public:
     Node* head;
 
-    Linked_list(){
-        head=nullptr;
+    DoublyLinkedList() {
+        head = nullptr;
     }
 
-    void add(int val){
-        if(head==nullptr){
-            head=new Node(val);
-        }
-        else{
-            Node* temp=head;
-
-            while(temp->next!=NULL){
-                temp=temp->next;
+    // Adding node to the end of the list
+    void add(int val) {
+        Node* newNode = new Node(val);
+        if (head == nullptr) {
+            head = newNode;
+        } else {
+            Node* temp = head;
+            while (temp->next != nullptr) {
+                temp = temp->next;
             }
-            temp->next=new Node(val);
-            temp->next->previous=temp;
-
+            temp->next = newNode;
+            newNode->prev = temp; // Set the previous pointer
         }
     }
 
-
-    void print(){
-        Node* temp=head;
-        while(temp!=NULL){
-            cout<<temp->data<<" ";
-            temp=temp->next;
+    // Printing the list from the head to the end
+    void print() {
+        Node* temp = head;
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->next;
         }
-        cout<<endl;
+        cout << endl;
     }
-    
+
+    // Printing the list from the end to the head (reverse print)
+    void printReverse() {
+        if (head == nullptr) return;
+
+        Node* temp = head;
+        // Go to the last node
+        while (temp->next != nullptr) {
+            temp = temp->next;
+        }
+
+        // Traverse backwards using prev pointers
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->prev;
+        }
+        cout << endl;
+    }
+
+    ~DoublyLinkedList() {
+        // Destructor to delete all nodes and avoid memory leaks
+        Node* temp = head;
+        while (temp != nullptr) {
+            Node* nextNode = temp->next;
+            delete temp;
+            temp = nextNode;
+        }
+    }
 };
 
-int main(){
-    Linked_list list;
+int main() {
+    DoublyLinkedList list;
     list.add(3);
     list.add(6);
     list.add(9);
     list.add(12);
     list.add(14);
 
-    //printing
+    // Printing the list from head to end
+    cout << "List in forward order: ";
     list.print();
 
+    // Printing the list from end to head (reverse order)
+    cout << "List in reverse order: ";
+    list.printReverse();
+
+    return 0;
 }
