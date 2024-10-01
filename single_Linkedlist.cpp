@@ -129,7 +129,7 @@ public:
     Node* newNode = new Node(val);
     newNode->next = temp->next; // New node should point to the current next node
     temp->next = newNode; // Current node should point to the new node
-    delete newNode;
+
 }
 
 
@@ -159,7 +159,8 @@ int main() {
     cout <<"Size of List is :"<< list.size() << endl;
 
     // Remove an element by index
-    list.remove(2);
+    // list.remove(2);
+    list.inser_middle(45,2);
     list.printList();
 
     // list.inser_middle(44,3);

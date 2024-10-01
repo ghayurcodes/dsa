@@ -54,12 +54,40 @@ public:
     }
 
 
-    void addat(int val,int index){
-        Node* temp=head;
-        while(size()-index){
-
-        }
+    void addat(int val, int index) {
+    if (index < 0 || index > size()) {
+        cout << "Invalid index" << endl;
+        return;
     }
+
+    Node* newnode = new Node(val);
+
+    // Case 1: Insert at the beginning (index == 0)
+    if (index == 0) {
+        newnode->next = head;
+        if (head != nullptr) {
+            head->prev = newnode; // Update the previous head's prev pointer
+        }
+        head = newnode; // New node becomes the new head
+        return;
+    }
+
+    Node* temp = head;
+    
+    // Traverse to the node just before the insertion point
+    for (int i = 0; i < index - 1 && temp != nullptr; i++) {
+        temp = temp->next;
+    }
+
+    // Case 2: Insert in the middle or end
+    newnode->next = temp->next;
+    if (temp->next != nullptr) {
+        temp->next->prev = newnode; // Set the next node's prev pointer if it's not null
+    }
+    temp->next = newnode;
+    newnode->prev = temp; // Set the new node's prev pointer
+}
+
 
     // Printing the list from the head to the end
     void print() {
