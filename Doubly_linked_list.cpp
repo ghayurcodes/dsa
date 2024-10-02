@@ -127,11 +127,15 @@ public:
         }
     }
 
+    void remove(){
+        
+    }
+
     
 };
 
 int main() {
-    DoublyLinkedList list=new;
+    DoublyLinkedList list;
     list.add(3);
     list.add(6);
     list.add(9);
@@ -148,7 +152,7 @@ int main() {
 
     cout<<"size: "<<list.size()<<endl;
 
-    delete list;
+    
 
     return 0;
 }
