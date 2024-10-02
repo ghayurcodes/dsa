@@ -131,7 +131,7 @@ public:
 };
 
 int main() {
-    DoublyLinkedList list;
+    DoublyLinkedList list=new;
     list.add(3);
     list.add(6);
     list.add(9);
@@ -147,6 +147,8 @@ int main() {
     // list.printReverse();
 
     cout<<"size: "<<list.size()<<endl;
+
+    delete list;
 
     return 0;
 }
