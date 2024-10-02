@@ -127,9 +127,46 @@ public:
         }
     }
 
-    void remove(){
-        
+    void remove(int index) {
+    // Check if the list is empty
+    if (head == nullptr) {
+        cout << "List is empty" << endl;
+        return;
     }
+
+    // Check for out-of-bound index
+    if (index < 0 || index >= size()) {
+        cout << "Invalid index" << endl;
+        return;
+    }
+
+    // Case 1: Removing the head node
+    if (index == 0) {
+        Node* temp = head;
+        head = head->next; // Move head to the next node
+        if (head != nullptr) {
+            head->prev = nullptr; // Update the new head's prev pointer
+        }
+        delete temp; // Delete the original head node
+        return;
+    }
+
+    // Traverse to the node at the given index
+    Node* temp = head;
+    for (int i = 0; i < index; i++) {
+        temp = temp->next;
+    }
+
+    // Case 2: Removing a middle or last node
+    if (temp->next != nullptr) { // Not the last node
+        temp->next->prev = temp->prev; // Update the next node's prev pointer
+    }
+    if (temp->prev != nullptr) { // Not the head
+        temp->prev->next = temp->next; // Update the previous node's next pointer
+    }
+
+    delete temp; // Delete the node
+}
 
     
 };
@@ -144,6 +181,9 @@ int main() {
 
     // Printing the list from head to end
     cout << "List in forward order: ";
+    list.print();
+
+    list.remove(2);
     list.print();
 
     // Printing the list from end to head (reverse order)
