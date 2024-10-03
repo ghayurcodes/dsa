@@ -12,7 +12,6 @@ public:
         this->next = nullptr;
     
     }
-
     ~Node() {
         cout << "Node deleted with value: " << this->data << endl;
     }
