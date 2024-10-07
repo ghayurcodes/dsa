@@ -75,11 +75,22 @@ public:
             curr->next=prev;
             prev=curr; 
             curr=next;
-           
-             
-    
+        
         }
         head=prev;
+
+
+    }
+
+
+    void reverse_recurcion(Node*& prev,Node*& curr){//pasing by referanec tahts why using & sign
+            if(curr==NULL){
+                head=prev;
+                return;
+            }
+            Node* next=curr->next;
+            reverse_recurcion(curr,next);
+            curr->next=prev;
 
 
     }
@@ -99,8 +110,13 @@ list.append(2);
 //displaying
 list.display();
 cout<<endl;
-list.reverse();
+Node* curr=list.head;
+Node*prev= nullptr;
+list.reverse_recurcion(prev,curr);
 list.display();
+
+
+
 cout<<endl;
     
 }
