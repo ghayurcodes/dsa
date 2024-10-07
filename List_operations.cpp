@@ -65,6 +65,24 @@ public:
     }
 
 
+    void reverse(){
+        Node* curr=head;
+        Node* prev=nullptr;
+        Node* next=nullptr;
+
+        while(curr!=nullptr){
+            next==curr->next;
+            curr->next=prev;
+             prev=curr;
+             curr=next;
+        
+
+        }
+        head=prev;
+
+
+    }
+
 
 };
 
@@ -80,7 +98,9 @@ list.append(2);
 //displaying
 list.display();
 cout<<endl;
-
+list.reverse();
+list.display();
+cout<<endl;
     
 }
 
