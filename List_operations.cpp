@@ -71,12 +71,13 @@ public:
         Node* next=nullptr;
 
         while(curr!=nullptr){
-            next==curr->next;
+            next=curr->next;
             curr->next=prev;
-             prev=curr;
-             curr=next;
-        
-
+            prev=curr; 
+            curr=next;
+           
+             
+    
         }
         head=prev;
 
