@@ -71,7 +71,7 @@ public:
         Node* next=nullptr;
 
         while(curr!=nullptr){
-            next=curr->next;
+            next=curr->next; //most basic code
             curr->next=prev;
             prev=curr; 
             curr=next;
