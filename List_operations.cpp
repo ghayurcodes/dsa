@@ -93,7 +93,12 @@ public:
             curr->next=prev;
         
 
+    }
 
+
+
+    void middle(){
+        
     }
 
 
