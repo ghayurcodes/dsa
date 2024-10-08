@@ -97,8 +97,12 @@ public:
 
 
 
-    void middle(){
-        
+    void middle(int){
+        int index=0;
+        int middle_element=0;
+        cout<<size()/2;
+
+
     }
 
 
@@ -116,9 +120,13 @@ list.append(2);
 //displaying
 list.display();
 cout<<endl;
-Node* curr=list.head;
-Node*prev= nullptr;
-list.reverse_recurcion(prev,curr);
+
+
+// Node* curr=list.head;
+// Node*prev= nullptr;
+// list.reverse_recurcion(prev,curr); recursive call
+
+
 list.display();
 
 
