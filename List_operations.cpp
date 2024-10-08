@@ -97,10 +97,14 @@ public:
 
 
 
-    void middle(int){
-        int index=0;
-        int middle_element=0;
-        cout<<size()/2;
+    void middle(){
+       
+        Node* temp=head;
+        for(int i=0;i<size()/2;i++){
+            temp=temp->next;
+        }
+        cout<<"middel element at index: "<<size()/2<<" Element: "<<temp->data<<endl;
+
 
 
     }
@@ -115,7 +119,8 @@ list.append(3);
 list.append(4);
 list.append(9);
 list.append(7);
-list.append(2);
+list.append(12);
+
 
 //displaying
 list.display();
@@ -127,7 +132,8 @@ cout<<endl;
 // list.reverse_recurcion(prev,curr); recursive call
 
 
-list.display();
+
+list.middle();
 
 
 
