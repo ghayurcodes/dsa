@@ -91,7 +91,7 @@ public:
             Node* next=curr->next;
             reverse_recurcion(curr,next);
             curr->next=prev;
-            cout<<"fixed :"<<curr->data<<endl;
+        
 
 
     }
