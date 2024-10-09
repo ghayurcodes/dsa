@@ -145,6 +145,22 @@ public:
         temp->next=temp->next->next;
         delete To_delete;
 
+
+    }
+
+
+    void join(LinkedList* list1,LinkedList* list2){
+        Node* temp1=list1->head;
+         Node*temp2=list2->head;
+
+         while(temp1->next!=nullptr){
+            temp1=temp1->next;
+
+         }
+         temp1->next=temp2;
+
+         
+
     }
 
 
@@ -180,9 +196,11 @@ cout<<endl;
 // list.middle();
 
 
-cout<<list.exists(122);
-cout<<endl;
-list.remove(12);
+// cout<<list.exists(122);
+// cout<<endl;
+// list.remove(12);
+
+list.join(&list,&list2);
 list.display();
 
 
