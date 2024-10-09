@@ -1,27 +1,15 @@
 import 'dart:io';
 
-// void main() {
-//   stdout.write("Enter a number");
-//   int num = int.parse(stdin.readLineSync()!);
-//   for (var i = 1; i <= num; i++) {
-//     if (num % i == 0) {
-//       print(i);
-//     }
-//   }
-// }
-
-
-
 void main() {
-  print(factorial(6));
-}
+  List list = List.filled(3, 0);
 
-int factorial(int number) {
-  if (number <= 0) {
-    // termination case
-    return 1;
-  } else {
-    return (number * factorial(number - 1));
-    // function invokes itself
-  }
+  list[0] = 2;
+  list[1] = 4;
+  list[2] = 7;
+  
+
+  print(list);
+  list.add(34);
+  print('after');
+  print(list);
 }
