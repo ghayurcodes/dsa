@@ -109,6 +109,30 @@ public:
 
     }
 
+    bool exists(int element){
+        Node* temp=head;
+        bool exists=false;
+
+        while(temp!=nullptr){
+            if(temp->data==element){
+                exists=true;
+                return exists;
+                break;
+            }
+            else{
+                temp=temp->next;
+            }
+            
+
+        }
+        // if(!exists){
+        //     return exists;
+        // }
+
+        return exists;
+        
+    }
+
 
 };
 
@@ -133,8 +157,10 @@ cout<<endl;
 
 
 
-list.middle();
+// list.middle();
 
+
+cout<<list.exists(122);
 
 
 cout<<endl;
