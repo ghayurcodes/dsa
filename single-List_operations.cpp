@@ -125,9 +125,7 @@ public:
             
 
         }
-        // if(!exists){
-        //     return exists;
-        // }
+      
 
         return exists;
         
@@ -201,10 +199,9 @@ cout<<endl;
 // cout<<list.exists(122);
 // cout<<endl;
 // list.remove(12);
-
-list.join(&list,&list2);
-list.display();
-
+// list.display();
+// list.join(&list,&list2);
+// list.display();
 
 cout<<endl;
     
