@@ -164,18 +164,40 @@ public:
     }
 
 
+   Node* k_reverse(Node* head,int k){
+
+        if(head==NULL){
+            return NULL;
+        }
+        Node* curr=head;
+        Node* prev=nullptr;
+        Node* frwrd=nullptr;
+        int count=0;
+
+         while(curr!=nullptr && count<k){
+            frwrd=curr->next; 
+            curr->next=prev;
+            prev=curr; 
+            curr=frwrd;
+            count++;
+        }
+        
+
+    }
+
+
 };
 
 int main(){
 LinkedList list;
 
+list.append(1);
+list.append(2);
 list.append(3);
 list.append(4);
-list.append(9);
-list.append(7);
-list.append(12);
-list.append(90);
-list.append(142);
+list.append(5);
+list.append(6);
+
 
 LinkedList list2;
 list2.append(88);
