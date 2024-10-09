@@ -141,7 +141,10 @@ public:
             temp=temp->next;
 
         }
-        cout<<temp->data;
+        Node* To_delete=temp->next;
+        temp->next=temp->next->next;
+        delete To_delete;
+
     }
 
 
@@ -155,6 +158,9 @@ list.append(4);
 list.append(9);
 list.append(7);
 list.append(12);
+list.append(90);
+list.append(142);
+
 
 
 //displaying
@@ -173,7 +179,8 @@ cout<<endl;
 
 cout<<list.exists(122);
 cout<<endl;
-list.remove(9);
+list.remove(12);
+list.display();
 
 
 cout<<endl;
