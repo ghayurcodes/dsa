@@ -161,6 +161,9 @@ list.append(12);
 list.append(90);
 list.append(142);
 
+LinkedList list2;
+list2.append(88);
+list2.append(99);
 
 
 //displaying
