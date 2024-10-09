@@ -6,10 +6,14 @@ void main() {
   list[0] = 2;
   list[1] = 4;
   list[2] = 7;
-  
 
-  print(list);
-  list.add(34);
+  List list_expanded = [3, 5, 7];
+
+  print(list_expanded);
+  list_expanded.add(34);
+  list_expanded.insert(1, 1);
   print('after');
-  print(list);
+  print(list_expanded);
+
+
 }
