@@ -134,6 +134,17 @@ public:
     }
 
 
+    void remove(int element){
+        Node* temp=head;
+
+        while(temp->next->data!=element){
+            temp=temp->next;
+
+        }
+        cout<<temp->data;
+    }
+
+
 };
 
 int main(){
@@ -161,6 +172,8 @@ cout<<endl;
 
 
 cout<<list.exists(122);
+cout<<endl;
+list.remove(9);
 
 
 cout<<endl;
