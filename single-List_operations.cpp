@@ -164,20 +164,18 @@ public:
 
 
      void is_circular() {
-        Node* slow = head;
-        Node* fast = head;
+        
+            if(head==nullptr){
+                cout<<"no liked list yet\n";
+            }
 
+        Node* temp = head->next;
         bool is_circular = false;
 
-        while (fast != nullptr && fast->next != nullptr) {
-            slow = slow->next;
-            fast = fast->next->next;
-
-            if (slow == fast) {
-                is_circular = true;
-                break;
-            }
+        while(temp!=head && temp!=NULL){
+            
         }
+
 
         cout << "It is " << (is_circular ? "circular" : "not circular") << endl;
     }
