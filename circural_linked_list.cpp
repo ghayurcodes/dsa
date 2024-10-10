@@ -96,6 +96,30 @@ public:
             delete curr;
         }
     }
+
+
+
+
+
+    
+     void is_circular() {
+        Node* slow = head;
+        Node* fast = head;
+
+        bool is_circular = false;
+
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+
+            if (slow == fast) {
+                is_circular = true;
+                break;
+            }
+        }
+
+        cout << "It is " << (is_circular ? "circular" : "not circular") << endl;
+    }
 };
 
 int main() {
