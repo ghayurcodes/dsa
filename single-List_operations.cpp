@@ -173,11 +173,18 @@ public:
         bool is_circular = false;
 
         while(temp!=head && temp!=NULL){
-            
+            temp=temp->next;
         }
+
+        if(temp==head){
+            is_circular=true;
+
+        }
+    
 
 
         cout << "It is " << (is_circular ? "circular" : "not circular") << endl;
+        delete temp;
     }
 };
 
