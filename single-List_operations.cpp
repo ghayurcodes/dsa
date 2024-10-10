@@ -168,15 +168,16 @@ public:
         bool is_circural=false;
 
 
-        do{
-            if(temp==head){
-                is_circural=true;
-                break;
-            }
-            temp=temp->next;
-        }while(true);
+       while(true){
+        if(temp->next==NULL){
+            is_circural=true;
+            break;
+        }
+        temp=temp->next;
+       }
 
-        cout<<""
+        cout<<"it is :"<<is_circural?"circural ":"not circural";
+        cout<<endl;
     }
 };
 
@@ -205,6 +206,8 @@ int main() {
     // cout << "After k-reverse:" << endl;
     // list.display();
     // cout << endl;
+
+    list.is_circural();
 
     return 0;
 }
