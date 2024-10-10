@@ -160,6 +160,24 @@ public:
         // Return the new head
         return prev;
     }
+
+
+
+    void is_circural(){
+        Node* temp=head;
+        bool is_circural=false;
+
+
+        do{
+            if(temp==head){
+                is_circural=true;
+                break;
+            }
+            temp=temp->next;
+        }while(true);
+
+        cout<<""
+    }
 };
 
 int main() {
@@ -181,12 +199,12 @@ int main() {
     cout << endl;
 
     // k reverse call
-    list.head = list.k_reverse(list.head, 2);
+    // list.head = list.k_reverse(list.head, 2);
     
-    // Display after reverse
-    cout << "After k-reverse:" << endl;
-    list.display();
-    cout << endl;
+    // // Display after reverse
+    // cout << "After k-reverse:" << endl;
+    // list.display();
+    // cout << endl;
 
     return 0;
 }
