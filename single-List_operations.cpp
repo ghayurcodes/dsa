@@ -184,7 +184,7 @@ public:
 
 
         cout << "It is " << (is_circular ? "circular" : "not circular") << endl;
-        delete temp;
+        
     }
 };
 
