@@ -163,21 +163,23 @@ public:
 
 
 
-    void is_circural(){
-        Node* temp=head;
-        bool is_circural=false;
+     void is_circular() {
+        Node* slow = head;
+        Node* fast = head;
 
+        bool is_circular = false;
 
-       while(true){
-        if(temp->next==NULL){
-            is_circural=true;
-            break;
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+
+            if (slow == fast) {
+                is_circular = true;
+                break;
+            }
         }
-        temp=temp->next;
-       }
 
-        cout<<"it is :"<<is_circural?"circural ":"not circural";
-        cout<<endl;
+        cout << "It is " << (is_circular ? "circular" : "not circular") << endl;
     }
 };
 
@@ -207,7 +209,7 @@ int main() {
     // list.display();
     // cout << endl;
 
-    list.is_circural();
+    list.is_circular();
 
     return 0;
 }
