@@ -7,6 +7,7 @@ class stack{
     int* arr;
     int size;
 
+    public:
     stack(int size){
         this->size=size;
         arr=new int[size];
@@ -15,15 +16,30 @@ class stack{
 
 
     void push(int element){
+        if(size-top>1){
+            top++;
+            arr[top]=element;
+        }
 
+        else{
+            cout<<"stack overflowed\n";
+        }
     }
 
     void pop(){
-
+        if(top>=0){
+            top--;
+        }
+        else{
+            cout<<"stack underflowed\n";
+        }
     }
 
-    int top(){
-        
+    int peak(){
+        if(top>=0 && top<size){
+            return arr[top];
+        }
+        else return -1;
     }
 };
 
@@ -33,7 +49,18 @@ int main(){
     // s.push(3);
     // cout<<s.top();
 
-    stack s(10);
+    stack s(5);
+    s.push(45);
+    s.push(45);
+    s.push(45);
+    s.push(45);
+    s.push(46);
+
+    cout<<s.peak();
+    cout<<endl;
+
+    s.push(5);
+
 
 
 
