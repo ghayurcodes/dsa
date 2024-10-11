@@ -172,7 +172,7 @@ public:
         Node* temp = head->next;
         bool is_circular = false;
 
-        while(temp!=head && temp!=NULL){
+        while(temp!=head && temp!=NULL){// best way 2 sondition usew dto check 1 for circurala nd other for somple
             temp=temp->next;
         }
 
