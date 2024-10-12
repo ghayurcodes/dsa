@@ -26,7 +26,6 @@ public:
         }
     }
 
-    // Push into the second stack
     void push2(int element) {
         if (top2 - top1 > 1) {
             top2--;
