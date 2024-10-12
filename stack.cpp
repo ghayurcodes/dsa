@@ -39,7 +39,10 @@ class stack{
         if(top>=0 && top<size){
             return arr[top];
         }
-        else return -1;
+        else {
+            cout<<"Stack is empty!\n";
+            return -1;
+        }
     }
 };
 
@@ -53,12 +56,13 @@ int main(){
     s.push(45);
     s.push(45);
     s.push(45);
-    s.push(45);
+    s.push(451);
     s.push(46);
 
     cout<<s.peak();
     cout<<endl;
-
+    s.pop();
+cout<<s.peak();
  
 
 
