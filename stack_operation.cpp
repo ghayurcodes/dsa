@@ -93,8 +93,8 @@ int main() {
     cout << "Top of Stack 1: " << s.peak1() << endl;
     cout << "Top of Stack 2: " << s.peak2() << endl;
 
-    // s.pop1();
-    // s.pop2();
+    s.pop1();
+    s.pop2();
     
 
     cout << "Top of Stack 1 after pop: " << s.peak1() << endl;
