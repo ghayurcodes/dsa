@@ -59,7 +59,7 @@ int main(){
     cout<<s.peak();
     cout<<endl;
 
-    s.push(5);
+ 
 
 
 
