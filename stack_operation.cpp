@@ -15,7 +15,7 @@ public:
         top2 = size;
     }
 
-    // Push into the first stack
+    
     void push1(int element) {
         if (top2 - top1 > 1) {
             top1++;
