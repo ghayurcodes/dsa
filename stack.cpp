@@ -16,9 +16,10 @@ class stack{
 
 
     void push(int element){
-        if(size-top>1){
+        if(top<size){
             top++;
             arr[top]=element;
+            cout<<'element added\n';
         }
 
         else{
@@ -58,11 +59,12 @@ int main(){
     s.push(45);
     s.push(451);
     s.push(46);
+    s.push(46);
 
-    cout<<s.peak();
-    cout<<endl;
-    s.pop();
-cout<<s.peak();
+//     cout<<s.peak();
+//     cout<<endl;
+//     s.pop();
+// cout<<s.peak();
  
 
 
