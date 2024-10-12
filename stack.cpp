@@ -59,12 +59,11 @@ int main(){
     s.push(45);
     s.push(451);
     s.push(46);
-    s.push(46);
- s.push(46);
-//     cout<<s.peak();
-//     cout<<endl;
-//     s.pop();
-// cout<<s.peak();
+   
+    cout<<s.peak();
+    cout<<endl;
+    s.pop();
+cout<<s.peak();
  
 
 
