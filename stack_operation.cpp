@@ -1,86 +1,103 @@
 #include<iostream>
+using namespace std;
 
-using namespace std;//stacks LIFO (last in forst out)
-
-class Doublestack{
+class Doublestack {
     int top1;
     int top2;
     int* arr;
     int size;
 
-    public:
-    Doublestack(int size){
-        this->size=size;
-        arr=new int[size];
-        top1=-1;
-        top2=size;
+public:
+    Doublestack(int size) {
+        this->size = size;
+        arr = new int[size];
+        top1 = -1;
+        top2 = size;
     }
 
-
-    void push1(int element){
-        if(size-top>1){
-            top++;
-            arr[top]=element;
-            cout<<"element added\n";
-        }
-
-        else{
-            cout<<"stack overflowed\n";
-        }
-    }
-
-     void push2(int element){
-        if(size-top>1){
-            top++;
-            arr[top]=element;
-            cout<<"element added\n";
-        }
-
-        else{
-            cout<<"stack overflowed\n";
+    // Push into the first stack
+    void push1(int element) {
+        if (top2 - top1 > 1) {
+            top1++;
+            arr[top1] = element;
+            cout << "Element added to Stack 1: " << element << endl;
+        } else {
+            cout << "Stack Overflow\n";
         }
     }
 
-    void pop(){
-        if(top>=0){
-            top--;
-        }
-        else{
-            cout<<"stack underflowed\n";
+    // Push into the second stack
+    void push2(int element) {
+        if (top2 - top1 > 1) {
+            top2--;
+            arr[top2] = element;
+            cout << "Element added to Stack 2: " << element << endl;
+        } else {
+            cout << "Stack Overflow\n";
         }
     }
 
-    int peak(){
-        if(top>=0 && top<size){
-            return arr[top];
+    // Pop from the first stack
+    void pop1() {
+        if (top1 >= 0) {
+            cout << "Popped element from Stack 1: " << arr[top1] << endl;
+            top1--;
+        } else {
+            cout << "Stack 1 Underflow\n";
         }
-        else {
-            cout<<"Stack is empty!\n";
+    }
+
+    // Pop from the second stack
+    void pop2() {
+        if (top2 < size) {
+            cout << "Popped element from Stack 2: " << arr[top2] << endl;
+            top2++;
+        } else {
+            cout << "Stack 2 Underflow\n";
+        }
+    }
+
+    // Peak from the first stack
+    int peak1() {
+        if (top1 >= 0) {
+            return arr[top1];
+        } else {
+            cout << "Stack 1 is Empty\n";
             return -1;
         }
     }
+
+    // Peak from the second stack
+    int peak2() {
+        if (top2 < size) {
+            return arr[top2];
+        } else {
+            cout << "Stack 2 is Empty\n";
+            return -1;
+        }
+    }
+
+    ~Doublestack() {
+        delete[] arr;
+    }
 };
 
-int main(){
-    // stack<int> s;//stl method
-
-    // s.push(3);
-    // cout<<s.top();
-
+int main() {
     Doublestack s(5);
-    s.push(45);
-    s.push(45);
-    s.push(45);
-    s.push(451);
-    s.push(46);
-   
-    cout<<s.peak();
-    cout<<endl;
-    s.pop();
-cout<<s.peak();
- 
 
+    s.push1(10);
+    s.push1(20);
+    s.push2(30);
+    s.push2(40);
 
+    cout << "Top of Stack 1: " << s.peak1() << endl;
+    cout << "Top of Stack 2: " << s.peak2() << endl;
 
+    s.pop1();
+    s.pop2();
 
+    cout << "Top of Stack 1 after pop: " << s.peak1() << endl;
+    cout << "Top of Stack 2 after pop: " << s.peak2() << endl;
+
+    return 0;
 }
