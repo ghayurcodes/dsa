@@ -21,6 +21,8 @@ void delet__middle( stack<int>& s,int count,int size){
 
 
 
+
+
 void dislpay(stack<int> s){
     while (!s.empty()) {
         cout << s.top() << " ";
@@ -72,6 +74,27 @@ bool check(string exp){
 
 
 
+
+
+
+
+void insert_at_start(stack<int>& s,int count,int element){
+    if(count==0){
+        int temp=s.top();
+        s.pop();
+        s.push(element);
+        s.push( temp);
+    }
+    else{
+        int temp=s.top();
+        s.pop();
+        insert_at_start(s,count-1,99);
+        s.push(temp);
+    }
+
+}
+
+
 int main(){
 
 
@@ -93,14 +116,14 @@ int main(){
 
 
 
-    // stack<int> n;
+    stack<int> n;
 
-    // n.push(4);
-    // n.push(6);
-    // n.push(9);
-    // n.push(11);
-    // n.push(15);
-    // n.push(19);                  //removing middle of stack
+    n.push(4);
+    n.push(6);
+    n.push(9);
+    n.push(11);
+    n.push(15);
+    n.push(19);                  //removing middle of stack
 
     // dislpay(n);
 
@@ -111,15 +134,23 @@ int main(){
 
     
 
-    string exp="{()}";
-    bool is_correct=check(exp);
+    // string exp="{()}";
+    // bool is_correct=check(exp);
 
-    if(is_correct){
-        cout<<"expression is valid\n";
-    }
-    else{
-        cout<<"not a valid expression\n";
-    }
+    // if(is_correct){
+    //     cout<<"expression is valid\n";                   //cheking expression valid or not
+    // }
+    // else{
+    //     cout<<"not a valid expression\n";
+    // }
+    dislpay(n);
+    int count=n.size()-1;
+    insert_at_start(n,count,99);
+    
+cout<<"after: "<<endl;
+dislpay(n);
+
+
 
 
 
