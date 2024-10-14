@@ -19,6 +19,8 @@ void delet__middle( stack<int>& s,int count,int size){
 
 
 
+
+
 void dislpay(stack<int> s){
     while (!s.empty()) {
         cout << s.top() << " ";
@@ -26,6 +28,49 @@ void dislpay(stack<int> s){
     }
     cout << endl;
 }
+
+
+
+
+bool check(string exp){
+    stack<char> temp;
+    for(int i=0;i<exp.length();i++){
+        char ch=exp[i];
+
+        if(ch=='(' ||ch=='{' ||ch=='['){
+            temp.push(ch);
+        }
+        else{
+            if(!temp.empty()){
+                char top=temp.top();
+                if(ch==')' && top=='(' ||
+                ch=='}' && top=='{'||
+                ch==']' && top=='['
+                ){
+                    temp.pop();
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+    }
+
+    if(temp.empty()){
+        return true;
+    }
+    else{
+        return false;
+    }
+        
+
+}
+
+
+
 
 int main(){
 
@@ -48,25 +93,33 @@ int main(){
 
 
 
-    stack<int> n;
+    // stack<int> n;
 
-    n.push(4);
-    n.push(6);
-    n.push(9);
-    n.push(11);
-    n.push(15);
-    n.push(19);
+    // n.push(4);
+    // n.push(6);
+    // n.push(9);
+    // n.push(11);
+    // n.push(15);
+    // n.push(19);                  //removing middle of stack
 
-    dislpay(n);
+    // dislpay(n);
 
-    int count=0;
-    delet__middle(n,count,n.size());
-    cout<<"after deleting middel:\n";
-    dislpay(n);
+    // int count=0;
+    // delet__middle(n,count,n.size());
+    // cout<<"after deleting middel:\n";
+    // dislpay(n);
 
     
 
+    string exp="{()}";
+    bool is_correct=check(exp);
 
+    if(is_correct){
+        cout<<"expression is valid\n";
+    }
+    else{
+        cout<<"not a valid expression\n";
+    }
 
 
 
