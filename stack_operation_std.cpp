@@ -87,10 +87,22 @@ void insert_at_start(stack<int>& s,int element){
     else{
         int temp=s.top();
         s.pop();
-        insert_at_start(s,99);
+        insert_at_start(s,element);
         s.push(temp);
     }
 
+}
+
+
+
+void reverse(stack<int>& s){
+    if(s.empty()){
+        return;
+    }
+    int temp=s.top();
+    s.pop();
+    reverse(s);
+    insert_at_start(s,temp);
 }
 
 
@@ -142,13 +154,19 @@ int main(){
     // else{
     //     cout<<"not a valid expression\n";
     // }
-    dislpay(n);
-    int count=n.size()-1;
-    insert_at_start(n,99);
-    
-cout<<"after: "<<endl;
-dislpay(n);
 
+
+    // dislpay(n);
+    // int count=n.size()-1;
+    // insert_at_start(n,99);                           //INSERT AT BOTTOM
+    
+    // cout<<"after: "<<endl;
+    // dislpay(n);
+
+
+    dislpay(n);
+    reverse(n);
+    dislpay(n);
 
 
 
