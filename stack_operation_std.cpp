@@ -78,17 +78,16 @@ bool check(string exp){
 
 
 
-void insert_at_start(stack<int>& s,int count,int element){
-    if(count==0){
-        int temp=s.top();
-        s.pop();
+void insert_at_start(stack<int>& s,int element){
+    if(s.empty()){
+    
         s.push(element);
-        s.push( temp);
+    
     }
     else{
         int temp=s.top();
         s.pop();
-        insert_at_start(s,count-1,99);
+        insert_at_start(s,99);
         s.push(temp);
     }
 
@@ -145,7 +144,7 @@ int main(){
     // }
     dislpay(n);
     int count=n.size()-1;
-    insert_at_start(n,count,99);
+    insert_at_start(n,99);
     
 cout<<"after: "<<endl;
 dislpay(n);
