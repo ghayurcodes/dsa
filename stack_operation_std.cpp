@@ -10,7 +10,7 @@ void delet__middle( stack<int>& s,int count,int size){
  }else{
     int temp=s.top();
     s.pop();
-    delet__middle(s,count++,s.size());
+    delet__middle(s,count+1,s.size());
     s.push(temp);
 
  }
