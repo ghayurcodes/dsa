@@ -4,10 +4,27 @@
 using namespace std;
 
 
-void delet__middle( stack<int>& s){
- 
+void delet__middle( stack<int>& s,int count,int size){
+ if(count==size/2){
     s.pop();
+ }else{
+    int temp=s.top();
+    s.pop();
+    delet__middle(s,count++,s.size());
+    s.push(temp);
 
+ }
+
+}
+
+
+
+void dislpay(stack<int> s){
+    while (!s.empty()) {
+        cout << s.top() << " ";
+        s.pop();
+    }
+    cout << endl;
 }
 
 int main(){
@@ -27,20 +44,27 @@ int main(){
     //     s.pop();
     // }
     // cout<<"reversd string is: "<<ans<<endl;
-    // stack<int> n;
-
-    // n.push(4);
-    // n.push(6);
-    // n.push(9);
-    // n.push(11);
-    // n.push(15);
 
 
 
 
-    delet__middle(n);
+    stack<int> n;
 
-    cout<<n.top();
+    n.push(4);
+    n.push(6);
+    n.push(9);
+    n.push(11);
+    n.push(15);
+    n.push(19);
+
+    dislpay(n);
+
+    int count=0;
+    delet__middle(n,count,n.size());
+    cout<<"after deleting middel:\n";
+    dislpay(n);
+
+    
 
 
 
