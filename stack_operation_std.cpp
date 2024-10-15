@@ -126,7 +126,7 @@ void sort(stack<int>& s){
     }
     }
     
-    
+     
 }
 
 
@@ -197,6 +197,8 @@ int main(){
     dislpay(n);
     sort(n);
     dislpay(n);
+
+    s
 
 
 
