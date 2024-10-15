@@ -107,26 +107,33 @@ void reverse(stack<int>& s){
 
 
 
-void sort(stack<int>& s){
-    if(s.empty()){
+void sort_insert(stack<int>& s, int element) {
+    if (s.empty() || s.top() <= element) {
+        s.push(element);
         return;
     }
-    int temp=s.top();
-    s.pop();
-    sort(s);
-    if(s.empty()){
-        s.push(temp);
-    }
-    else{
-        if(temp<s.top()){
-        insert_at_start(s,temp);
-    }
-    else{
-        s.push(temp);
-    }
-    }
     
-     
+    int temp = s.top();
+    s.pop();
+    sort_insert(s, element);
+    
+    s.push(temp); // Put the top element back after recursion
+}
+
+// Recursive function to sort the stack
+void sort(stack<int>& s) {
+    if (s.empty()) {
+        return;
+    }
+
+    int temp = s.top();
+    s.pop();
+
+    // Sort the remaining stack recursively
+    sort(s);
+
+    // Insert the current element in the sorted order
+    sort_insert(s, temp);
 }
 
 
