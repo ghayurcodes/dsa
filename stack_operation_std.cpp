@@ -106,6 +106,30 @@ void reverse(stack<int>& s){
 }
 
 
+
+void sort(stack<int>& s){
+    if(s.empty()){
+        return;
+    }
+    int temp=s.top();
+    s.pop();
+    sort(s);
+    if(s.empty()){
+        s.push(temp);
+    }
+    else{
+        if(temp<s.top()){
+        insert_at_start(s,temp);
+    }
+    else{
+        s.push(temp);
+    }
+    }
+    
+    
+}
+
+
 int main(){
 
 
@@ -131,10 +155,10 @@ int main(){
 
     n.push(4);
     n.push(6);
-    n.push(9);
+    n.push(2);
     n.push(11);
     n.push(15);
-    n.push(19);                  //removing middle of stack
+    n.push(1);                  //removing middle of stack
 
     // dislpay(n);
 
@@ -168,6 +192,11 @@ int main(){
     // reverse(n);                                      //reversing a stack
     // dislpay(n);
 
+
+
+    dislpay(n);
+    sort(n);
+    dislpay(n);
 
 
 
