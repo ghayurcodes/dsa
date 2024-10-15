@@ -164,9 +164,9 @@ int main(){
     // dislpay(n);
 
 
-    dislpay(n);
-    reverse(n);
-    dislpay(n);
+    // dislpay(n);
+    // reverse(n);                                      //reversing a stack
+    // dislpay(n);
 
 
 
