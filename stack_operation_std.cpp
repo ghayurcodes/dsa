@@ -201,9 +201,9 @@ int main(){
 
 
 
-    dislpay(n);
-    sort(n);
-    dislpay(n);
+    // dislpay(n);
+    // sort(n);                                         //sorting a stack(a bit complx highly recursive)
+    // dislpay(n);
 
     
 
