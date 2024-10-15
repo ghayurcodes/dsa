@@ -156,7 +156,7 @@ int main(){
     n.push(4);
     n.push(6);
     n.push(2);
-    n.push(11);
+    n.push(-11);
     n.push(15);
     n.push(1);                  //removing middle of stack
 
@@ -198,8 +198,7 @@ int main(){
     sort(n);
     dislpay(n);
 
-    s
-
+    
 
 
 }
