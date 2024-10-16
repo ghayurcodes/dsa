@@ -208,35 +208,49 @@ bool check_brackets(string exp){
 
 
 
-int cost_to_fix_exp(string exp){
+int findMinimumCost(string str) {
+  	
+    //odd condition
+    if(str.length()%2 == 1) {
+        return -1;
+    }
+    
     stack<char> s;
-
-    int cost=0;
-    int count1=0;
-    int count2=0;
-
-    for(int i=0;i<exp.length();i++){
-        if(exp[i]=='{'){
-            s.push(exp[i]);
-            count1++;
-
-        }
-        else if(exp[i]=='}'){
-            count2++;
-            if(s.top()=='{'){
+    for(int i=0; i<str.length(); i++) {
+        char ch = str[i];
+        
+        if(ch == '{') 
+            s.push(ch);
+		else
+        {
+            //ch is closed brace
+            if(!s.empty() && s.top() == '{') {
                 s.pop();
             }
-           
+            else
+            {
+                s.push(ch);
+            }
         }
     }
-     if(count1<count2){
-        return count2-count1;
-    }
-    else if(count1>count2){
-        return count1-count2;
-    }
-
-    return 0;
+    
+        //stack contains invalid expression
+        int a = 0, b = 0;
+        while(!s.empty()) {
+            if(s.top() == '{') {
+                b++;
+            }
+            else
+            {
+                a++;
+            }
+            s.pop();
+        }
+        
+		int ans = (a+1)/2 + (b+1)/2;
+        return ans;
+    
+    
 }
 
 
@@ -326,8 +340,8 @@ int main(){
     //     cout<<"invalid expression\n";
     // }
 
-    string exp="{{";
-    int result=cost_to_fix_exp(exp);
+    string exp="{{}}}}";
+    int result=findMinimumCost(exp);
     cout<<"cost to fix this expression is: "<<result<<endl;
 
     
