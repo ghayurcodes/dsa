@@ -137,6 +137,41 @@ void sort(stack<int>& s) {
 }
 
 
+
+
+int evaluatePostfix(const string& expression) {
+    stack<int> stack;
+
+    for (char c : expression) {
+        // If the character is a digit, push it onto the stack
+        if (isdigit(c)) {
+            stack.push(ctoi);  // Convert char to int
+        }
+        // If the character is an operator, pop two operands from the stack
+        else {
+            int b = stack.top(); stack.pop();
+            int a = stack.top(); stack.pop();
+
+            switch (c) {
+                case '+':
+                    stack.push(a + b);
+                    break;
+                case '-':
+                    stack.push(a - b);
+                    break;
+                case '*':
+                    stack.push(a * b);
+                    break;
+                case '/':
+                    stack.push(a / b);
+                    break;
+            }
+        }
+    }
+    return stack.top();
+}
+
+
 int main(){
 
 
@@ -204,6 +239,12 @@ int main(){
     // dislpay(n);
     // sort(n);                                         //sorting a stack(a bit complx highly recursive)
     // dislpay(n);
+
+
+
+    string postfixExpression = "534*+9-";  
+    int result = evaluatePostfix(postfixExpression);
+    cout << "The result of the postfix expression is: " << result << endl;
 
     
 
