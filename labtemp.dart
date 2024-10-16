@@ -51,17 +51,17 @@ class RegularUser extends User {
 
 
 void main() {
-  // Create Admin and Regular users
-  AdminUser admin = AdminUser('Admin', 'admin@example.com', 'adminPass');
-  RegularUser regularUser = RegularUser('John Doe', 'john@example.com', 'userPass');
+ 
+  AdminUser admin = AdminUser('Admin', 'admin@gmal.com', '000');
+  RegularUser regularUser = RegularUser('employe', 'emp@gmail.com', '111');
 
-  // Display user info
+ 
   admin.displayInfo();
   regularUser.displayInfo();
 
-  // Admin performs management actions
+ 
   admin.manageSystem();
 
-  // Regular user browses content
+ 
   regularUser.browseContent();
 }
