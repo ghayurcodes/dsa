@@ -279,20 +279,23 @@ int main(){
 
 
     // string postfixExpression = "534*+9-";  
-    // int result = evaluatePostfix(postfixExpression);                 //post fix expression  (also called Reverse Polish Notation)
-    // cout << "The result of the postfix expression is: " << result << endl;
-
-    string exp="(2+2)";
-    bool result=check_brackets(exp);
-
-    if(result){
-        cout<<"the expression is valid\n";
-    }else{
-        cout<<"invalid expression\n";
-    }
+    // int result = evaluatePostfix(postfixExpression);                          //post fix expression  (also called Reverse Polish Notation)
+    // cout << "The result of the postfix expression is:"<<result<< endl;
 
 
 
+
+    // string exp="(2+2)";
+    // bool result=check_brackets(exp);
+
+    // if(result){
+    //     cout<<"the expression is valid\n";                           //check redundent parenthesis
+    // }else{
+    //     cout<<"invalid expression\n";
+    // }
+
+
+    
     
 
 
