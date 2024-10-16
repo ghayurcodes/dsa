@@ -212,10 +212,31 @@ int cost_to_fix_exp(string exp){
     stack<char> s;
 
     int cost=0;
+    int count1=0;
+    int count2=0;
 
     for(int i=0;i<exp.length();i++){
-        cout<<"wf";
+        if(exp[i]=='{'){
+            s.push(exp[i]);
+            count1++;
+
+        }
+        else if(exp[i]=='}'){
+            count2++;
+            if(s.top()=='{'){
+                s.pop();
+            }
+           
+        }
     }
+     if(count1<count2){
+        return count2-count1;
+    }
+    else if(count1>count2){
+        return count1-count2;
+    }
+
+    return 0;
 }
 
 
@@ -305,7 +326,9 @@ int main(){
     //     cout<<"invalid expression\n";
     // }
 
-
+    string exp="{{{}}{}";
+    int result=cost_to_fix_exp(exp);
+    cout<<"cost to fix this expression is: "<<result<<endl;
 
     
 
