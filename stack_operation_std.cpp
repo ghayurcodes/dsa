@@ -142,17 +142,17 @@ void sort(stack<int>& s) {
 int evaluatePostfix(const string& expression) {
     stack<int> stack;
 
-    for (char c : expression) {
-        // If the character is a digit, push it onto the stack
-        if (isdigit(c)) {
-            stack.push(ctoi);  // Convert char to int
+    for (int i=0;i<expression.length();i++) {
+        
+        if (isdigit(expression[i])) {
+            stack.push(expression[i] - '0'); //chk ltr but easy
         }
-        // If the character is an operator, pop two operands from the stack
+       
         else {
             int b = stack.top(); stack.pop();
             int a = stack.top(); stack.pop();
 
-            switch (c) {
+            switch (expression[i]) {
                 case '+':
                     stack.push(a + b);
                     break;
@@ -242,9 +242,9 @@ int main(){
 
 
 
-    string postfixExpression = "534*+9-";  
-    int result = evaluatePostfix(postfixExpression);
-    cout << "The result of the postfix expression is: " << result << endl;
+    // string postfixExpression = "534*+9-";  
+    // int result = evaluatePostfix(postfixExpression);                 //post fix expression  (also called Reverse Polish Notation)
+    // cout << "The result of the postfix expression is: " << result << endl;
 
     
 
