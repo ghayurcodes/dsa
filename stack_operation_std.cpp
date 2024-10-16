@@ -172,6 +172,42 @@ int evaluatePostfix(const string& expression) {
 }
 
 
+
+
+
+bool check_brackets(string exp){
+    stack<char> s;
+    bool isok=false;
+    for(int i=0;i<exp.length();i++){
+        if(exp[i]=='(' || exp[i]=='+' ||exp[i]=='-' ||exp[i]=='/' ||exp[i]=='*'){
+            s.push(exp[i]);
+        }
+        else if(exp[i]==')' ){
+            isok=false;
+            while(s.top()!='('){
+                char top=s.top();
+                if(top=='+' ||top=='-' ||top=='/' ||top=='*'){
+                    isok=true;
+                }
+                s.pop();
+            }
+            if(isok){
+                s.pop();
+            }
+            
+           
+        }
+    }
+
+     if(!isok){
+        s.pop();
+                 }
+    return isok;
+
+}
+
+
+
 int main(){
 
 
@@ -246,9 +282,17 @@ int main(){
     // int result = evaluatePostfix(postfixExpression);                 //post fix expression  (also called Reverse Polish Notation)
     // cout << "The result of the postfix expression is: " << result << endl;
 
+    string exp="(2+2)";
+    bool result=check_brackets(exp);
+
+    if(result){
+        cout<<"the expression is valid\n";
+    }else{
+        cout<<"invalid expression\n";
+    }
 
 
-    
+
     
 
 
