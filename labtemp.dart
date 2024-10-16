@@ -20,16 +20,17 @@ class Car extends Vehicle {
   Car(String make, String model, int year, double mileage, this.seats, this.fuelType)
       : super(make, model, year, mileage);
 
-  @override
+  
   void displayInfo() {
     super.displayInfo();
     print('Seats: $seats, Fuel Type: $fuelType');
   }
 }
 
+
 class Motorcycle extends Vehicle {
   double engineCapacity;
-  String type; // e.g., Cruiser, Sport
+  String type;
 
   Motorcycle(String make, String model, int year, double mileage, this.engineCapacity, this.type)
       : super(make, model, year, mileage);
@@ -40,7 +41,6 @@ class Motorcycle extends Vehicle {
     print('Engine Capacity: $engineCapacity cc, Type: $type');
   }
 }
-
 
 
 class Garage {
@@ -67,21 +67,21 @@ class Garage {
 
 
 void main() {
-  // Instantiate some Car and Motorcycle objects
+ 
   Car car1 = Car('Toyota', 'Corolla', 2020, 15000, 5, 'Petrol');
   Motorcycle moto1 = Motorcycle('Harley', 'Sportster', 2018, 8000, 1200, 'Cruiser');
 
-  // Create Garage and add vehicles
-  Garage garage = Garage();
+ 
+  Garage garage =  Garage();
   garage.addVehicle(car1);
   garage.addVehicle(moto1);
 
-  // Show all vehicles in garage
+ 
   garage.showAllVehicles();
 
-  // Remove a vehicle by model
+ 
   garage.removeVehicle('Corolla');
 
-  // Show remaining vehicles
+
   garage.showAllVehicles();
 }
