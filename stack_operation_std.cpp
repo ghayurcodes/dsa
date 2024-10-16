@@ -208,6 +208,17 @@ bool check_brackets(string exp){
 
 
 
+int cost_to_fix_exp(string exp){
+    stack<char> s;
+
+    int cost=0;
+
+    for(int i=0;i<exp.length();i++){
+        cout<<"wf";
+    }
+}
+
+
 int main(){
 
 
@@ -295,7 +306,7 @@ int main(){
     // }
 
 
-    
+
     
 
 
