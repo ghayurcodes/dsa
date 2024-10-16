@@ -326,7 +326,7 @@ int main(){
     //     cout<<"invalid expression\n";
     // }
 
-    string exp="{{{}}{}";
+    string exp="{{";
     int result=cost_to_fix_exp(exp);
     cout<<"cost to fix this expression is: "<<result<<endl;
 
