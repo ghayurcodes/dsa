@@ -9,7 +9,7 @@ void find_next_smaller_element(vector<int>& arr){
     s.push(-1);
     for(int i=arr.size()-1;i>=0;i--){
         int temp=arr[i];
-        while(s.top()>=arr[i]){
+        while(s.top()>=arr[i]){  //!(s.top()<=arr[i]) can also be written
             s.pop();                                        //simple but abit tricky
         }
         arr[i]=s.top();
