@@ -7,10 +7,8 @@ using namespace std;
 void find_next_smaller_element( vector<int>& arr){
     stack<int> s;
     s.push(-1);
-    for(int i=0;i<arr.size();i++){
-        if(arr[i]<s.top()){
-            
-        }
+    for(int i=arr.size()-1;i<=0;i--){
+        while()
     }
 
 }
