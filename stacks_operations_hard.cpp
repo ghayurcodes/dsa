@@ -4,13 +4,13 @@
 
 using namespace std;
 
-void find_next_smaller_element( vector<int>& arr){
+void find_next_smaller_element(vector<int>& arr){
     stack<int> s;
     s.push(-1);
-    for(int i=arr.size()-1;i<=0;i--){
+    for(int i=arr.size()-1;i>=0;i--){
         int temp=arr[i];
         while(s.top()>=arr[i]){
-            s.pop();
+            s.pop();                                        //simple but abit tricky
         }
         arr[i]=s.top();
         s.push(temp);
@@ -35,7 +35,10 @@ int main(){
     arr.push_back(2);                   //next samller element
     arr.push_back(3);
 
+
+    display(arr);
     find_next_smaller_element(arr);
+    display(arr);
 
 
 
