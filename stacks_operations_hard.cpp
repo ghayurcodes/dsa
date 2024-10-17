@@ -8,9 +8,22 @@ void find_next_smaller_element( vector<int>& arr){
     stack<int> s;
     s.push(-1);
     for(int i=arr.size()-1;i<=0;i--){
-        while()
+        int temp=arr[i];
+        while(s.top()>=arr[i]){
+            s.pop();
+        }
+        arr[i]=s.top();
+        s.push(temp);
     }
 
+}
+
+
+void display(vector<int>& arr){
+    for(int i=0;i<arr.size();i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
 }
 
 
@@ -23,6 +36,8 @@ int main(){
     arr.push_back(3);
 
     find_next_smaller_element(arr);
+
+
 
 
 }
