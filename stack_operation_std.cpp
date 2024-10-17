@@ -247,8 +247,8 @@ int findMinimumCost(string str) {
             s.pop();
         }
         
-		int ans = (a+1)/2 + (b+1)/2;
-        return ans;
+            int ans = (a+1)/2 + (b+1)/2;    //jut remeber this expression no logic
+            return ans;
     
     
 }
