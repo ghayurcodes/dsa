@@ -1,14 +1,14 @@
 #include <iostream>
 using namespace std;
 
-class que {
+class deque {
     int qfront;
     int rear;
     int size;
     int *arr;
 
 public:
-    que(int size) {
+    deque(int size) {
         this->size = size;
         arr = new int[size];
         qfront = -1;
@@ -16,7 +16,7 @@ public:
     }
 
    
-    void push(int data) {
+    void push_back(int data) {
         // Queue is full
         if ((qfront == 0 && rear == size - 1) || (rear == (qfront - 1) % (size))) {
             cout << "Queue is full\n";
@@ -39,8 +39,32 @@ public:
         }
     }
 
+
+
+      void push_front(int data) {
+        // Queue is full
+        if ((qfront == 0 && rear == size - 1) || (rear == (qfront - 1) % (size))) {
+            cout << "Queue is full\n";
+            return;
+        } 
+        // First element insertion
+        else if (qfront == -1) {
+            qfront = rear = 0;
+            arr[qfront] = data;
+        } 
+        // To maintain cyclic nature
+        else if (qfront==0) {
+            qfront = size-1;
+            arr[qfront] = data;
+        } 
+        // Normal case
+        else {
+            qfront--;
+            arr[qfront] = data;
+        }
+    }
   
-    void pop() {
+    void pop_front() {
         // Queue is empty
         if (qfront == -1) {
             cout << "Queue is empty\n";
@@ -60,6 +84,30 @@ public:
             qfront++;
         }
     }
+
+
+ void pop_back() {
+        // Queue is empty
+        if (rear == -1) {
+            cout << "Queue is empty\n";
+            return;
+        }
+
+        // Single element in queue
+        if (qfront == rear) {
+            qfront = rear = -1;
+        } 
+        // To maintain cyclic nature
+        else if (qfront == size - 1) {
+            qfront = 0;
+        } 
+        // Normal case
+        else {
+            qfront++;
+        }
+    }
+
+    
 
     // Method to get the front element of the queue
     int front() {
