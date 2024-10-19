@@ -1,5 +1,5 @@
 #include <iostream>
-#include <queue>  
+#include <queue>            //fifo (first in first out)
 
 using namespace std;
 
@@ -7,5 +7,4 @@ using namespace std;
 
 int main() {
     
-cout<<"hello\n";
 }
