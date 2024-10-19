@@ -21,20 +21,20 @@ public:
 
 
     void push(int data){
-       if((qfront==0 && rear==size-1)||(rear==(qfront-1)%(size-1))){
+       if((qfront==0 && rear==size-1)||(rear==(qfront-1)%(size-1))){//que is full
         cout<<"que is full\n";
        }
-       else if(qfront==-1){
+       else if(qfront==-1){//fiest elemet added
         qfront=rear=0;
         arr[rear]=data;
     
        }
-       else if(rear==size-1 && qfront!=0){
+       else if(rear==size-1 && qfront!=0){//cyclic nature
         rear=0;
         arr[rear]=data;
        }
        else{
-        arr[rear]=data;
+        arr[rear]=data;//normal one
             rear++;
        }
     }
