@@ -1,93 +1,99 @@
 #include <iostream>
-                                             //fifo (first in first out)
-
 using namespace std;
 
-class que{
+class que {
     int qfront;
     int rear;
     int size;
     int *arr;
 
 public:
-
-    que(int size){
-        this->size=size;
-        arr=new int[size];
-        this->qfront=0;
-        this->rear=0;
+    que(int size) {
+        this->size = size;
+        arr = new int[size];
+        qfront = -1;
+        rear = -1;
     }
 
-
-
-    void push(int data){
-       if((qfront==0 && rear==size-1)||(rear==(qfront-1)%(size-1))){//que is full
-        cout<<"que is full\n";
-       }
-       else if(qfront==-1){//fiest elemet added
-        qfront=rear=0;
-        arr[rear]=data;
-    
-       }
-       else if(rear==size-1 && qfront!=0){//cyclic nature
-        rear=0;
-        arr[rear]=data;
-       }
-       else{
-        arr[rear]=data;//normal one
+    // Method to push an element into the queue
+    void push(int data) {
+        // Queue is full
+        if ((qfront == 0 && rear == size - 1) || (rear == (qfront - 1) % (size))) {
+            cout << "Queue is full\n";
+            return;
+        } 
+        // First element insertion
+        else if (qfront == -1) {
+            qfront = rear = 0;
+            arr[rear] = data;
+        } 
+        // To maintain cyclic nature
+        else if (rear == size - 1 && qfront != 0) {
+            rear = 0;
+            arr[rear] = data;
+        } 
+        // Normal case
+        else {
             rear++;
-       }
+            arr[rear] = data;
+        }
     }
 
+    // Method to pop an element from the queue
+    void pop() {
+        // Queue is empty
+        if (qfront == -1) {
+            cout << "Queue is empty\n";
+            return;
+        }
 
-
-    void pop(){
-       if(qfront==-1){
-        cout<<"quue ois empty\n";//emopty que
-
-       }
-       else if(qfront==rear){//pnly 1 element prest in que
-        qfront=rear=-1;
-       }
-       else if(qfront==size-1){//to maintain cyclic nature
-        qfront =0;
-       }
-       else{
-        qfront++;//nprmal que
-       }
+        // Single element in queue
+        if (qfront == rear) {
+            qfront = rear = -1;
+        } 
+        // To maintain cyclic nature
+        else if (qfront == size - 1) {
+            qfront = 0;
+        } 
+        // Normal case
+        else {
+            qfront++;
+        }
     }
 
-
-    int front(){
-        if(qfront==rear){
-            cout<<"empty que";
+    // Method to get the front element of the queue
+    int front() {
+        if (qfront == -1) {
+            cout << "Queue is empty\n";
             return -1;
         }
-        else{
-            return arr[qfront];
-        }
+        return arr[qfront];
     }
 
-
-    bool isempty(){
-        if(qfront==rear){
-            return true;
-        }
-        else{
-            return false;
-        }
+    // Method to check if the queue is empty
+    bool isempty() {
+        return (qfront == -1);
     }
 
-    void display(){
-        if(qfront==rear){
-            cout<<"que is empty\n";
+    // Method to display the queue elements
+    void display() {
+        if (qfront == -1) {
+            cout << "Queue is empty\n";
+            return;
         }
-        else{
-            for(int i=qfront;i<rear;i++){
-                cout<<arr[i]<<" ";
+        if (rear >= qfront) {
+            for (int i = qfront; i <= rear; i++) {
+                cout << arr[i] << " ";
             }
-            cout<<endl;
+        } else {
+            for (int i = qfront; i < size; i++) {
+                cout << arr[i] << " ";
+            }
+            for (int i = 0; i <= rear; i++) {
+                cout << arr[i] << " ";
+            }
         }
+        cout << endl;
     }
 };
 
@@ -100,13 +106,10 @@ int main() {
     q.push(1);
     q.push(9);
 
-
-    cout<<q.front();
-    cout<<endl;
+    cout << "Front element: " << q.front() << endl;
     q.pop();
-    cout<<q.front();
-    cout<<endl;
+    cout << "Front element after pop: " << q.front() << endl;
     q.display();
 
-    
+    return 0;
 }
