@@ -9,10 +9,10 @@ class que{
     int size;
     int *arr;
 
-
+public:
 
     que(int size){
-        this->size=0;
+        this->size=size;
         arr=new int[size];
         this->qfront=0;
         this->rear=0;
@@ -69,5 +69,17 @@ class que{
 };
 
 int main() {
+    que q(5);
+    q.push(3);
+    q.push(4);
+    q.push(7);
+    q.push(1);
+    q.push(9);
+
+
+    cout<<q.front();
+    cout<<endl;
+    q.pop();
+
     
 }
