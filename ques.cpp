@@ -66,10 +66,23 @@ public:
             return false;
         }
     }
+
+    void display(){
+        if(qfront==rear){
+            cout<<"que is empty\n";
+        }
+        else{
+            for(int i=qfront;i<rear;i++){
+                cout<<arr[i]<<" ";
+            }
+            cout<<endl;
+        }
+    }
 };
 
 int main() {
     que q(5);
+
     q.push(3);
     q.push(4);
     q.push(7);
@@ -80,6 +93,9 @@ int main() {
     cout<<q.front();
     cout<<endl;
     q.pop();
+    cout<<q.front();
+    cout<<endl;
+    q.display();
 
     
 }
