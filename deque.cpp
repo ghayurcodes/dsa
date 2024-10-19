@@ -98,12 +98,12 @@ public:
             qfront = rear = -1;
         } 
         // To maintain cyclic nature
-        else if (qfront == size - 1) {
-            qfront = 0;
+        else if (rear==0) {
+            rear=size-1;
         } 
         // Normal case
         else {
-            qfront++;
+            rear--;
         }
     }
 
@@ -146,16 +146,14 @@ public:
 };
 
 int main() {
-    que q(5);
+    deque q(5);
 
-    q.push(3);
-    q.push(4);
-    q.push(7);
-    q.push(1);
-    q.push(9);
+    q.push_front(3);
+    q.push_back(4);
+    
 
     cout << "Front element: " << q.front() << endl;
-    q.pop();
+ 
     cout << "Front element after pop: " << q.front() << endl;
     q.display();
 
