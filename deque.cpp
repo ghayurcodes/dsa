@@ -118,6 +118,14 @@ public:
         return arr[qfront];
     }
 
+    int backk() {
+        if (rear == -1) {
+            cout << "Queue is empty\n";
+            return -1;
+        }
+        return arr[rear];
+    }
+
     // Method to check if the queue is empty
     bool isempty() {
         return (qfront == -1);
@@ -149,12 +157,16 @@ int main() {
     deque q(5);
 
     q.push_front(3);
+    q.push_front(7);
     q.push_back(4);
     
 
     cout << "Front element: " << q.front() << endl;
- 
-    cout << "Front element after pop: " << q.front() << endl;
+     cout << "rear element: " << q.backk() << endl;         //hard dsa tounderstand but very fun to use
+    
+    q.pop_front();
+    q.pop_back();
+   
     q.display();
 
     return 0;
