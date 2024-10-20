@@ -42,7 +42,7 @@ void reverse_recursion(queue<int>& q){
 void reverseK(queue<int>& q,int k){
     stack<int> s;
 
-    // for(int i=0;i<q.size()/k;i++){
+    
 
         for(int j=0;j<k;j++){
             s.push(q.front());
@@ -62,7 +62,7 @@ void reverseK(queue<int>& q,int k){
         }
         
 
-    // }
+    
 
     
     
@@ -88,15 +88,14 @@ int main(){
 
 
 
-    cout << "Original queue: ";
-    display(q);
+    // cout << "Original queue: ";
+    // display(q);
+    // reverseK(q,3);                    //reversing K elements    
+    // cout << "Reversed queue: ";
+    // display(q);
+    
+    
 
-    
-    reverseK(q,3);                    //reversing K elements
-    
-    cout << "Reversed queue: ";
-    display(q);
-    
     
     return 0;
 }
