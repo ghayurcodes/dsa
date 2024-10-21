@@ -93,6 +93,9 @@ int main(){
     // reverseK(q,3);                    //reversing K elements    
     // cout << "Reversed queue: ";
     // display(q);
+
+
+    n
     
     
 
