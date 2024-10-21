@@ -80,7 +80,7 @@ void non_repeating(string s) {
        
         q.push(ch);
 
-                       //veryeasy logic but very weird
+                                                                     //veryeasy logic but very weird  stack cannot be sused bcuz we dont ahve fronta cess
         while (!q.empty() && count[q.front()] > 1) {
             q.pop();
         }
@@ -93,21 +93,12 @@ void non_repeating(string s) {
         }
     }
 
-    // Output the result
+    
     cout << ans << endl;
 }
 
 
 
-void non_repeating_own(string s){
-    string ans="";
-    queue<int> q;
-    for(int i=0;i<s.length();i++){
-        char ch=s[i];
-        
-        if()
-    }
-}
 
 int main(){
     queue<int> q;
