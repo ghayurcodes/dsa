@@ -102,23 +102,23 @@ void non_repeating(string s) {
 
 int petrolPumpTour(int petrol[], int distance[], int n) {
     int start = 0;  // Starting petrol pump
-    int total_petrol = 0;  // Total surplus petrol
-    int current_petrol = 0;  // Current petrol in truck
+    int balance=0;
+    int deficit=0;
+    
 
-    // Traverse through all petrol pumps
+   
     for (int i = 0; i < n; i++) {
-        total_petrol += (petrol[i] - distance[i]);
-        current_petrol += (petrol[i] - distance[i]);
-
-        // If current petrol becomes negative, restart from next petrol pump
-        if (current_petrol < 0) {
-            start = i + 1;  // Set the new starting point
-            current_petrol = 0;  // Reset current petrol
+        balance+= (petrol[i] - distance[i]);
+    
+        if (balance < 0) {
+            start = i + 1;                          //very smart and simp,approch than chat gpy
+           balance=0;
+           deficit +=balance ;
         }
     }
 
-    // Check if total petrol is enough to cover the whole distance
-    if (total_petrol >= 0) {
+
+    if (deficit+balance>=0) {
         return start;  // Starting point of the tour
     } else {
         return -1;  // No solution exists
@@ -163,11 +163,12 @@ int main(){
     int n = sizeof(petrol) / sizeof(petrol[0]);
 
     int start = petrolPumpTour(petrol, distance, n);
-
+  
     if (start != -1) {
         cout << "Start from petrol pump index: " << start << endl;
     } else {
         cout << "No solution exists" << endl;
+        
     }
 
 
