@@ -73,7 +73,8 @@ void non_repeating(string s){
 
     for(int i=0;i<s.length();i++){
         char ch=s[i];
-        
+        count[ch]++;
+        q.push(ch);
     }
 }
 
