@@ -100,6 +100,33 @@ void non_repeating(string s) {
 
 
 
+int petrolPumpTour(int petrol[], int distance[], int n) {
+    int start = 0;  // Starting petrol pump
+    int total_petrol = 0;  // Total surplus petrol
+    int current_petrol = 0;  // Current petrol in truck
+
+    // Traverse through all petrol pumps
+    for (int i = 0; i < n; i++) {
+        total_petrol += (petrol[i] - distance[i]);
+        current_petrol += (petrol[i] - distance[i]);
+
+        // If current petrol becomes negative, restart from next petrol pump
+        if (current_petrol < 0) {
+            start = i + 1;  // Set the new starting point
+            current_petrol = 0;  // Reset current petrol
+        }
+    }
+
+    // Check if total petrol is enough to cover the whole distance
+    if (total_petrol >= 0) {
+        return start;  // Starting point of the tour
+    } else {
+        return -1;  // No solution exists
+    }
+}
+
+
+
 int main(){
     queue<int> q;
     q.push(2);
@@ -127,8 +154,8 @@ int main(){
     // display(q);
 
 
-     string g="aabc";
-     non_repeating(g);
+    //  string g="aabc";
+    //  non_repeating(g);                           //first non-repeating char in string
 
     
     
