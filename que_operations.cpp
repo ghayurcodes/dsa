@@ -66,16 +66,35 @@ void reverseK(queue<int>& q,int k){
 
 
 
-void non_repeating(string s){
-    map<char,int> count;
-    queue<int> q;
-    string ans="";
+void non_repeating(string s) {
+    map<char, int> count;
+    queue<char> q;
+    string ans = "";
 
-    for(int i=0;i<s.length();i++){
-        char ch=s[i];
+    for (int i = 0; i < s.length(); i++) {
+        char ch = s[i];
+
+        // Increment the count of the current character
         count[ch]++;
+        
+        // Push the current character into the queue
         q.push(ch);
+
+        // Remove all characters from the front of the queue that are repeating
+        while (!q.empty() && count[q.front()] > 1) {
+            q.pop();
+        }
+
+        // If the queue is empty, there is no non-repeating character
+        if (q.empty()) {
+            ans += '#';  // No non-repeating character
+        } else {
+            ans += q.front();  // First non-repeating character
+        }
     }
+
+    // Output the result
+    cout << ans << endl;
 }
 
 int main(){
