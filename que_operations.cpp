@@ -111,14 +111,41 @@ int petrolPumpTour(int petrol[], int distance[], int n) {
         balance+= (petrol[i] - distance[i]);
     
         if (balance < 0) {
-            start = i + 1;                          //very smart and simp,approch than chat gpy
-           balance=0;
+            start = i + 1;                          //extremly smart and simp,approch than chat gpy
            deficit +=balance ;
+           balance=0;
         }
     }
 
 
     if (deficit+balance>=0) {
+        return start;  //solution exists
+    } else {
+        return -1;  // No solution exists
+    }
+}
+
+
+
+int petrolPumpTour(int petrol[], int distance[], int n) {
+    int start = 0;  // Starting petrol pump
+    int total_petrol = 0;  // Total surplus petrol
+    int current_petrol = 0;  //No major use in the code just to check the circularity. if +ve value then its possible
+
+    // Traverse through all petrol pumps
+    for (int i = 0; i < n; i++) {
+        total_petrol += (petrol[i] - distance[i]);
+        current_petrol += (petrol[i] - distance[i]);
+
+        // If current petrol becomes negative, restart from next petrol pump
+        if (current_petrol < 0) {
+            start = i + 1;  // Set the new starting point
+            current_petrol = 0;  // Reset current petrol                             //gpt approch of upper problem(hard)
+        }
+    }
+
+    // Check if total petrol is enough to cover the whole distance
+    if (total_petrol >= 0) {
         return start;  // Starting point of the tour
     } else {
         return -1;  // No solution exists
@@ -158,8 +185,8 @@ int main(){
     //  non_repeating(g);                           //first non-repeating char in string
 
     
-    int petrol[] = {6, 3, 7};
-    int distance[] = {4, 6, 3};
+    int petrol[] = {4,6, 7, 4};
+    int distance[] = {6, 5, 3,5};
     int n = sizeof(petrol) / sizeof(petrol[0]);
 
     int start = petrolPumpTour(petrol, distance, n);
