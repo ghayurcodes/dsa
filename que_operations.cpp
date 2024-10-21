@@ -1,6 +1,7 @@
 #include<iostream>
 #include<queue>
 #include<stack>
+#include<map>
 using namespace std;
 
 void display(queue<int> q) {
@@ -61,11 +62,18 @@ void reverseK(queue<int>& q,int k){
             q.push(temp);
         }
         
+}
 
-    
 
-    
-    
+
+void non_repeating(string s){
+    map<char,int> count;
+    queue<int> q;
+    string ans="";
+
+    for(int i=0;i<s.length();i++){
+        
+    }
 }
 
 int main(){
@@ -95,7 +103,9 @@ int main(){
     // display(q);
 
 
-    n
+     string g="aabc";
+     non_repeating(g);
+
     
     
 
