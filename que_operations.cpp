@@ -127,7 +127,7 @@ int petrolPumpTour(int petrol[], int distance[], int n) {
 
 
 
-int petrolPumpTour(int petrol[], int distance[], int n) {
+int petrolPumpTour_gpt(int petrol[], int distance[], int n) {
     int start = 0;  // Starting petrol pump
     int total_petrol = 0;  // Total surplus petrol
     int current_petrol = 0;  //No major use in the code just to check the circularity. if +ve value then its possible
@@ -154,14 +154,35 @@ int petrolPumpTour(int petrol[], int distance[], int n) {
 
 
 
+void interleve(queue<int>& q){
+    stack<int> s1,s2;
+    for(int i=0;i<q.size()/2;i++){
+        s1.push(q.front());
+        q.pop();
+    }
+
+    while(!s1.empty()){
+        s2.push(s1.top());
+        s1.pop();
+    }
+
+    while(!s2.empty()){
+        q.push(s2.top());
+        s2.pop();
+        q.push(q.front());
+        q.pop();
+    }
+}
+
+
 int main(){
-    queue<int> q;
-    q.push(2);
-    q.push(3);
-    q.push(8);
-    q.push(1);
-    q.push(5);
-    q.push(9);
+    // queue<int> q;
+    // q.push(2);
+    // q.push(3);
+    // q.push(8);
+    // q.push(1);
+    // q.push(5);
+    // q.push(9);
 
     // cout << "Original queue: ";
     // display(q);
@@ -200,7 +221,13 @@ int main(){
 
 
 
-    
+    queue<int> q;
+    for(int i=10;i<20;i++){
+        q.push(i);
+    };
+    display(q);
+    interleve(q);
+    display(q);
 
     
  
