@@ -312,9 +312,9 @@ int main(){
     // dislpay(n);
 
 
-    // dislpay(n);
-    // reverse(n);                                      //reversing a stack
-    // dislpay(n);
+    dislpay(n);
+    reverse(n);                                      //reversing a stack
+    dislpay(n);
 
 
 
@@ -340,9 +340,9 @@ int main(){
     //     cout<<"invalid expression\n";
     // }
 
-    string exp="{{}}}}";
-    int result=findMinimumCost(exp);
-    cout<<"cost to fix this expression is: "<<result<<endl;
+    // string exp="{{}}}}";
+    // int result=findMinimumCost(exp);
+    // cout<<"cost to fix this expression is: "<<result<<endl;
 
     
 

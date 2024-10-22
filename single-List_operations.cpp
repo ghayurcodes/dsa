@@ -93,6 +93,7 @@ public:
         while (temp != nullptr) {
             if (temp->data == element) {
                 return true;
+                break;
             }
             temp = temp->next;
         }
