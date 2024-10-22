@@ -162,17 +162,13 @@ void interleve(queue<int>& q){
     for(int i=0;i<halfSize;i++){
         p.push(q.front());
         q.pop();
-    }
+    }                                                           //very easy jsut imagine
     while(!p.empty()){
         q.push(p.front());
         p.pop();
         q.push(q.front());
         q.pop();
     }
-
-
-
-
 
 
     // stack<int> s1,s2;
@@ -183,7 +179,7 @@ void interleve(queue<int>& q){
 
     // while(!s1.empty()){
     //     s2.push(s1.top());
-    //     s1.pop();
+    //     s1.pop();                                                    //if demanded to use stack not quee
     // }
 
     // while(!s2.empty()){
@@ -196,13 +192,13 @@ void interleve(queue<int>& q){
 
 
 int main(){
-    // queue<int> q;
-    // q.push(2);
-    // q.push(3);
-    // q.push(8);
-    // q.push(1);
-    // q.push(5);
-    // q.push(9);
+    queue<int> q;
+    q.push(2);
+    q.push(3);
+    q.push(8);
+    q.push(1);
+    q.push(5);
+    q.push(9);
 
     // cout << "Original queue: ";
     // display(q);
@@ -241,13 +237,16 @@ int main(){
 
 
 
-    queue<int> q;
-    for(int i=10;i<20;i++){
-        q.push(i);
-    };
-    display(q);
-    interleve(q);
-    display(q);
+    // queue<int> q;
+    // for(int i=10;i<20;i++){
+    //     q.push(i);
+    // };
+    // display(q);                                          //onterleving queue
+    // interleve(q);
+    // display(q);
+
+
+    
 
     
  
