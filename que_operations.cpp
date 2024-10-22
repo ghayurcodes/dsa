@@ -185,20 +185,23 @@ int main(){
     //  non_repeating(g);                           //first non-repeating char in string
 
     
-    int petrol[] = {4,6, 7, 4};
-    int distance[] = {6, 5, 3,5};
-    int n = sizeof(petrol) / sizeof(petrol[0]);
+    // int petrol[] = {4,6, 7, 4};
+    // int distance[] = {6, 5, 3,5};
+    // int n = sizeof(petrol) / sizeof(petrol[0]);
 
-    int start = petrolPumpTour(petrol, distance, n);
+    // int start = petrolPumpTour(petrol, distance, n);
   
-    if (start != -1) {
-        cout << "Start from petrol pump index: " << start << endl;
-    } else {
-        cout << "No solution exists" << endl;
+    // if (start != -1) {                                                                   //famous petrol problenm
+    //     cout << "Start from petrol pump index: " << start << endl;
+    // } else {
+    //     cout << "No solution exists" << endl;
         
-    }
+    // }
+
 
 
     
-    return 0;
+
+    
+ 
 }
