@@ -172,14 +172,14 @@ void interleve(queue<int>& q){
 
 
     // stack<int> s1,s2;
-    // for(int i=0;i<q.size()/2;i++){
+    // for(int i=0;i<q.size()/2;i++){                       
     //     s1.push(q.front());
     //     q.pop();
     // }
 
     // while(!s1.empty()){
     //     s2.push(s1.top());
-    //     s1.pop();                                                    //if demanded to use stack not quee
+    //     s1.pop();                                                    //if demanded to use stack not quee(can also be done with 1 stack)
     // }
 
     // while(!s2.empty()){
@@ -246,7 +246,7 @@ int main(){
     // display(q);
 
 
-    
+
 
     
  
