@@ -155,23 +155,43 @@ int petrolPumpTour_gpt(int petrol[], int distance[], int n) {
 
 
 void interleve(queue<int>& q){
-    stack<int> s1,s2;
-    for(int i=0;i<q.size()/2;i++){
-        s1.push(q.front());
+
+    queue<int> p;
+    int halfSize = q.size() / 2;
+    
+    for(int i=0;i<halfSize;i++){
+        p.push(q.front());
         q.pop();
     }
-
-    while(!s1.empty()){
-        s2.push(s1.top());
-        s1.pop();
-    }
-
-    while(!s2.empty()){
-        q.push(s2.top());
-        s2.pop();
+    while(!p.empty()){
+        q.push(p.front());
+        p.pop();
         q.push(q.front());
         q.pop();
     }
+
+
+
+
+
+
+    // stack<int> s1,s2;
+    // for(int i=0;i<q.size()/2;i++){
+    //     s1.push(q.front());
+    //     q.pop();
+    // }
+
+    // while(!s1.empty()){
+    //     s2.push(s1.top());
+    //     s1.pop();
+    // }
+
+    // while(!s2.empty()){
+    //     q.push(s2.top());
+    //     s2.pop();
+    //     q.push(q.front());
+    //     q.pop();
+    // }
 }
 
 
