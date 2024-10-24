@@ -66,13 +66,17 @@ int main() {
     queue.enqueue(4);
     queue.enqueue(5);
 
-    std::cout << "Front element: " << queue.front() << std::endl;  // Output: 1
+    std::cout << "Front element: " << queue.front() << std::endl;  
 
     queue.dequeue();  // Dequeues 1
     std::cout << "Front element after dequeue: " << queue.front() << std::endl;  // Output: 2
 
     queue.dequeue();  // Dequeues 2
-    queue.dequeue();  // Dequeues 3
+    queue.enqueue(7); 
+    queue.dequeue();
+     // Dequeues 3
+
+     std::cout << "Front element: " << queue.front() << std::endl;  
 
     if (queue.empty()) {
         std::cout << "Queue is empty now!" << std::endl;  // Queue is empty now!
