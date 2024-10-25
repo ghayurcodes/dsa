@@ -246,7 +246,8 @@ int main(){
     // display(q);
 
 
-    
+    dequeue<int> g;
+    g
 
 
 
