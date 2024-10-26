@@ -1,74 +1,75 @@
 #include<iostream>
 using namespace std;
 
-class Node{
-    public:
+class Node {
+public:
     int data;
     Node* right;
     Node* left;
 
-    public:
-    Node(int val){
-        this->data=val;
-        right=nullptr;
-        left=nullptr;
+    Node(int val) {
+        this->data = val;
+        right = nullptr;
+        left = nullptr;
     }
-
 };
 
-
-class Binarytree{
+class BinaryTree {
+public:
     Node* Root;
-    public:
-    Binarytree(){
-        Root=nullptr;
+
+    BinaryTree() {
+        Root = nullptr;
     }
 
-
-    void add(){
-        Root=add_Node();
+    void add() {
+        Root = add_Node();
     }
-    Node* add_Node(){
-        cout<<"Enter value:";
+
+    Node* add_Node() {
+        cout << "Enter value (-1 to indicate no node): ";
         int val;
-        cin>>val;
-        Root=new Node(val);
+        cin >> val;
 
-        if(val==-1){
+        // If user inputs -1, this branch is null
+        if (val == -1) {
+            return nullptr;
+        }
+
+        Node* newNode = new Node(val);
+
+        cout << "Enter data for inserting at left of " << val << endl;
+        newNode->left = add_Node();
+
+        cout << "Enter data for inserting at right of " << val << endl;
+        newNode->right = add_Node();
+
+        return newNode;
+    }
+
+    void display(Node* root) {
+        if (root == nullptr) {
             return;
         }
+
+        cout << root->data << endl;
         
-        cout<<"Enter data fore inserting at left\n";
-        Root->left=add_Node();
-        cout<<"Enter data fore inserting at right\n";
-        Root->right=add_Node();
-
-        return Root;
-
+        // Recursively display left and right children
+        if (root->left != nullptr) {
+            display(root->left);
+        }
+        if (root->right != nullptr) {
+            display(root->right);
+        }
     }
-
-
-    void display(Node* root){
-        cout<<Root->data<<endl;
-        display(Root->left);
-        display(root->right);
-    }
-
-    
-
 };
 
+int main() {
+    BinaryTree b;
+    b.add();
 
+    cout << "Displaying tree:" << endl;
+    b.display(b.Root);
 
-
-
-
-
-
-
-
-
-
-int main(){
-   
-}   
+    return 0;
+}
