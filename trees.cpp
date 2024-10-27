@@ -69,7 +69,7 @@ public:
 
     void level_oder_trasversal(Node* root){                     //also caleed breadth first search
         queue<Node*> q;
-        stack<int> s;
+        // stack<int> s;
         q.push(root);
         q.push(NULL);
 
@@ -81,6 +81,7 @@ public:
            
 
             if(temp==NULL){
+                // s.push(-1);
                 cout<<endl;
                 if(!q.empty()){
                     q.push(NULL);
@@ -88,8 +89,8 @@ public:
             }
 
             else{
-                //  cout<<temp->data<<" ";
-                s.push(temp->data);
+                 cout<<temp->data<<" ";       //sment tghis line and store teh data to stack then print teh data to get in reverse order
+                // s.push(temp->data);
                  if(temp->left){
                     q.push(temp->left);
                  }
@@ -99,11 +100,16 @@ public:
             }
         }
 
-        while (!s.empty())
-        {
-           cout<<s.top();
-           s.pop();
-        }
+        // while (!s.empty())
+        // {
+        //     if(s.top()!=-1){
+        //         cout<<s.top();
+        //     }else{
+        //         cout<<endl;
+        //     }
+           
+        //    s.pop();
+        // }
         
 
     }
