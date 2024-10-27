@@ -120,7 +120,7 @@ int main() {
     b.add();
 
     cout << "Displaying tree:" << endl;
-    b.level_oder_trasversal(b.Root);
+    b.level_oder_trasversal(b.Root);//also called breadth first search
 
     return 0;
 }
