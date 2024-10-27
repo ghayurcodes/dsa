@@ -1,5 +1,6 @@
 #include<iostream>
 #include<queue>
+#include<stack>
 using namespace std;
 
 class Node {
@@ -68,8 +69,11 @@ public:
 
     void level_oder_trasversal(Node* root){                     //also caleed breadth first search
         queue<Node*> q;
+        stack<int> s;
         q.push(root);
         q.push(NULL);
+
+
 
         while(!q.empty()){
             Node* temp=q.front();
@@ -84,7 +88,8 @@ public:
             }
 
             else{
-                 cout<<temp->data<<" ";
+                //  cout<<temp->data<<" ";
+                s.push(temp->data);
                  if(temp->left){
                     q.push(temp->left);
                  }
@@ -93,6 +98,13 @@ public:
                  }
             }
         }
+
+        while (!s.empty())
+        {
+           cout<<s.top();
+           s.pop();
+        }
+        
 
     }
 };
