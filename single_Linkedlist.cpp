@@ -97,8 +97,8 @@ public:
         }
 
        Node* temp = head;
-    int i = 0;
-    while (i < index - 1) {
+        int i = 0;
+        while (i < index - 1) {
         temp = temp->next;
         i++;
     }
