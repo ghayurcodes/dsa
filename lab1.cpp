@@ -112,11 +112,114 @@ void deleteatend(){
             while(current->nxtadr->nxtadr!=NULL){
                 current=current->nxtadr;
             }
+            Node* todel=current->nxtadr;
+            current->nxtadr=NULL;
+            delete todel;
             
-            delete current;
             noV--;
         }
+
 }
+
+
+
+void delatlocation(int index) {
+    if (index < 0 || index >= noV) {
+        cout << "Invalid index" << endl;
+        return;
+    }
+
+    if (index == 0) {
+       current = head;
+        head = head->nxtadr;
+        delete current;
+    } else {
+       current = head;
+        int locCounter = 0;
+
+        while (locCounter < index - 1) {
+            current = current->nxtadr;
+            locCounter++;
+        }
+
+        Node* todel = current->nxtadr;
+        current->nxtadr = current->nxtadr->nxtadr;
+        delete todel;
+    }
+
+    noV--;
+}
+
+void searchvalue(int val) {
+    if (head == NULL) {
+        cout << "Empty list\n";
+        return;
+    } else {
+        current = head;
+        int index = 0;
+        bool found = false;
+
+        while (current != NULL) {
+            if (current->data == val) {
+                found = true;
+                break;
+            }
+            current = current->nxtadr;
+            index++;
+        }
+
+        if (found) {
+            cout << val << " found at index: " << index << endl;
+        } else {
+            cout << "No such element exists\n";
+        }
+    }
+}
+
+
+void modifylocation(int index){
+    if(head==NULL){
+        cout << "Empty list\n";
+        return;
+    }
+    else if(index<0 || index>noV){
+        cout<<"Index does not exists\n";
+        return;
+    }
+    else{
+        current=head;
+        locCounter=0;
+        while(locCounter<index){
+            current=current->nxtadr;
+            locCounter++;
+        }
+        cout<<"enter new value:";
+        cin>>current->data;
+
+    }
+}
+
+void modifyvalue(int val){
+    if(head==NULL){
+        cout << "Empty list\n";
+        return;
+    }
+    else{
+        current=head;
+        int count=0;
+        while(current!=NULL){
+            if(current->data==val){
+                cout<<"enter value for the "<<count+1<<" value found: ";
+                cin>>current->data;
+                count++;
+            }
+            current=current->nxtadr;
+            
+        }
+    }
+}
+
+
 
 };
 
@@ -178,17 +281,33 @@ int main() {
                 cout << "\n\tValue deleted";
                 break;
             case 6:
-
+                cout << "\n\tEnter index: ";
+                cin>>index;
+                myList.delatlocation(index);
+                cout << "\n\tValue deleted successfully\n";
+                break;
 
             case 7:
-
+                cout << "\n\tEnter value: ";
+                cin >> value;
+                myList.searchvalue(value);
+                break;
 
             case 8:
-
+                cout << "\n\tEnter index: ";
+                cin>>index;
+                myList.modifylocation(index);
+                cout << "\n\tValue updated successfully\n";
+               
+                break;
 
 
             case 9:
-
+                cout << "\n\tEnter value: ";
+                cin >> value;
+                myList.modifyvalue(value);
+                 cout << "\n\tValue updated successfully\n";
+                break;
 
 
             case 10:
