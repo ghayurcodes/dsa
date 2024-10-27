@@ -1,4 +1,5 @@
 #include<iostream>
+#include<queue>
 using namespace std;
 
 class Node {
@@ -65,8 +66,34 @@ public:
 
 
 
-    void level_oder_trasversal(){
-        
+    void level_oder_trasversal(Node* root){                     //also caleed breadth first search
+        queue<Node*> q;
+        q.push(root);
+        q.push(NULL);
+
+        while(!q.empty()){
+            Node* temp=q.front();
+            q.pop();
+           
+
+            if(temp==NULL){
+                cout<<endl;
+                if(!q.empty()){
+                    q.push(NULL);
+                }
+            }
+
+            else{
+                 cout<<temp->data<<" ";
+                 if(temp->left){
+                    q.push(temp->left);
+                 }
+                 if(temp->right){
+                    q.push(temp->right);
+                 }
+            }
+        }
+
     }
 };
 
@@ -75,7 +102,7 @@ int main() {
     b.add();
 
     cout << "Displaying tree:" << endl;
-    b.display(b.Root);
+    b.level_oder_trasversal(b.Root);
 
     return 0;
 }
