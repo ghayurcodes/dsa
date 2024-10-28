@@ -55,7 +55,7 @@ public:
 
 
     void addat(int val, int index) {
-    if (index < 0 || index > size()) {
+    if (index < 0 || index >= size()) {
         cout << "Invalid index" << endl;
         return;
     }
