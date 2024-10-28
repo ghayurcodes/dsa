@@ -1,58 +1,79 @@
 #include <iostream>
-#include <queue>
-#include <stack>
 using namespace std;
+#define MAX 10
 
-struct Node {
-    int data;
-    Node* left;
-    Node* right;
-    Node(int val) : data(val), left(NULL), right(NULL) {}
+template <typename T>
+class Stack {
+    int top;
+    T arr[MAX];  
+
+public:
+    Stack() { top = -1; }
+    bool push(T x);
+    T pop();
+    bool isEmpty();
+    T peek();
 };
 
-void reverse_level_order_traversal(Node* root) {
-    if (root == NULL) return;
-
-    queue<Node*> q;
-    stack<int> s;
-
-    q.push(root);
-
-    while (!q.empty()) {
-        Node* temp = q.front();
-        q.pop();
-
-        // Push the current node's data into the stack
-        s.push(temp->data);
-
-        // Enqueue right child before left to ensure reverse order
-        if (temp->right) {
-            q.push(temp->right);
-        }
-        if (temp->left) {
-            q.push(temp->left);
-        }
-    }
-
-    // Print the nodes in reverse level order
-    while (!s.empty()) {
-        cout << s.top() << " ";
-        s.pop();
+template <typename T>
+bool Stack<T>::push(T x) {
+    if (top >= (MAX - 1)) {
+        cout << "Stack Overflow\n";
+        return false;
+    } else {
+        arr[++top] = x;
+        cout << x << " pushed into stack\n";
+        return true;
     }
 }
 
-int main() {
-    // Example usage
-    Node* root = new Node(1);
-    root->left = new Node(2);
-    root->right = new Node(3);
-    root->left->left = new Node(4);
-    root->left->right = new Node(5);
-    root->right->left = new Node(6);
-    root->right->right = new Node(7);
+template <typename T>
+T Stack<T>::pop() {
+    if (top < 0) {
+        cout << "Stack Underflow\n";
+        return T(); 
+    } else {
+        T x = arr[top--];
+        return x;
+    }
+}
 
-    cout << "Reverse Level Order Traversal: ";
-    reverse_level_order_traversal(root);
+template <typename T>
+T Stack<T>::peek() {
+    if (top < 0) {
+        cout << "Stack is Empty\n";
+        return T(); 
+    } else {
+        return arr[top];
+    }
+}
+
+template <typename T>
+bool Stack<T>::isEmpty() {
+    return (top < 0);
+}
+
+int main() {
+    Stack<int> intStack; 
+    intStack.push(10);
+    intStack.push(20);
+    intStack.push(30);
+    cout << intStack.pop() << " popped from stack\n";
+    cout << "Top element is: " << intStack.peek() << endl;
+
+    Stack<float> floatStack; 
+    floatStack.push(1.1);
+    floatStack.push(2.2);
+    floatStack.push(3.3);
+    cout << floatStack.pop() << " popped from stack\n";
+    cout << "Top element is: " << floatStack.peek() << endl;
+
+    Stack<char> charStack; 
+    charStack.push('A');
+    charStack.push('B');
+    charStack.push('C');
+    cout << charStack.pop() << " popped from stack\n";
+    cout << "Top element is: " << charStack.peek() << endl;
 
     return 0;
 }
