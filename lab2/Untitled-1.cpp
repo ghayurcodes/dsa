@@ -8,7 +8,7 @@ using namespace std;//stacks LIFO (last in forst out)
 int precedence(char op) {
     if (op == '+' || op == '-') return 1;
     if (op == '*' || op == '/') return 2;
-    if (op == '^') return 3; // Added for exponentiation
+    if (op == '^') return 3; 
     return 0;
 }
 
