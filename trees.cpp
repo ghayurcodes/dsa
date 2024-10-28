@@ -113,6 +113,17 @@ public:
         
 
     }
+
+
+    void inorder(Node* root){
+        if(root==NULL){
+            return;
+        }
+
+        inorder(root->left);
+        cout<<root->data<<" ";
+        inorder(root->right);
+    }
 };
 
 int main() {
@@ -121,6 +132,10 @@ int main() {
 
     cout << "Displaying tree:" << endl;
     b.level_oder_trasversal(b.Root);//also called breadth first search
+
+    cout<<"Inorder: "<<endl;
+    b.inorder(b.Root);
+    
 
     return 0;
 }
