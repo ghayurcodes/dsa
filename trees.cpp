@@ -121,21 +121,140 @@ public:
         }
 
         inorder(root->left);
-        cout<<root->data<<" ";
+        cout<<root->data<<" ";          //LNR
         inorder(root->right);
     }
+
+    void preorder(Node* root){
+        if(root==NULL){
+            return;
+        }
+        cout<<root->data<<" ";          //NLR
+        preorder(root->left);
+        preorder(root->right);
+    }
+
+    void postorder(Node* root){
+        if(root==NULL){
+            return;
+        }
+
+        postorder(root->left);          //LRN
+        postorder(root->right);
+        cout<<root->data<<" ";
+    }
+
+
+
+
+    void build_from_lvl_order(Node*& root){
+        queue<Node*> q;
+        cout<<"\nenter data for root: ";
+        int data;
+        cin>>data;
+        root=new Node(data);
+        q.push(root);
+     
+        while(!q.empty()){
+            
+            Node* temp=q.front();
+            q.pop();
+
+            cout<<"Enter leftnode for: "<<temp->data<<endl;
+            int leftdata;
+            cin>>leftdata;
+
+            if(leftdata!=-1){
+                temp->left=new Node(leftdata);
+                q.push(temp->left);
+            }
+
+            cout<<"Enter rightnode for: "<<temp->data<<endl;
+            int rightdata;
+            cin>>rightdata;
+
+            if(rightdata!=-1){
+                temp->right=new Node(rightdata);
+                q.push(temp->right);
+            }
+
+
+        }
+
+        cout<<endl;
+       
+
+
+    }
+
+
+
+    int countleaf_node(Node* root,int count){
+        countin(root,count);
+        return count;
+    }
+
+    void countin(Node* root,int& count){
+         if(root==NULL){
+            return;
+        }
+
+        countin(root->left,count);
+
+        if(root->left==NULL && root->right==NULL) {
+            count++;
+        }       
+                                                                             //any trasversing can be suse pre podt or in or level
+        countin(root->right,count);
+    }
+
+
+  void inorderMorrisTraversal(Node* root) {
+    Node* current = root;
+
+    while (current != nullptr) {
+        if (current->left == nullptr) {
+            // If there is no left subtree, print the current node and move to the right
+            cout << current->data << " ";
+            current = current->right;
+        } else {
+            // Find the inorder predecessor of the current node
+            Node* predecessor = current->left;
+            while (predecessor->right != nullptr && predecessor->right != current) {
+                predecessor = predecessor->right;
+            }
+
+            // Make current the right child of its inorder predecessor
+            if (predecessor->right == nullptr) {
+                predecessor->right = current;
+                current = current->left;
+            }
+            // Revert the changes made (restore the tree structure)
+            else {
+                predecessor->right = nullptr;
+                cout << current->data << " ";
+                current = current->right;
+            }
+        }
+    }
+}
+
 };
 
 int main() {
     BinaryTree b;
-    b.add();
+    b.build_from_lvl_order(b.Root);
 
     cout << "Displaying tree:" << endl;
     b.level_oder_trasversal(b.Root);//also called breadth first search
 
-    cout<<"Inorder: "<<endl;
+    // cout<<"leaf nodes :\n";
+    // int count=0;
+    // count=b.countleaf_node(b.Root,count);
+    // cout<<count<<endl;
+    cout<<"inorder: \n";
     b.inorder(b.Root);
-    
-
+     cout<<"\ninorder: \n";
+    b.inorderMorrisTraversal(b.Root);
     return 0;
 }
