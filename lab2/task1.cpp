@@ -48,10 +48,7 @@ class stack{
 };
 
 int main(){
-    // stack<int> s;//stl method
 
-    // s.push(3);
-    // cout<<s.top();
 
     stack s(5);
     s.push(45);
@@ -63,7 +60,7 @@ int main(){
     cout<<s.peak();
     cout<<endl;
     s.pop();
-cout<<s.peak();
+    cout<<s.peak();
  
 
 
