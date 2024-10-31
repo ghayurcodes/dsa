@@ -9,8 +9,8 @@ void insertionSort(int arr[], int n) {
         // Move elements of arr[0..i-1], that are greater than key,
         // to one position ahead of their current position
         while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            j = j - 1;
+            arr[j + 1] = arr[j];                                        //space=O(1) no memory used
+            j = j - 1;                                                      //time bestO(n)  worstO(n^2)
         }
         arr[j + 1] = key;
     }
