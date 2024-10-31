@@ -16,6 +16,36 @@ void insertionSort(int arr[], int n) {
     }
 }
 
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        bool swapped = false;
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap if elements are in the wrong order
+                swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+        // If no swaps were made, the array is already sorted
+        if (!swapped) break;
+    }
+}
+
+
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        // Swap the found minimum element with the first element
+        swap(arr[minIndex], arr[i]);
+    }
+}
+
 void printArray(int arr[], int n) {
     for (int i = 0; i < n; i++) {
         cout << arr[i] << " ";
