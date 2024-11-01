@@ -30,7 +30,7 @@ void bubbleSort(int arr[], int n) {
         // If no swaps were made, the array is already sorted
         if (!swapped) break;
     }
-}                                                                                       //ss an dbubble sort both ahve timeO(n^2)
+}                                                                                       //ss an dbubble sort both ahve timeO(n^2) d
 
 
 void selectionSort(int arr[], int n) {
