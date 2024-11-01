@@ -41,7 +41,7 @@ void selectionSort(int arr[], int n) {
                 minIndex = j;
             }
         }
-        // Swap the found minimum element with the first element
+        // Swap the found minimum element with the first elemen
         swap(arr[minIndex], arr[i]);
     }
 }
