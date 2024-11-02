@@ -1,0 +1,103 @@
+#include <iostream>
+#include <string>
+#include <stack>
+#include <ctime>
+
+using namespace std;
+
+// CodeState class to store each code version with description and timestamp
+class CodeState {
+public:
+    string code;
+    string timestamp;
+    string description;
+
+    CodeState(const string& code, const string& description) {
+        this->code = code;
+        this->description = description;
+        this->timestamp = getCurrentTime();
+    }
+
+    // Get the current timestamp as a string
+    string getCurrentTime() const {
+        time_t now = time(0);
+        char* dt = ctime(&now);
+        return string(dt);
+    }
+};
+
+// CodeEditor class to manage code editing and undo functionality
+class CodeEditor {
+private:
+    string current_code;           // Current code in the editor
+    stack<CodeState> undo_stack;   // Stack to keep track of previous states
+
+public:
+    // Constructor initializes with empty code
+    CodeEditor() : current_code("") {}
+
+    // Edit code with new content and description
+    void edit_code(const string& new_code, const string& description) {
+        // Push current state to the stack before editing
+        undo_stack.push(CodeState(current_code, description));
+        
+        // Update the current code
+        current_code = new_code;
+        cout << "Edited code: " << description << "\n\n";
+    }
+
+    // Undo the last code edit
+    void undo() {
+        if (undo_stack.empty()) {
+            cout << "No actions to undo.\n";
+            return;
+        }
+
+        // Pop the last state from the stack and revert current code
+        CodeState last_state = undo_stack.top();
+        undo_stack.pop();
+        current_code = last_state.code;
+        cout << "Undo performed. Reverted to: " << last_state.description << "\n\n";
+    }
+
+    // Peek at the last saved state without modifying the current code
+    void peek() const {
+        if (undo_stack.empty()) {
+            cout << "No previous actions.\n";
+            return;
+        }
+
+        CodeState last_state = undo_stack.top();
+        cout << "Last edit: " << last_state.description 
+             << "\nTimestamp: " << last_state.timestamp
+             << "\nCode: " << last_state.code << "\n";
+    }
+
+    // Display the current state of the code
+    void display_code() const {
+        cout << "Current Code:\n" << current_code << "\n";
+    }
+};
+
+// Main function to demonstrate the code editor functionality
+int main() {
+    CodeEditor editor;
+    editor.display_code();  // Display initial empty code
+
+    // Simulate edits
+    editor.edit_code("print('Hello, World!');", "Added greeting message");
+    editor.display_code();
+
+    editor.edit_code("print('Hello, World!');\nprint('Goodbye!');", "Added goodbye message");
+    editor.display_code();
+
+    // Peek at the last action
+    cout << "\nPeeking at last edit:\n";
+    editor.peek();
+
+    // Perform undo and display the code
+    editor.undo();
+    editor.display_code();
+
+    return 0;
+}
