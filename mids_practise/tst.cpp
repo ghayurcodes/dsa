@@ -1,113 +1,91 @@
-#include<iostream>
+#include <iostream>
+#define SIZE 5  // Define the maximum size of the queue
+
 using namespace std;
 
+class Queue {
+private:
+    int items[SIZE];
+    int front, rear;
 
+public:
+    Queue() : front(-1), rear(-1) {}
 
-class Node{
-    public:
-    string ename;
-    int duration;
-    string type;
-    Node* nxt;
+    // Check if the queue is full
+    bool isFull() {
+        return rear == SIZE - 1;
+    }
 
+    // Check if the queue is empty
+    bool isEmpty() {
+        return front == -1 || front > rear;
+    }
 
-    public:
-    Node(string name,string type,int duration){
-        this->duration=duration;
-        this->ename=name;
-        this->type=type;
-        this->nxt=NULL;
+    // Enqueue: Add an element to the queue
+    void enqueue(int value) {
+        if (isFull()) {
+            cout << "Queue is full. Cannot enqueue " << value << "." << endl;
+            return;
+        }
+        if (isEmpty()) {
+            front = 0;  // Set front to 0 when adding the first element
+        }
+        rear++;
+        items[rear] = value;
+        cout << "Enqueued " << value << endl;
+    }
+
+    // Dequeue: Remove an element from the queue
+    int dequeue() {
+        if (isEmpty()) {
+            cout << "Queue is empty. Cannot dequeue." << endl;
+            return -1;
+        }
+        int removedValue = items[front];
+        front++;
+        // Reset front and rear if the queue becomes empty after dequeue
+        if (front > rear) {
+            front = rear = -1;
+        }
+        return removedValue;
+    }
+
+    // Display the queue
+    void display() {
+        if (isEmpty()) {
+            cout << "Queue is empty." << endl;
+            return;
+        }
+        cout << "Queue elements: ";
+        for (int i = front; i <= rear; i++) {
+            cout << items[i] << " ";
+        }
+        cout << endl;
     }
 };
 
-class Exercise{
-    public:
-    Node* head;
+int main() {
+    Queue q;
 
-    public:
-    Exercise(){
-        head=NULL;
-    }
+    // Perform enqueue operations
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    q.enqueue(50);
+    
+    // Trying to add another element to a full queue
+    q.enqueue(60);
 
+    // Display the queue
+    q.display();
 
-    void add(){
-        string anme,type;
-        int duration;
-        cout<<"ente rname\n";
-        cin>>anme;
-        cout<<"enter duration\n";
-        cin>>duration;
-        cout<<"ente rtype\n";
-        cin>>type;
-        Node* newnode=new Node(anme,type,duration);
+    // Perform dequeue operations
+    cout << "Dequeued: " << q.dequeue() << endl;
+    cout << "Dequeued: " << q.dequeue() << endl;
 
-        if(head==NULL){
-            head=newnode;
-        }
-        else{
-            Node* temp=head;
-            while(temp->nxt!=NULL){
-                temp=temp->nxt;
-            }
-            temp->nxt=newnode;
+    // Display the queue again
+    q.display();
 
-        }
-    }
-
-
-    void remove(string name){
-         
-
-        if(head==NULL){
-           cout<<"nothing to rmove empty list\n";
-           return;
-        }
-        else{
-            Node* temp=head;
-            while(temp!=NULL){
-                if(temp->nxt->ename==name){
-                    break;
-                }
-                temp=temp->nxt;
-            }
-            Node* todel=temp->nxt;
-            temp->nxt=todel->nxt;
-            delete todel;
-        }
-    }
-
-
-    void disp(){
-
-        Node* temp=head;
-        int i=0;
-
-        while(temp!=NULL){
-            cout<<i++<<" : "<<"\t"<<temp->ename<<"\t"<<temp->type<<"\t"<<temp->duration<<endl;
-            temp=temp->nxt;
-        }
-        
-
-    }
-
-
-};
-
-
-
-
-int main(){
-    cout<<"+++++WELCOME++++\n";
-    Exercise e;
-    e.add();
-    e.add();
-    e.add();
-    cout<<"displaying\n";
-    e.disp();
-    cout<<"ente rnam eto remove\n";
-    string n;
-    cin>>n;
-    e.remove(n);
-    e.disp();
-   
+    return 0;
 }
