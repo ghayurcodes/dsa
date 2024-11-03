@@ -22,7 +22,7 @@ if(s.empty()){
 int tenmp=s.top();
 s.pop();
 sort(s);
-sort_insert();
+// sort_insert();
 
 
 }
