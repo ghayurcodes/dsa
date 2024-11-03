@@ -3,22 +3,22 @@
 
 using namespace std;
 
-class Queue {
+class CircularQueue {
 private:
     int items[SIZE];
     int front, rear;
 
 public:
-    Queue() : front(-1), rear(-1) {}
+    CircularQueue() : front(-1), rear(-1) {}
 
     // Check if the queue is full
     bool isFull() {
-        return rear == SIZE - 1;
+        return (rear + 1) % SIZE == front;
     }
 
     // Check if the queue is empty
     bool isEmpty() {
-        return front == -1 || front > rear;
+        return front == -1;
     }
 
     // Enqueue: Add an element to the queue
@@ -28,9 +28,10 @@ public:
             return;
         }
         if (isEmpty()) {
-            front = 0;  // Set front to 0 when adding the first element
+            front = rear = 0;
+        } else {
+            rear = (rear + 1) % SIZE;  // Move rear to the next position
         }
-        rear++;
         items[rear] = value;
         cout << "Enqueued " << value << endl;
     }
@@ -42,10 +43,11 @@ public:
             return -1;
         }
         int removedValue = items[front];
-        front++;
-        // Reset front and rear if the queue becomes empty after dequeue
-        if (front > rear) {
+        if (front == rear) {
+            // Queue is empty after this dequeue
             front = rear = -1;
+        } else {
+            front = (front + 1) % SIZE;  // Move front to the next position
         }
         return removedValue;
     }
@@ -57,15 +59,18 @@ public:
             return;
         }
         cout << "Queue elements: ";
-        for (int i = front; i <= rear; i++) {
+        int i = front;
+        while (true) {
             cout << items[i] << " ";
+            if (i == rear) break;
+            i = (i + 1) % SIZE;
         }
         cout << endl;
     }
 };
 
 int main() {
-    Queue q;
+    CircularQueue q;
 
     // Perform enqueue operations
     q.enqueue(10);
@@ -85,6 +90,13 @@ int main() {
     cout << "Dequeued: " << q.dequeue() << endl;
 
     // Display the queue again
+    q.display();
+
+    // Add more elements after dequeuing
+    q.enqueue(60);
+    q.enqueue(70);
+
+    // Display the queue after adding more elements
     q.display();
 
     return 0;

@@ -1,114 +1,102 @@
 #include <iostream>
+#define SIZE 5  // Define the maximum size of the queue
+
 using namespace std;
 
-class que {
-    int qfront;
-    int rear;
-    int size;
-    int *arr;
+class CircularQueue {
+private:
+    int items[SIZE];
+    int front, rear;
 
 public:
-    que(int size) {
-        this->size = size;
-        arr = new int[size];
-        qfront = -1;
-        rear = -1;
+    CircularQueue() : front(-1), rear(-1) {}
+
+    // Check if the queue is full
+    bool isFull() {
+        return (rear + 1) % SIZE == front;
     }
 
-   
-    void push(int data) {
-        // Queue is full
-        if ((qfront == 0 && rear == size - 1) || (rear == (qfront - 1) % (size))) {
-            cout << "Queue is full\n";
-            return;
-        } 
-        // First element insertion
-        else if (qfront == -1) {
-            qfront = rear = 0;
-            arr[rear] = data;
-        } 
-        // To maintain cyclic nature
-        else if (rear == size - 1 && qfront != 0) {
-            rear = 0;
-            arr[rear] = data;
-        } 
-        // Normal case
-        else {
-            rear++;
-            arr[rear] = data;
-        }
+    // Check if the queue is empty
+    bool isEmpty() {
+        return front == -1;
     }
 
-  
-    void pop() {
-        // Queue is empty
-        if (qfront == -1) {
-            cout << "Queue is empty\n";
+    // Enqueue: Add an element to the queue
+    void enqueue(int value) {
+        if (isFull()) {
+            cout << "Queue is full. Cannot enqueue " << value << "." << endl;
             return;
         }
-
-        // Single element in queue
-        if (qfront == rear) {
-            qfront = rear = -1;
-        } 
-        // To maintain cyclic nature
-        else if (qfront == size - 1) {
-            qfront = 0;
-        } 
-        // Normal case
-        else {
-            qfront++;
+        if (isEmpty()) {
+            front = rear = 0;
+        } else {
+            rear = (rear + 1) % SIZE;  // Move rear to the next position
         }
+        items[rear] = value;
+        cout << "Enqueued " << value << endl;
     }
 
-    // Method to get the front element of the queue
-    int front() {
-        if (qfront == -1) {
-            cout << "Queue is empty\n";
+    // Dequeue: Remove an element from the queue
+    int dequeue() {
+        if (isEmpty()) {
+            cout << "Queue is empty. Cannot dequeue." << endl;
             return -1;
         }
-        return arr[qfront];
+        int removedValue = items[front];
+        if (front == rear) {
+            // Queue is empty after this dequeue
+            front = rear = -1;
+        } else {
+            front = (front + 1) % SIZE;  // Move front to the next position
+        }
+        return removedValue;
     }
 
-    // Method to check if the queue is empty
-    bool isempty() {
-        return (qfront == -1);
-    }
-
-    // Method to display the queue elements
+    // Display the queue
     void display() {
-        if (qfront == -1) {
-            cout << "Queue is empty\n";
+        if (isEmpty()) {
+            cout << "Queue is empty." << endl;
             return;
         }
-        if (rear >= qfront) {
-            for (int i = qfront; i <= rear; i++) {
-                cout << arr[i] << " ";
-            }
-        } else {
-            for (int i = qfront; i < size; i++) {
-                cout << arr[i] << " ";
-            }
-            for (int i = 0; i <= rear; i++) {
-                cout << arr[i] << " ";
-            }
+        cout << "Queue elements: ";
+        int i = front;
+        while (true) {
+            cout << items[i] << " ";
+            if (i == rear) break;
+            i = (i + 1) % SIZE;
         }
         cout << endl;
     }
 };
 
 int main() {
-    que q(5);
+    CircularQueue q;
 
-    q.push(3);
-    q.push(4);
-    q.push(7);
-    q.push(1);
-    q.push(9);
+    // Perform enqueue operations
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    q.enqueue(50);
+    
+    // Trying to add another element to a full queue
+    q.enqueue(60);
 
-    cout << "Front element: " << q.front() << endl;
-    q.pop();
-    cout << "Front element after pop: " << q.front() << endl;
+    // Display the queue
+    q.display();
+
+    // Perform dequeue operations
+    cout << "Dequeued: " << q.dequeue() << endl;
+    cout << "Dequeued: " << q.dequeue() << endl;
+
+    // Display the queue again
+    q.display();
+
+    // Add more elements after dequeuing
+    q.enqueue(60);
+    q.enqueue(70);
+
+    // Display the queue after adding more elements
     q.display();
 
     return 0;
