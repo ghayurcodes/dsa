@@ -179,6 +179,7 @@ public:
 
         if(temp==head){
             is_circular=true;
+            break;
 
         }
     
