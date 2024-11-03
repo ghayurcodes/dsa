@@ -1,103 +1,102 @@
 #include <iostream>
-#define SIZE 5  // Define the maximum size of the queue
-
 using namespace std;
 
-class CircularQueue {
+class Node {
+public:
+    int data;
+    Node* next;
+
+    // Constructor to initialize a node with data
+    Node(int data) {
+        this->data = data;
+        this->next = nullptr;
+    }
+};
+
+class Stack {
 private:
-    int items[SIZE];
-    int front, rear;
+    Node* topNode; // Pointer to the top node of the stack
 
 public:
-    CircularQueue() : front(-1), rear(-1) {}
+    Stack() : topNode(nullptr) {} // Initialize an empty stack
 
-    // Check if the queue is full
-    bool isFull() {
-        return (rear + 1) % SIZE == front;
+    // Push operation to add an element to the stack
+    void push(int value) {
+        Node* newNode = new Node(value);
+        newNode->next = topNode;
+        topNode = newNode;
+        cout << "Pushed " << value << " onto the stack.\n";
     }
 
-    // Check if the queue is empty
-    bool isEmpty() {
-        return front == -1;
-    }
-
-    // Enqueue: Add an element to the queue
-    void enqueue(int value) {
-        if (isFull()) {
-            cout << "Queue is full. Cannot enqueue " << value << "." << endl;
+    // Pop operation to remove the top element from the stack
+    void pop() {
+        if (isEmpty()) {
+            cout << "Stack is empty. Cannot pop.\n";
             return;
         }
-        if (isEmpty()) {
-            front = rear = 0;
-        } else {
-            rear = (rear + 1) % SIZE;  // Move rear to the next position
-        }
-        items[rear] = value;
-        cout << "Enqueued " << value << endl;
+        Node* temp = topNode;
+        topNode = topNode->next;
+        cout << "Popped " << temp->data << " from the stack.\n";
+        delete temp; // Free memory
     }
 
-    // Dequeue: Remove an element from the queue
-    int dequeue() {
+    // Peek operation to view the top element of the stack without removing it
+    int top() {
         if (isEmpty()) {
-            cout << "Queue is empty. Cannot dequeue." << endl;
-            return -1;
+            cout << "Stack is empty.\n";
+            return -1; // Returning -1 as a convention; could handle this differently
         }
-        int removedValue = items[front];
-        if (front == rear) {
-            // Queue is empty after this dequeue
-            front = rear = -1;
-        } else {
-            front = (front + 1) % SIZE;  // Move front to the next position
-        }
-        return removedValue;
+        return topNode->data;
     }
 
-    // Display the queue
+    // Check if the stack is empty
+    bool isEmpty() {
+        return topNode == nullptr;
+    }
+
+    // Display all elements in the stack
     void display() {
         if (isEmpty()) {
-            cout << "Queue is empty." << endl;
+            cout << "Stack is empty.\n";
             return;
         }
-        cout << "Queue elements: ";
-        int i = front;
-        while (true) {
-            cout << items[i] << " ";
-            if (i == rear) break;
-            i = (i + 1) % SIZE;
+        Node* temp = topNode;
+        cout << "Stack elements: ";
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->next;
         }
         cout << endl;
+    }
+
+    // Destructor to clean up all nodes when the stack is destroyed
+    ~Stack() {
+        while (!isEmpty()) {
+            pop();
+        }
     }
 };
 
 int main() {
-    CircularQueue q;
+    Stack stack;
 
-    // Perform enqueue operations
-    q.enqueue(10);
-    q.enqueue(20);
-    q.enqueue(30);
-    q.enqueue(40);
-    q.enqueue(50);
-    
-    // Trying to add another element to a full queue
-    q.enqueue(60);
+    // Test push operation
+    stack.push(10);
+    stack.push(20);
+    stack.push(30);
 
-    // Display the queue
-    q.display();
+    // Display stack elements
+    stack.display();
 
-    // Perform dequeue operations
-    cout << "Dequeued: " << q.dequeue() << endl;
-    cout << "Dequeued: " << q.dequeue() << endl;
+    // Test top operation
+    cout << "Top element is: " << stack.top() << endl;
 
-    // Display the queue again
-    q.display();
+    // Test pop operation
+    stack.pop();
+    stack.display();
 
-    // Add more elements after dequeuing
-    q.enqueue(60);
-    q.enqueue(70);
-
-    // Display the queue after adding more elements
-    q.display();
+    // Check top element after pop
+    cout << "Top element after pop is: " << stack.top() << endl;
 
     return 0;
 }
