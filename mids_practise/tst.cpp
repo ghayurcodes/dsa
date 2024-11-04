@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stack>
+#include<ctime>
 
 using namespace std;
 
@@ -35,4 +36,9 @@ stack<int> s;
 s.push(3);
 s.push(4);
 cout<<s.size();
+time_t d = time(0); // Get current time
+    std::cout << "Epoch time: " << d << "\n";
+    std::cout << "Readable time: " << ctime(&d); // Convert and display as readable format
+    return 0;
+
 }
