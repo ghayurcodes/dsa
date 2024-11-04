@@ -31,5 +31,8 @@ sort(s);
 
 
 int main(){
-
+stack<int> s;
+s.push(3);
+s.push(4);
+cout<<s.size();
 }
