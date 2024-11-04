@@ -4,16 +4,11 @@ using namespace std;
 
 // Function to calculate (base^exp) % mod using modular exponentiation
 long long power(long long base, long long exp, long long mod) {
-    long long result = 1;
-    base = base % mod;
-    while (exp > 0) {
-        if (exp % 2 == 1) {
-            result = (result * base) % mod;
-        }
-        exp = exp >> 1;
-        base = (base * base) % mod;
+    long long result=1;
+    for(int i=0;i<exp;i++){
+        result*=base;
     }
-    return result;
+    return result%mod;
 }
 
 int main() {
