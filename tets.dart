@@ -8,7 +8,7 @@ void main() {
   }
   else{
     print("Number is odd");
-  
+    
   }
 
 
