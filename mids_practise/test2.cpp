@@ -10,8 +10,7 @@ class CodeState {
 public:
     string code;           
     time_t timestamp;      // When the state was saved
-    string description;    // Description of the change
-
+    string description; 
     CodeState(const string& code, const string& description) {
         this->code = code;
         this->timestamp = time(0); // Save current time
