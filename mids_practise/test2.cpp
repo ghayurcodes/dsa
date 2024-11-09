@@ -8,7 +8,7 @@ using namespace std;
 // Class representing a single state of the code
 class CodeState {
 public:
-    string code;           // Current state of the code
+    string code;           
     time_t timestamp;      // When the state was saved
     string description;    // Description of the change
 
