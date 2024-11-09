@@ -1,0 +1,114 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+# Sample ungrouped dataset
+data = [15, 21, 25, 20, 18, 21, 22, 30, 18, 19, 22, 24, 23, 20, 21]
+
+# Step 1: Frequency Distribution
+def frequency_distribution(data):
+    freq_dist = pd.Series(data).value_counts().sort_index()
+    print("Frequency Distribution (Ungrouped):\n", freq_dist)
+    return freq_dist
+
+# Step 2: Grouped Frequency Distribution
+def grouped_frequency_distribution(data, bins=5):
+    min_value = min(data)
+    max_value = max(data)
+    bin_width = (max_value - min_value) / bins
+    bins = [min_value + i * bin_width for i in range(bins + 1)]
+    
+    freq_dist_grouped = pd.cut(data, bins=bins, include_lowest=True).value_counts().sort_index()
+    print("\nGrouped Frequency Distribution:\n", freq_dist_grouped)
+    return freq_dist_grouped
+
+freq_dist = frequency_distribution(data)
+freq_dist_grouped = grouped_frequency_distribution(data)
+
+# Step 3: Graphs (Histogram, Box Plot, Frequency Polygon, and Ogive)
+def draw_graphs(data, freq_dist, freq_dist_grouped):
+    plt.figure(figsize=(14, 10))
+    
+    # Histogram for Ungrouped Data
+    plt.subplot(2, 2, 1)
+    plt.hist(data, bins=range(min(data), max(data) + 2), edgecolor='black', alpha=0.7)
+    plt.title('Histogram (Ungrouped Data)')
+    plt.xlabel('Data Values')
+    plt.ylabel('Frequency')
+
+    # Box Plot for Ungrouped Data
+    plt.subplot(2, 2, 2)
+    plt.boxplot(data, vert=False)
+    plt.title('Box and Whisker Plot (Ungrouped Data)')
+    plt.xlabel('Data Values')
+    
+    # Frequency Polygon for Grouped Data
+    plt.subplot(2, 2, 3)
+    # Calculate midpoints for each bin in the grouped data
+    bins = freq_dist_grouped.index.categories
+    midpoints = [interval.left + (interval.right - interval.left) / 2 for interval in bins]
+    plt.plot(midpoints, freq_dist_grouped.values, marker='o', linestyle='-', color='blue')
+    plt.title('Frequency Polygon (Grouped Data)')
+    plt.xlabel('Midpoints of Data Intervals')
+    plt.ylabel('Frequency')
+    
+    # Ogive (Cumulative Frequency Graph) for Grouped Data
+    plt.subplot(2, 2, 4)
+    cumulative_freq = freq_dist_grouped.cumsum()
+    plt.step(midpoints, cumulative_freq, where='mid', color='green')
+    plt.title('Ogive (Cumulative Frequency Graph)')
+    plt.xlabel('Midpoints of Data Intervals')
+    plt.ylabel('Cumulative Frequency')
+
+    plt.tight_layout()
+    plt.show()
+
+draw_graphs(data, freq_dist, freq_dist_grouped)
+
+# Step 4: Mean Calculations
+def calculate_means(data):
+    arithmetic_mean = np.mean(data)
+    harmonic_mean = stats.hmean(data)
+    geometric_mean = stats.gmean(data)
+
+    print(f"Arithmetic Mean: {arithmetic_mean}")
+    print(f"Harmonic Mean: {harmonic_mean}")
+    print(f"Geometric Mean: {geometric_mean}")
+    return arithmetic_mean, harmonic_mean, geometric_mean
+
+arithmetic_mean, harmonic_mean, geometric_mean = calculate_means(data)
+
+# Step 5: Median, Mode, Quartiles
+def calculate_median_mode_quartiles(data):
+    median = np.median(data)
+    mode = stats.mode(data).mode[0]
+    quartiles = np.percentile(data, [25, 50, 75])
+
+    print(f"Median: {median}")
+    print(f"Mode: {mode}")
+    print(f"Q1 (25th percentile): {quartiles[0]}")
+    print(f"Q2 (50th percentile/Median): {quartiles[1]}")
+    print(f"Q3 (75th percentile): {quartiles[2]}")
+    return median, mode, quartiles
+
+median, mode, quartiles = calculate_median_mode_quartiles(data)
+
+# Step 6: Coefficient of Variation
+def calculate_coefficient_of_variation(data):
+    mean = np.mean(data)
+    std_dev = np.std(data, ddof=1)  # sample standard deviation
+    coeff_var = (std_dev / mean) * 100
+
+    print(f"Coefficient of Variation: {coeff_var}%")
+    return coeff_var
+
+coeff_var = calculate_coefficient_of_variation(data)
+
+# Summary Output for Grouped Data
+print("\nSummary for Grouped Data:")
+print("Mean:", np.mean(data))
+print("Median:", np.median(data))
+print("Mode:", stats.mode(data).mode[0])
+print("Q1, Q2, Q3:", np.percentile(data, [25, 50, 75]))
+print("Coefficient of Variation:", calculate_coefficient_of_variation(data), "%")
