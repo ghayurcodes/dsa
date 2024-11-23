@@ -16,7 +16,7 @@ public:
     SinglyLinkedList() : head(nullptr) {}
 
     void append(int value) {
-        Node* newNode = new Node(value)
+        Node* newNode = new Node(value);
         if (!head) {
             head = newNode;
             return;
