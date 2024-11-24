@@ -28,7 +28,7 @@ public:
         temp->next = newNode;
     }
 
-    void reverse() 
+    void reverse() {
         Node* prev = nullptr;
         Node* current = head;
         Node* next = nullptr;
