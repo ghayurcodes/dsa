@@ -74,7 +74,7 @@ int main() {
     vector<char> uniqueChars;
     vector<int> frequencies;
     for (char ch : text) {
-        vector<char>::iterator it = find(uniqueChars.begin(), uniqueChars.end(), ch);
+        auto it = find(uniqueChars.begin(), uniqueChars.end(), ch);//it datatype vector<char>::iterator
         if (it != uniqueChars.end()) {
             frequencies[it - uniqueChars.begin()]++;//- convert iterator type to index(int)
         } else {
