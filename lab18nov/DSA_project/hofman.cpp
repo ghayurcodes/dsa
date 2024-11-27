@@ -87,6 +87,7 @@ int main() {
     priority_queue<Node*, vector<Node*>, Compare> pq;
     for (size_t i = 0; i < uniqueChars.size(); i++) {
         pq.push(new Node(uniqueChars[i], frequencies[i]));
+        
     }
 
     // Build the Huffman Tree
