@@ -141,7 +141,7 @@ int main(){
     }
     cout << "heaped Array:" << endl;
 
-     for (int i = 1; i <= size; i++) {//34 32 39 99 22 93 31     39 32 34 99 22 93 31     
+     for (int i = 1; i <= size; i++) {//easy if u do on paper
         cout << a[i] << " ";
     }
     cout << endl;
