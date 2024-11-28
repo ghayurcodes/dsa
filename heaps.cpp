@@ -5,7 +5,7 @@
 //heap is a cbt that comes with heap order property
 
 
-
+using namespace std;
 
 class heap{
     public:
@@ -26,8 +26,24 @@ class heap{
         while(index>1){
             int parent=index/2;
 
-            if
+            if(a[parent]<a[index]){
+                swap(a[parent],a[index]);
+                index=parent;
+            }
+            else{
+                return;
+            }
         }
+    }
+
+
+
+
+    void print(){
+        for(int i=1;i<=size;i++){
+            cout<<a[i]<<" ";
+        }
+        cout<<endl;
     }
 
 };
@@ -36,5 +52,16 @@ class heap{
 
 using namespace std;
 int main(){
-    cout<<"hey\n";
+    heap h;
+    h.insert(34);
+    h.insert(32);
+    h.insert(31);
+    h.insert(39);
+    h.insert(22);
+    h.insert(93);
+    h.insert(99);
+
+
+    cout<<"\t displaying\n";
+    h.print();
 }
