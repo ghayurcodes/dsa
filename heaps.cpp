@@ -17,7 +17,7 @@ class heap{
         a[size]=-1;
     }
 
-    void insert(int val){
+    void insert(int val){                       //insert and del time coleity O(logn)
 
         size=size+1;
         int index=size;
@@ -46,6 +46,39 @@ class heap{
         cout<<endl;
     }
 
+
+
+    void del(){
+        if(size==0){
+            cout<<"nothing to delete\n";
+            return;
+        }
+        //steop1
+        a[1]=a[size];
+        //step 2
+        size=size-1;
+
+        //step 3 taking root node to corect position
+        int i=1;
+        while(i<size){
+            int leftnode=i*2;
+            int rightnode=i*2+1;
+
+
+            if(leftnode<size && a[leftnode]>a[i]){
+                swap(a[leftnode],a[i]);
+                i=leftnode;
+            }
+            if(rightnode<size && a[rightnode]>a[i]){
+                swap(a[rightnode],a[i]);
+                i=rightnode;
+            }
+            else{
+                return;
+            }
+        }
+    }
+
 };
 
 
@@ -63,5 +96,10 @@ int main(){
 
 
     cout<<"\t displaying\n";
+    h.print();
+
+    h.del();
+
+     cout<<"\t displaying\n";
     h.print();
 }
