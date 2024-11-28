@@ -2,7 +2,16 @@
 //cbt:(complete binary tree) A complete binary tree is a binary tree in which every level, 
 //except possibly the last, is completely filled, and all nodes in the last level are as far left as possible
 
-//heap is a cbt that cmes with heap order property
+//heap is a cbt that comes with heap order property
+
+
+
+
+class heap{
+
+};
+
+
 
 using namespace std;
 int main(){
