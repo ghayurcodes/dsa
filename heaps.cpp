@@ -83,25 +83,26 @@ class heap{
 
 
 
-void heapify(int a[],int size,int index){
-        int largest=index;
-        int leftnode=index*2;
-        int rightnode=index*2+1;
+void heapify(int a[], int size, int index) {
+    int largest = index;
+    int leftnode = index * 2;
+    int rightnode = index * 2 + 1;
 
-        if(leftnode<=size && a[leftnode]>a[largest]){
-            
-            largest=leftnode;
-        }
-        
-        if(rightnode<=size && a[rightnode]>a[largest]){
-           
-            largest=rightnode;
-        }
+    // Check if left node exists and is larger than the current largest
+    if (leftnode <= size && a[leftnode] > a[largest]) {
+        largest = leftnode;
+    }
 
-        if(largest!=index){
-            swap(a[index],a[largest]);
-            heapify(a,size,largest);
-        }
+    // Check if right node exists and is larger than the current largest
+    if (rightnode <= size && a[rightnode] > a[largest]) {
+        largest = rightnode;
+    }
+
+    // If largest is not the current index, swap and recursively heapify the affected subtree
+    if (largest != index) {
+        swap(a[index], a[largest]);
+        heapify(a, size, largest);  // Recursive call on the subtree
+    }
 }
 
 
