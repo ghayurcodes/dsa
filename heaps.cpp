@@ -88,17 +88,18 @@ void heapify(int a[],int size,int index){
         int leftnode=index*2;
         int rightnode=index*2+1;
 
-        if(leftnode<size && a[leftnode]>a[largest]){
-            swap(a[leftnode],a[largest]);
+        if(leftnode<=size && a[leftnode]>a[largest]){
+            
             largest=leftnode;
         }
         
-        if(rightnode<size && a[rightnode]>a[largest]){
-            swap(a[rightnode],a[largest]);
+        if(rightnode<=size && a[rightnode]>a[largest]){
+           
             largest=rightnode;
         }
 
         if(largest!=index){
+            swap(a[index],a[largest]);
             heapify(a,size,largest);
         }
 }
@@ -140,7 +141,7 @@ int main(){
     }
     cout << "heaped Array:" << endl;
 
-     for (int i = 1; i <= size; i++) {
+     for (int i = 1; i <= size; i++) {//34 32 39 99 22 93 31     39 32 34 99 22 93 31     
         cout << a[i] << " ";
     }
     cout << endl;
