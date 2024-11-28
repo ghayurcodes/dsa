@@ -15,7 +15,8 @@ struct Node {
 };
 
 // Comparator for priority queue
-struct Compare {
+class Compare {        
+    public:                                                //finction object
     bool operator()(Node* a, Node* b) {
         return a->freq > b->freq; // Min-heap based on frequency
     }
@@ -74,7 +75,7 @@ int main() {
     vector<char> uniqueChars;
     vector<int> frequencies;
     for (char ch : text) {
-        auto it = find(uniqueChars.begin(), uniqueChars.end(), ch);//it datatype vector<char>::iterator
+        vector<char>::iterator it = find(uniqueChars.begin(), uniqueChars.end(), ch);
         if (it != uniqueChars.end()) {
             frequencies[it - uniqueChars.begin()]++;//- convert iterator type to index(int)
         } else {
@@ -87,7 +88,6 @@ int main() {
     priority_queue<Node*, vector<Node*>, Compare> pq;
     for (size_t i = 0; i < uniqueChars.size(); i++) {
         pq.push(new Node(uniqueChars[i], frequencies[i]));
-        
     }
 
     // Build the Huffman Tree
