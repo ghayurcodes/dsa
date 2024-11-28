@@ -8,6 +8,27 @@
 
 
 class heap{
+    public:
+    int a[20];
+    int size;
+
+    heap(){
+        size=0;
+        a[size]=-1;
+    }
+
+    void insert(int val){
+
+        size=size+1;
+        int index=size;
+        a[index]=val;
+
+        while(index>1){
+            int parent=index/2;
+
+            if
+        }
+    }
 
 };
 
