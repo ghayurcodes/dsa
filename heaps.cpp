@@ -117,14 +117,31 @@ int main(){
     h.insert(99);
 
 
-    cout<<"\t displaying\n";
-    h.print();
+    // cout<<"\t displaying\n";
+    // h.print();
 
-    h.del();
+    // h.del();
 
-     cout<<"\t displaying\n";
-    h.print();
+    //  cout<<"\t displaying\n";
+    // h.print();
 
 
-    int arr[5]={-1,}
+     int a[] = {-1, 34, 32, 31, 39, 22, 93, 99}; // -1 is a placeholder for 1-based indexing
+    int size = 7; // Number of elements in the heap
+
+    cout << "Original Array:" << endl;
+    for (int i = 1; i <= size; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+
+    for (int i = size / 2; i > 0; i--) {
+        heapify(a, size, i);
+    }
+    cout << "heaped Array:" << endl;
+
+     for (int i = 1; i <= size; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
 }
