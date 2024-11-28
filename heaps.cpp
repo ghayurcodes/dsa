@@ -83,6 +83,28 @@ class heap{
 
 
 
+void heapify(int a[],int size,int index){
+        int largest=index;
+        int leftnode=index*2;
+        int rightnode=index*2+1;
+
+        if(leftnode<size && a[leftnode]>a[largest]){
+            swap(a[leftnode],a[largest]);
+            largest=leftnode;
+        }
+        
+        if(rightnode<size && a[rightnode]>a[largest]){
+            swap(a[rightnode],a[largest]);
+            largest=rightnode;
+        }
+
+        if(largest!=index){
+            heapify(a,size,largest);
+        }
+}
+
+
+
 using namespace std;
 int main(){
     heap h;
@@ -102,4 +124,7 @@ int main(){
 
      cout<<"\t displaying\n";
     h.print();
+
+
+    int arr[5]={-1,}
 }
