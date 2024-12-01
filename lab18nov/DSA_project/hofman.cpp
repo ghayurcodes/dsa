@@ -18,7 +18,7 @@ struct Node {
 class Compare {        
     public:                                                //finction object
     bool operator()(Node* a, Node* b) {
-        return a->freq > b->freq; // Min-heap based on frequency
+       return b->freq < a->freq; // Min-heap based on frequency
     }
 };
 
@@ -69,9 +69,9 @@ string encode(const string& text, const vector<char>& characters, const vector<s
 int main() {
     string text;
     cout << "Enter the text to compress: ";
-   getline(cin>>ws,text);
+    getline(cin>>ws,text);
 
-    // Count the frequency of each character
+  
     vector<char> uniqueChars;
     vector<int> frequencies;
     for (char ch : text) {
@@ -104,6 +104,8 @@ int main() {
 
     // Root of the Huffman Tree
     Node* root = pq.top();
+    pq.pop();
+    
 
     // Generate Huffman codes
     vector<char> characters;
