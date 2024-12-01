@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <iomanip>  // For formatting output
 using namespace std;
 
 // Node structure for the Huffman Tree
@@ -16,7 +17,7 @@ struct Node {
 
 // Comparator for priority queue
 class Compare {        
-    public:                                                //finction object
+    public:                                                // function object
     bool operator()(Node* a, Node* b) {
        return b->freq < a->freq; // Min-heap based on frequency
     }
@@ -38,7 +39,6 @@ void generateCodes(Node* root, string code, vector<char>& characters, vector<str
     generateCodes(root->right, code + "1", characters, codes);
 }
 
-
 // Function to encode a string
 string encode(const string& text, const vector<char>& characters, const vector<string>& codes) {
     string encodedText = "";
@@ -53,18 +53,53 @@ string encode(const string& text, const vector<char>& characters, const vector<s
     return encodedText;
 }
 
-int main() {
-    string text;
-    cout << "Enter the text to compress: ";
-    getline(cin>>ws,text);
+string decode(const string& encodedText, Node* root) {
+    string decodedText = "";
+    Node* current = root;
 
-  
-    vector<char> uniqueChars;
+    for (char bit : encodedText) {
+        // Traverse the Huffman tree based on the bit
+        if (bit == '0') {
+            current = current->left;
+        } else {
+            current = current->right;
+        }
+
+        // If it's a leaf node, add the character to the decoded string
+        if (!current->left && !current->right) {
+            decodedText += current->ch;
+            current = root; // Reset to root for next character
+        }
+    }
+    return decodedText;
+}
+
+int main() {
+    // Display menu options
+    
+    cout << "\n*************************************\n";
+    cout << "          Huffman Coding Tool       \n";
+    cout << "*************************************\n";
+    cout << "1. Encrypt Text\n";
+    cout << "2. Decrypt Text\n";
+    cout << "Enter your choice (1 or 2): ";
+    
+    int choice;
+    cin >> choice;
+    cin.ignore(); // To consume the newline after the choice input
+
+    string text;
+    Node* root=NULL;
+    
+    if (choice == 1) {
+        cout << "\nEnter the text to compress: ";
+        getline(cin, text);
+        vector<char> uniqueChars;
     vector<int> frequencies;
     for (char ch : text) {
         vector<char>::iterator it = find(uniqueChars.begin(), uniqueChars.end(), ch);
         if (it != uniqueChars.end()) {
-            frequencies[it - uniqueChars.begin()]++;//- convert iterator type to index(int)
+            frequencies[it - uniqueChars.begin()]++;
         } else {
             uniqueChars.push_back(ch);
             frequencies.push_back(1);
@@ -90,28 +125,42 @@ int main() {
     }
 
     // Root of the Huffman Tree
-    Node* root = pq.top();
+     root= pq.top();
     pq.pop();
-    
 
     // Generate Huffman codes
     vector<char> characters;
     vector<string> codes;
     generateCodes(root, "", characters, codes);
 
-    // Print the Huffman codes
-    cout << "Huffman Codes:\n";
+    // Display the Huffman codes
+    cout << "\nHuffman Codes:\n";
     for (size_t i = 0; i < characters.size(); i++) {
-        cout << characters[i] << ": " << codes[i] << endl;
+        cout << setw(4) << characters[i] << ": " << codes[i] << endl;
     }
 
-    // Encode the input text
-    string encodedText = encode(text, characters, codes);
-    cout << "\nEncoded Text: " << encodedText << endl;
+  
+        // Encode the input text
+        string encodedText = encode(text, characters, codes);
+        cout << "\nEncoded Text: " << encodedText << endl;
+        
+        cout << "\nOriginal Size (in bits): " << text.length() * 8 << " bits\n";
+        cout << "Compressed Size (in bits): " << encodedText.length() << " bits\n";
+    
+    
 
     
-    cout << "Original Size (in bits): " << text.length() * 8 << " bits" << endl;
-    cout << "Compressed Size (in bits): " <<encodedText.length() << " bits" << endl;
+    } else if (choice == 2) {
+        cout << "\nEnter the encoded text to decompress: ";
+        getline(cin, text);
+        // Decode the encoded text
+        string decodedText = decode(text, root);
+        cout << "\nDecoded Text: " << decodedText << endl;
+    
+    } else {
+        cout << "Invalid choice. Exiting program.\n";
+        return 1;
+    }
 
-    return 0;
+    
 }
