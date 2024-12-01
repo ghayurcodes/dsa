@@ -38,25 +38,12 @@ void generateCodes(Node* root, string code, vector<char>& characters, vector<str
     generateCodes(root->right, code + "1", characters, codes);
 }
 
-// Function to calculate the total size of the encoded string
-int calculateEncodedSize(const vector<char>& characters, const vector<string>& codes, const string& text) {
-    int totalSize = 0;
-    for (char ch : text) {
-        for (size_t i = 0; i < characters.size(); i++) {
-            if (ch == characters[i]) {
-                totalSize += codes[i].length();
-                break;
-            }
-        }
-    }
-    return totalSize;
-}
 
 // Function to encode a string
 string encode(const string& text, const vector<char>& characters, const vector<string>& codes) {
     string encodedText = "";
     for (char ch : text) {
-        for (size_t i = 0; i < characters.size(); i++) {
+        for (int i = 0; i < characters.size(); i++) {
             if (ch == characters[i]) {
                 encodedText += codes[i];
                 break;
@@ -122,10 +109,9 @@ int main() {
     string encodedText = encode(text, characters, codes);
     cout << "\nEncoded Text: " << encodedText << endl;
 
-    // Calculate the size of the encoded text
-    int encodedSize = calculateEncodedSize(characters, codes, text);
+    
     cout << "Original Size (in bits): " << text.length() * 8 << " bits" << endl;
-    cout << "Compressed Size (in bits): " << encodedSize << " bits" << endl;
+    cout << "Compressed Size (in bits): " <<encodedText.length() << " bits" << endl;
 
     return 0;
 }
