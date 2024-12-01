@@ -69,7 +69,7 @@ string encode(const string& text, const vector<char>& characters, const vector<s
 int main() {
     string text;
     cout << "Enter the text to compress: ";
-    cin >> text;
+   getline(cin>>ws,text);
 
     // Count the frequency of each character
     vector<char> uniqueChars;
