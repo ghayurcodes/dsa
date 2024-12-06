@@ -18,7 +18,7 @@ struct Node {
     Node(char c, int f) : ch(c), freq(f), left(nullptr), right(nullptr) {}
 };
 
-// Comparator for the priority queue
+// Comparator for the priority queu
 struct Compare {
     bool operator()(Node* a, Node* b) {
         return a->freq > b->freq;
