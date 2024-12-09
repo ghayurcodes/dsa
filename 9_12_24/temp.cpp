@@ -14,7 +14,7 @@ struct Node {
     }
 };
 
-// Function to insert a node into the BST
+
 Node* insert(Node* root, int value) {
     if (root == nullptr) {
         return new Node(value);
@@ -29,7 +29,7 @@ Node* insert(Node* root, int value) {
     return root;
 }
 
-// Function to search for an element in the BST
+
 bool search(Node* root, int value) {
     if (root == nullptr) {
         return false;
@@ -46,6 +46,54 @@ bool search(Node* root, int value) {
     }
 }
 
+// Helper function to find the minimum value node in the BST
+Node* findMin(Node* root) {
+    while (root->left != nullptr) {
+        root = root->left;
+    }
+    return root;
+}
+
+
+Node* deleteNode(Node* root, int value) {
+    if (root == nullptr) {
+        return nullptr;
+    }
+
+    if (value < root->data) {
+        root->left = deleteNode(root->left, value);
+    } else if (value > root->data) {
+        root->right = deleteNode(root->right, value);
+    } else {
+        // Node with no children (leaf node)
+        if (root->left == nullptr && root->right == nullptr) {
+            delete root;
+            return nullptr;
+        }
+
+        // Node with one child (right child)
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        }
+
+        // Node with one child (left child)
+        if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Node with two children
+        Node* temp = findMin(root->right);
+        root->data = temp->data;
+        root->right = deleteNode(root->right, temp->data);
+    }
+
+    return root;
+}
+
 // Inorder traversal function (for displaying BST elements)
 void inorder(Node* root) {
     if (root != nullptr) {
@@ -55,30 +103,60 @@ void inorder(Node* root) {
     }
 }
 
-// Main function to test the BST implementation
+// Main function to provide an option menu
 int main() {
     Node* root = nullptr;
-    int elements[] = {50, 30, 70, 20, 40, 60, 80};
-    
-    // Insert elements into the BST
-    for (int val : elements) {
-        root = insert(root, val);
-    }
+    int choice, value;
 
-    cout << "Inorder traversal of the BST: ";
-    inorder(root);
-    cout << endl;
+    do {
+        cout << "\n--- Binary Search Tree Menu ---\n";
+        cout << "1. Insert\n";
+        cout << "2. Search\n";
+        cout << "3. Delete\n";
+        cout << "4. Display Inorder Traversal\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-    // Search for elements
-    int searchValue;
-    cout << "Enter a value to search: ";
-    cin >> searchValue;
+        switch (choice) {
+            case 1:
+                cout << "Enter value to insert: ";
+                cin >> value;
+                root = insert(root, value);
+                cout << "Value inserted.\n";
+                break;
 
-    if (search(root, searchValue)) {
-        cout << "Element " << searchValue << " is found in the BST." << endl;
-    } else {
-        cout << "Element " << searchValue << " is NOT found in the BST." << endl;
-    }
+            case 2:
+                cout << "Enter value to search: ";
+                cin >> value;
+                if (search(root, value)) {
+                    cout << "Element " << value << " is found in the BST.\n";
+                } else {
+                    cout << "Element " << value << " is NOT found in the BST.\n";
+                }
+                break;
+
+            case 3:
+                cout << "Enter value to delete: ";
+                cin >> value;
+                root = deleteNode(root, value);
+                cout << "Value deleted (if it existed).\n";
+                break;
+
+            case 4:
+                cout << "Inorder traversal of the BST: ";
+                inorder(root);
+                cout << endl;
+                break;
+
+            case 5:
+                cout << "Exiting the program. Goodbye!\n";
+                break;
+
+            default:
+                cout << "Invalid choice. Please enter a number between 1 and 5.\n";
+        }
+    } while (choice != 5);
 
     return 0;
 }
