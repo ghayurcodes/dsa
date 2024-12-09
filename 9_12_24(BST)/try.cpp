@@ -20,19 +20,43 @@ class node{
 
 
 
-void takeinput(){
-    
+node* insert(node* root,int val){
+    if(root==nullptr){
+        return new node(val);
+    }
+
+    if(val<root->data){
+        root->left=insert(root->left,val);
+    }
+    else if(val>root->data){
+        root->right=insert(root->right,val);
+    }
+
+    return root;
 }
 
 
-
+void display(node*root){//inorder vire
+    if(root==nullptr){
+        return;
+    }
+    display(root->left);
+    cout<<root->data<<" ";
+    display(root->right);
+}
 
 
 int main(){
     
     node* root=nullptr;
 
-    cout<<"enter data:\n";
-    takeinput();
+    int a[7]={22,44,23,14,5,7,99};
+    for(int i:a){
+        root=insert(root,i);
+    }
+    cout<<"data added\n";
+    cout<<"\tDisplaying:\n";
+    display(root);
+    
 
 }
