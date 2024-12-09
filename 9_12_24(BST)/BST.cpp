@@ -120,10 +120,13 @@ int main() {
 
         switch (choice) {
             case 1:
+            do{
                 cout << "Enter value to insert: ";
                 cin >> value;
                 root = insert(root, value);
-                cout << "Value inserted.\n";
+             
+            }while(value!=-1);
+                
                 break;
 
             case 2:
