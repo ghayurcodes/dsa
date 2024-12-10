@@ -71,6 +71,13 @@ Node* findMin(Node* root) {
     return root;
 }
 
+int findm(Node* root) {
+    while (root->left != nullptr) {
+        root = root->left;
+    }
+    return root->data;
+}
+
 
 
 
@@ -119,7 +126,7 @@ Node* deleteNode(Node* root, int value) {
 
 // Inorder traversal function (for displaying BST elements)
 void inorder(Node* root) {
-    if (root != nullptr) {
+    if (root ->left->left!= nullptr) {
         inorder(root->left);
         cout << root->data << " ";
         inorder(root->right);
@@ -179,7 +186,8 @@ int main() {
                 break;
 
             case 5:
-                cout << "Exiting the program. Goodbye!\n";
+                // cout << "Exiting the program. Goodbye!\n";
+                cout<<"secont minumum element is: "<<findm(root);
                 break;
 
             default:

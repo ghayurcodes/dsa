@@ -46,6 +46,15 @@ void display(node*root){//inorder vire
 }
 
 
+int findm(node* root) {
+    while (root->left->left != nullptr) {
+        root = root->left;
+    }
+    return root->data;
+}
+
+
+
 int main(){
     
     node* root=nullptr;
@@ -57,6 +66,7 @@ int main(){
     cout<<"data added\n";
     cout<<"\tDisplaying:\n";
     display(root);
+    cout<<"\n2nd leat element: "<<findm(root)<<endl;
     
 
 }
