@@ -19,7 +19,7 @@ int findSecondSmallest(Node* root) {
     Node* current = root;
     int count = 0;
 
-    while ( current != nullptr) {
+    while (!st.empty() || current != nullptr) {
         while (current != nullptr) {
             st.push(current);
             current = current->left;
