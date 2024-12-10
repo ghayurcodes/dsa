@@ -72,17 +72,15 @@ Node* findMin(Node* root) {
 }
 
 
+
+
 Node* deleteNode(Node* root, int value) {
     if (root == nullptr) {
         return nullptr;
     }
 
-    if (value < root->data) {
-        root->left = deleteNode(root->left, value);
-    } else if (value > root->data) {
-        root->right = deleteNode(root->right, value);
-    } else {
-        // Node with no children (leaf node)
+    if(root->data==value){
+         // Node with no children (leaf node)
         if (root->left == nullptr && root->right == nullptr) {
             delete root;
             return nullptr;
@@ -106,7 +104,15 @@ Node* deleteNode(Node* root, int value) {
         Node* temp = findMin(root->right);
         root->data = temp->data;
         root->right = deleteNode(root->right, temp->data);
+    
     }
+
+    if (value < root->data) {
+        root->left = deleteNode(root->left, value);
+    } else if (value > root->data) {
+        root->right = deleteNode(root->right, value);
+    } 
+       
 
     return root;
 }

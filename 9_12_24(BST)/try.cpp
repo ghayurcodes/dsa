@@ -41,7 +41,7 @@ void display(node*root){//inorder vire
         return;
     }
     display(root->left);
-    cout<<root->data<<" ";
+    cout<<root->data<<" ";//displaying in norder displays the data in order
     display(root->right);
 }
 
