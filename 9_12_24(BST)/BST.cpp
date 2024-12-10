@@ -123,7 +123,7 @@ int main() {
             while(true){
                 cout << "Enter value to insert: ";
                 cin >> value;
-                if(vaue==-1){
+                if(value==-1){
                     break;
                 }
                 root = insert(root, value);
