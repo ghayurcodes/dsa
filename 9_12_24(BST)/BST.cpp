@@ -46,6 +46,23 @@ bool search(Node* root, int value) {
     }
 }
 
+
+// bool search(Node* root, int value) {
+//     while (root != nullptr) {
+//         if (root->data == value) {
+//             return true;
+//         }                                        //while lop aproach
+        
+//         if (value < root->data) {
+//             root = root->left;
+//         } else {
+//             root = root->right;
+//         }
+//     }
+
+//     return false;  // Reached a leaf node without finding the value
+// }
+
 // Helper function to find the minimum value node in the BST
 Node* findMin(Node* root) {
     while (root->left != nullptr) {
