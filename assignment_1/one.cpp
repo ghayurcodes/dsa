@@ -1,111 +1,62 @@
 #include <iostream>
+#include <stack>
 #include <string>
-
+#include <cctype>
 using namespace std;
 
-
-struct InventoryItem {
-    int id;
-    string name;
-    InventoryItem* next;
-    InventoryItem* prev;
-
-    InventoryItem(int i, string n) : id(i), name(n), next(nullptr), prev(nullptr) {}
-};
-
-
-class InventoryList {
-private:
-    InventoryItem* head;
-    InventoryItem* tail;
-
-public:
-    InventoryList() : head(nullptr), tail(nullptr) {}
-
-   
-    void addItem(int id, string name) {
-        InventoryItem* newItem = new InventoryItem(id, name);
-        if (!head) {
-            head = tail = newItem;
-        } else {
-            newItem->next = head;
-            head->prev = newItem;
-            head = newItem;
-        }
-        cout << "Item added: ID = " << id << ", Name = " << name << endl;
+int precedence(char op) {
+    if (op == '+' || op == '-') {
+        return 1;
+    } else if (op == '*' || op == '/') {
+        return 2;
+    } else if (op == '^') {
+        return 3;
     }
+    return 0;
+}
 
-   
-    void removeItem() {
-        if (!tail) {
-            cout << "Inventory is empty.\n";
-            return;
-        }
-        cout << "Item removed: ID = " << tail->id << ", Name = " << tail->name << endl;
+string infixToPostfix(string infix) {
+    stack<char> operators;
+    string postfix = "";
 
-        if (head == tail) {
-            delete tail;
-            head = tail = nullptr;
-        } else {
-            tail = tail->prev;
-            delete tail->next;
-            tail->next = nullptr;
-        }
-    }
+    for (int i = 0; i < infix.length(); i++) {
+        char current = infix[i];
 
-  
-    void updateItem(int id, string newName) {
-        if (!head) {
-            cout << "Inventory is empty.\n";
-            return;
-        }
-
-        InventoryItem* temp = head;
-        while (temp) {
-            if (temp->id == id) {
-                cout << "Item updated: ID = " << id << ", Old Name = " << temp->name << ", New Name = " << newName << endl;
-                temp->name = newName;
-                return;
+        if (isalnum(current)) {
+            postfix += current;
+        } else if (current == '(') {
+            operators.push(current);
+        } else if (current == ')') {
+            while (!operators.empty() && operators.top() != '(') {
+                postfix += operators.top();
+                operators.pop();
             }
-            temp = temp->next;
+            operators.pop();
+        } else if (current == '+' || current == '-' || current == '*' || current == '/' || current == '^') {
+            while (!operators.empty() && precedence(operators.top()) >= precedence(current)) {
+                postfix += operators.top();
+                operators.pop();
+            }
+            operators.push(current);
         }
-        cout << "Item with ID " << id << " not found.\n";
     }
 
-    void displayItems() {
-        if (!head) {
-            cout << "No inventory items.\n";
-            return;
-        }
-        InventoryItem* temp = head;
-        while (temp) {
-            cout << "ID: " << temp->id << ", Name: " << temp->name << endl;
-            temp = temp->next;
-        }
+    while (!operators.empty()) {
+        postfix += operators.top();
+        operators.pop();
     }
-};
+
+    return postfix;
+}
 
 int main() {
-    InventoryList inventory;
+    string infix;
 
-    inventory.addItem(101, "laptop");
-    inventory.addItem(102, "iphone");
-    inventory.addItem(103, "watch");
+    cout << "Enter an infix expression: ";
+    getline(cin, infix);
 
-    cout << "\nDisplaying inventory items:\n";
-    inventory.displayItems();
-
-    cout << "\nUpdating item with ID 102:\n";
-    inventory.updateItem(102, "Iphone Pro");
-
-    cout << "\nDisplaying inventory after update:\n";
-    inventory.displayItems();
-
-    cout << "\nRemoving the last item:\n";
-    inventory.removeItem();
-
-    cout << "\nDisplaying inventory after removal:\n";
-    inventory.displayItems();
+    string postfix = infixToPostfix(infix);
+    cout << "Postfix Expression: " << postfix << endl;
 
     return 0;
 }
