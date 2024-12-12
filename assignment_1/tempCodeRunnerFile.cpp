@@ -5,23 +5,19 @@
 
 using namespace std;
 
-// TreeNode class representing a department, team, or employee
 class TreeNode {
 public:
     string data;
     vector<TreeNode*> children;
 
-    // Constructor
     TreeNode(string data) {
         this->data = data;
     }
 
-    // Add a child node
     void addChild(TreeNode* child) {
         children.push_back(child);
     }
 
-    // Remove a child node by name
     bool removeChild(const string& childName) {
         auto it = remove_if(children.begin(), children.end(),
                             [&childName](TreeNode* child) {
@@ -36,7 +32,6 @@ public:
         return removed;
     }
 
-    // Destructor to free memory
     ~TreeNode() {
         for (auto child : children) {
             delete child;
@@ -44,7 +39,6 @@ public:
     }
 };
 
-// Pre-order traversal
 void preOrderTraversal(TreeNode* node, int level = 0) {
     if (!node) return;
     cout << string(level * 2, ' ') << node->data << endl;
@@ -53,7 +47,6 @@ void preOrderTraversal(TreeNode* node, int level = 0) {
     }
 }
 
-// Post-order traversal
 void postOrderTraversal(TreeNode* node, int level = 0) {
     if (!node) return;
     for (auto child : node->children) {
@@ -62,7 +55,6 @@ void postOrderTraversal(TreeNode* node, int level = 0) {
     cout << string(level * 2, ' ') << node->data << endl;
 }
 
-// Search function to find a node by name
 TreeNode* search(TreeNode* node, const string& target) {
     if (!node) return nullptr;
     if (node->data == target) return node;
@@ -73,7 +65,6 @@ TreeNode* search(TreeNode* node, const string& target) {
     return nullptr;
 }
 
-// Add an employee to a specific team
 bool addEmployee(TreeNode* root, const string& teamName, const string& employeeName) {
     TreeNode* teamNode = search(root, teamName);
     if (teamNode) {
@@ -86,7 +77,6 @@ bool addEmployee(TreeNode* root, const string& teamName, const string& employeeN
     }
 }
 
-// Remove an employee by name
 bool removeEmployee(TreeNode* node, const string& employeeName) {
     if (!node) return false;
     bool removed = node->removeChild(employeeName);
@@ -97,12 +87,9 @@ bool removeEmployee(TreeNode* node, const string& employeeName) {
     return false;
 }
 
-// Main function to demonstrate the functionality
 int main() {
-    // Build the organizational hierarchy
     TreeNode* root = new TreeNode("Company");
 
-    // Sales Department
     TreeNode* sales = new TreeNode("Sales");
     TreeNode* teamA = new TreeNode("Team A");
     teamA->addChild(new TreeNode("Employee 1"));
@@ -115,20 +102,16 @@ int main() {
     sales->addChild(teamA);
     sales->addChild(teamB);
 
-    // IT Department
     TreeNode* it = new TreeNode("IT");
     it->addChild(new TreeNode("Network"));
     it->addChild(new TreeNode("Security"));
 
-    // Add departments to the root
     root->addChild(sales);
     root->addChild(it);
 
-    // Print the initial structure
     cout << "Initial Organizational Structure (Pre-order Traversal):" << endl;
     preOrderTraversal(root);
 
-    // Search for an employee
     string searchName = "Employee 3";
     TreeNode* found = search(root, searchName);
     if (found) {
@@ -137,12 +120,10 @@ int main() {
         cout << "\nSearch Result: '" << searchName << "' not found" << endl;
     }
 
-    // Add a new employee to Team A
     cout << "\nAdding 'Employee 5' to 'Team A':" << endl;
     addEmployee(root, "Team A", "Employee 5");
     preOrderTraversal(root);
 
-    // Remove Employee 4
     cout << "\nRemoving 'Employee 4':" << endl;
     if (removeEmployee(root, "Employee 4")) {
         cout << "'Employee 4' removed successfully." << endl;
@@ -151,8 +132,6 @@ int main() {
     }
     preOrderTraversal(root);
 
-    // Free allocated memory
     delete root;
-
     return 0;
 }
