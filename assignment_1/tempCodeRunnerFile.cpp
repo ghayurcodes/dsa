@@ -18,19 +18,16 @@ public:
         children.push_back(child);
     }
 
-    bool removeChild(const string& childName) {
-        auto it = remove_if(children.begin(), children.end(),
-                            [&childName](TreeNode* child) {
-                                if (child->data == childName) {
-                                    delete child;
-                                    return true;
-                                }
-                                return false;
-                            });
-        bool removed = it != children.end();
-        children.erase(it, children.end());
-        return removed;
+  bool removeChild(const string& childName) {
+    for (auto it = children.begin(); it != children.end(); ++it) {
+        if ((*it)->data == childName) {
+            children.erase(it);  // Remove the child node from the vector
+            return true;  // Return true to indicate the node was removed
+        }
     }
+    return false;  // Return false if no child node was found
+}
+
 
     ~TreeNode() {
         for (auto child : children) {
