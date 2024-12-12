@@ -21,22 +21,22 @@ public:
   bool removeChild(const string& childName) {
     for (auto it = children.begin(); it != children.end(); it++) {
         if ((*it)->data == childName) {
-            children.erase(it);  // Remove the child node from the vector
-            return true;  // Return true to indicate the node was removed
+            children.erase(it);  
+            return true; 
         }
     }
-    return false;  // Return false if no child node was found
+    return false;  
 }
 
 
     ~TreeNode() {
-        for (auto child : children) {
+        for (TreeNode* child : children) {
             delete child;
         }
     }
 };
 
-void preOrderTraversal(TreeNode* node, int level = 0) {
+void preOrderTraversal(TreeNode* node, int level =0) {
     if (!node) return;
     cout << string(level * 2, ' ') << node->data << endl;
     for (auto child : node->children) {
@@ -50,6 +50,21 @@ void postOrderTraversal(TreeNode* node, int level = 0) {
         postOrderTraversal(child, level + 1);
     }
     cout << string(level * 2, ' ') << node->data << endl;
+}
+
+void inOrderTraversal(TreeNode* node, int level = 0) {
+    if (!node) return;
+
+    int numChildren = node->children.size();
+    if (numChildren > 0) {
+        inOrderTraversal(node->children[0], level + 1);
+    }
+
+    cout << string(level * 2, ' ') << node->data << endl;
+
+    for (int i = 1; i < numChildren; ++i) {
+        inOrderTraversal(node->children[i], level + 1);
+    }
 }
 
 TreeNode* search(TreeNode* node, const string& target) {
