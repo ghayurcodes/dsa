@@ -18,19 +18,7 @@ public:
         children.push_back(child);
     }
 
-    bool removeChild(const string& childName) {
-        auto it = remove_if(children.begin(), children.end(),
-                            [&childName](TreeNode* child) {
-                                if (child->data == childName) {
-                                    delete child;
-                                    return true;
-                                }
-                                return false;
-                            });
-        bool removed = it != children.end();
-        children.erase(it, children.end());
-        return removed;
-    }
+   
 
     ~TreeNode() {
         for (auto child : children) {
