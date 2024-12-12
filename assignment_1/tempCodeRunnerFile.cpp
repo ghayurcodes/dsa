@@ -1,131 +1,63 @@
 #include <iostream>
+#include <queue>
+#include <string>
 using namespace std;
 
-class EmployeeNode {
+class Task {
 public:
-    int id;  // Employee ID
-    string name;  // Employee Name
-    EmployeeNode* left;
-    EmployeeNode* right;
+    int taskId;
+    string taskDescription;
 
-    EmployeeNode(int id, const string& name) : id(id), name(name), left(nullptr), right(nullptr) {}
+    Task(int id, const string& description) : taskId(id), taskDescription(description) {}
 };
 
-class EmployeeBST {
+class TaskQueue {
 private:
-    EmployeeNode* root;
-
-    EmployeeNode* insert(EmployeeNode* node, int id, const string& name) {
-        if (node == nullptr) {
-            return new EmployeeNode(id, name);
-        }
-
-        if (id < node->id) {
-            node->left = insert(node->left, id, name);
-        } else if (id > node->id) {
-            node->right = insert(node->right, id, name);
-        }
-
-        return node;
-    }
-
-    EmployeeNode* search(EmployeeNode* node, int id) {
-        if (node == nullptr || node->id == id) {
-            return node;
-        }
-
-        if (id < node->id) {
-            return search(node->left, id);
-        }
-
-        return search(node->right, id);
-    }
-
-    EmployeeNode* findMin(EmployeeNode* node) {
-        while (node && node->left != nullptr) {
-            node = node->left;
-        }
-        return node;
-    }
-
-    EmployeeNode* deleteNode(EmployeeNode* node, int id) {
-        if (node == nullptr) return node;
-
-        if (id < node->id) {
-            node->left = deleteNode(node->left, id);
-        } else if (id > node->id) {
-            node->right = deleteNode(node->right, id);
-        } else {
-            if (node->left == nullptr) {
-                EmployeeNode* temp = node->right;
-                delete node;
-                return temp;
-            } else if (node->right == nullptr) {
-                EmployeeNode* temp = node->left;
-                delete node;
-                return temp;
-            }
-
-            EmployeeNode* temp = findMin(node->right);
-            node->id = temp->id;
-            node->name = temp->name;
-            node->right = deleteNode(node->right, temp->id);
-        }
-
-        return node;
-    }
+    queue<Task> taskQueue;
 
 public:
-    EmployeeBST() : root(nullptr) {}
-
-    void insert(int id, const string& name) {
-        root = insert(root, id, name);
+    void enqueue(int id, const string& description) {
+        taskQueue.push(Task(id, description));
     }
 
-    EmployeeNode* search(int id) {
-        return search(root, id);
-    }
-
-    void deleteNode(int id) {
-        root = deleteNode(root, id);
-    }
-
-    void printInOrder(EmployeeNode* node) {
-        if (node) {
-            printInOrder(node->left);
-            cout << "Employee ID: " << node->id << ", Name: " << node->name << endl;
-            printInOrder(node->right);
+    void dequeue() {
+        if (!taskQueue.empty()) {
+            Task task = taskQueue.front();
+            taskQueue.pop();
+            cout << "Processing Task ID: " << task.taskId << ", Description: " << task.taskDescription << endl;
+        } else {
+            cout << "Queue is empty!" << endl;
         }
     }
 
-    EmployeeNode* getRoot() {
-        return root;
+    void peek() {
+        if (!taskQueue.empty()) {
+            Task task = taskQueue.front();
+            cout << "Next Task: ID: " << task.taskId << ", Description: " << task.taskDescription << endl;
+        } else {
+            cout << "Queue is empty!" << endl;
+        }
+    }
+
+    bool isEmpty() {
+        return taskQueue.empty();
     }
 };
 
 int main() {
-    EmployeeBST bst;
+    TaskQueue tq;
 
-    bst.insert(101, "ghayur");
-    bst.insert(102, "ali");
-    bst.insert(100, "ahmed");
-    bst.insert(103, "jamshed");
+    tq.enqueue(1, "Print Documents");
+    tq.enqueue(2, "Process Images");
+    tq.enqueue(3, "Clean Server");
 
-    cout << "In-order traversal of BST:" << endl;
-    bst.printInOrder(bst.getRoot());
+    tq.peek();
 
-    int searchId = 102;
-    EmployeeNode* employee = bst.search(searchId);
-    if (employee) {
-        cout << "Employee found: ID: " << employee->id << ", Name: " << employee->name << endl;
-    } else {
-        cout << "Employee with ID " << searchId << " not found." << endl;
-    }
+    tq.dequeue();
+    tq.dequeue();
+    tq.dequeue();
 
-    bst.deleteNode(102);
-
-    cout << "In-order traversal after deletion:" << endl;
-    bst.printInOrder(bst.getRoot());
+    tq.peek();
 
     return 0;
 }
