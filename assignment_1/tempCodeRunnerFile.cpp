@@ -19,7 +19,7 @@ public:
     }
 
   bool removeChild(const string& childName) {
-    for (auto it = children.begin(); it != children.end(); ++it) {
+    for (auto it = children.begin(); it != children.end(); it++) {
         if ((*it)->data == childName) {
             children.erase(it);  // Remove the child node from the vector
             return true;  // Return true to indicate the node was removed
