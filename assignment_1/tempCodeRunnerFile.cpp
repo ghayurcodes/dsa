@@ -1,149 +1,131 @@
 #include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
-
 using namespace std;
 
-class TreeNode {
+class EmployeeNode {
 public:
-    string data;
-    vector<TreeNode*> children;
+    int id;  // Employee ID
+    string name;  // Employee Name
+    EmployeeNode* left;
+    EmployeeNode* right;
 
-    TreeNode(string data) {
-        this->data = data;
+    EmployeeNode(int id, const string& name) : id(id), name(name), left(nullptr), right(nullptr) {}
+};
+
+class EmployeeBST {
+private:
+    EmployeeNode* root;
+
+    EmployeeNode* insert(EmployeeNode* node, int id, const string& name) {
+        if (node == nullptr) {
+            return new EmployeeNode(id, name);
+        }
+
+        if (id < node->id) {
+            node->left = insert(node->left, id, name);
+        } else if (id > node->id) {
+            node->right = insert(node->right, id, name);
+        }
+
+        return node;
     }
 
-    void addChild(TreeNode* child) {
-        children.push_back(child);
+    EmployeeNode* search(EmployeeNode* node, int id) {
+        if (node == nullptr || node->id == id) {
+            return node;
+        }
+
+        if (id < node->id) {
+            return search(node->left, id);
+        }
+
+        return search(node->right, id);
     }
 
-  bool removeChild(const string& childName) {
-    for (auto it = children.begin(); it != children.end(); it++) {
-        if ((*it)->data == childName) {
-            children.erase(it);  
-            return true; 
+    EmployeeNode* findMin(EmployeeNode* node) {
+        while (node && node->left != nullptr) {
+            node = node->left;
+        }
+        return node;
+    }
+
+    EmployeeNode* deleteNode(EmployeeNode* node, int id) {
+        if (node == nullptr) return node;
+
+        if (id < node->id) {
+            node->left = deleteNode(node->left, id);
+        } else if (id > node->id) {
+            node->right = deleteNode(node->right, id);
+        } else {
+            if (node->left == nullptr) {
+                EmployeeNode* temp = node->right;
+                delete node;
+                return temp;
+            } else if (node->right == nullptr) {
+                EmployeeNode* temp = node->left;
+                delete node;
+                return temp;
+            }
+
+            EmployeeNode* temp = findMin(node->right);
+            node->id = temp->id;
+            node->name = temp->name;
+            node->right = deleteNode(node->right, temp->id);
+        }
+
+        return node;
+    }
+
+public:
+    EmployeeBST() : root(nullptr) {}
+
+    void insert(int id, const string& name) {
+        root = insert(root, id, name);
+    }
+
+    EmployeeNode* search(int id) {
+        return search(root, id);
+    }
+
+    void deleteNode(int id) {
+        root = deleteNode(root, id);
+    }
+
+    void printInOrder(EmployeeNode* node) {
+        if (node) {
+            printInOrder(node->left);
+            cout << "Employee ID: " << node->id << ", Name: " << node->name << endl;
+            printInOrder(node->right);
         }
     }
-    return false;  
-}
 
-
-    ~TreeNode() {
-        for (TreeNode* child : children) {
-            delete child;
-        }
+    EmployeeNode* getRoot() {
+        return root;
     }
 };
 
-void preOrderTraversal(TreeNode* node, int level =0) {
-    if (!node) return;
-    cout << string(level * 2, ' ') << node->data << endl;
-    for (auto child : node->children) {
-        preOrderTraversal(child, level + 1);
-    }
-}
-
-void postOrderTraversal(TreeNode* node, int level = 0) {
-    if (!node) return;
-    for (auto child : node->children) {
-        postOrderTraversal(child, level + 1);
-    }
-    cout << string(level * 2, ' ') << node->data << endl;
-}
-
-void inOrderTraversal(TreeNode* node, int level = 0) {
-    if (!node) return;
-
-    int numChildren = node->children.size();
-    if (numChildren > 0) {
-        inOrderTraversal(node->children[0], level + 1);
-    }
-
-    cout << string(level * 2, ' ') << node->data << endl;
-
-    for (int i = 1; i < numChildren; ++i) {
-        inOrderTraversal(node->children[i], level + 1);
-    }
-}
-
-TreeNode* search(TreeNode* node, const string& target) {
-    if (!node) return nullptr;
-    if (node->data == target) return node;
-    for (auto child : node->children) {
-        TreeNode* result = search(child, target);
-        if (result) return result;
-    }
-    return nullptr;
-}
-
-bool addEmployee(TreeNode* root, const string& teamName, const string& employeeName) {
-    TreeNode* teamNode = search(root, teamName);
-    if (teamNode) {
-        teamNode->addChild(new TreeNode(employeeName));
-        cout << "Employee '" << employeeName << "' added to '" << teamName << "'." << endl;
-        return true;
-    } else {
-        cout << "Team '" << teamName << "' not found." << endl;
-        return false;
-    }
-}
-
-bool removeEmployee(TreeNode* node, const string& employeeName) {
-    if (!node) return false;
-    bool removed = node->removeChild(employeeName);
-    if (removed) return true;
-    for (auto child : node->children) {
-        if (removeEmployee(child, employeeName)) return true;
-    }
-    return false;
-}
-
 int main() {
-    TreeNode* root = new TreeNode("Company");
+    EmployeeBST bst;
 
-    TreeNode* sales = new TreeNode("Sales");
-    TreeNode* teamA = new TreeNode("Team A");
-    teamA->addChild(new TreeNode("Employee 1"));
-    teamA->addChild(new TreeNode("Employee 2"));
+    bst.insert(101, "ghayur");
+    bst.insert(102, "ali");
+    bst.insert(100, "ahmed");
+    bst.insert(103, "jamshed");
 
-    TreeNode* teamB = new TreeNode("Team B");
-    teamB->addChild(new TreeNode("Employee 3"));
-    teamB->addChild(new TreeNode("Employee 4"));
+    cout << "In-order traversal of BST:" << endl;
+    bst.printInOrder(bst.getRoot());
 
-    sales->addChild(teamA);
-    sales->addChild(teamB);
-
-    TreeNode* it = new TreeNode("IT");
-    it->addChild(new TreeNode("Network"));
-    it->addChild(new TreeNode("Security"));
-
-    root->addChild(sales);
-    root->addChild(it);
-
-    cout << "Initial Organizational Structure (Pre-order Traversal):" << endl;
-    preOrderTraversal(root);
-
-    string searchName = "Employee 3";
-    TreeNode* found = search(root, searchName);
-    if (found) {
-        cout << "\nSearch Result: Found '" << found->data << "'" << endl;
+    int searchId = 102;
+    EmployeeNode* employee = bst.search(searchId);
+    if (employee) {
+        cout << "Employee found: ID: " << employee->id << ", Name: " << employee->name << endl;
     } else {
-        cout << "\nSearch Result: '" << searchName << "' not found" << endl;
+        cout << "Employee with ID " << searchId << " not found." << endl;
     }
 
-    cout << "\nAdding 'Employee 5' to 'Team A':" << endl;
-    addEmployee(root, "Team A", "Employee 5");
-    preOrderTraversal(root);
+    bst.deleteNode(102);
 
-    cout << "\nRemoving 'Employee 4':" << endl;
-    if (removeEmployee(root, "Employee 4")) {
-        cout << "'Employee 4' removed successfully." << endl;
-    } else {
-        cout << "Failed to remove 'Employee 4'." << endl;
-    }
-    preOrderTraversal(root);
+    cout << "In-order traversal after deletion:" << endl;
+    bst.printInOrder(bst.getRoot());
 
-    delete root;
     return 0;
 }
