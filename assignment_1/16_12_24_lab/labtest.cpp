@@ -20,12 +20,12 @@ public:
             return;
         }
 
-        // Insert the new value at the end of the heap
+        
         heap_size++;
         int i = heap_size - 1;
         arr[i] = val;
 
-        // Fix the min-heap property if it's violated
+     
         while (i != 0 && arr[(i - 1) / 2] < arr[i]) {
             swap(arr[i], arr[(i - 1) / 2]);
             i = (i - 1) / 2;
