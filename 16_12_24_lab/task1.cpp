@@ -29,7 +29,7 @@ class heap{
         while(index!=0){
             int parent=(index-1)/2;
 
-            if(arr[parent]<arr[index]){
+            if(arr[parent]>arr[index]){
                 swap(arr[parent],arr[index]);
                 index=parent;
             }
@@ -70,6 +70,6 @@ int main(){
     cout<<"displaying all:\n";
     h.display();
 
-    cout<<"\nMax number in heap: "<<h.maxnum()<<" "<<h.maxnum()<<endl;
+    cout<<"\nMin number in heap: "<<h.maxnum()<<" "<<h.maxnum()<<endl;
 }
 
