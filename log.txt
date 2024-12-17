@@ -1,1 +1,1 @@
-u
+ [Key.delete] u
