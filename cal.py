@@ -14,7 +14,7 @@ def compute_growth():
     try:
         rate = float(entry_rate.get())
         exp_factor = float(entry_exp_factor.get())
-        t_start = float(entry_start_time.get())
+        t_start = float(entry_start_time.get()
         t_end = float(entry_end_time.get())
         
         # Integrate the growth rate function using scipy's quad function
