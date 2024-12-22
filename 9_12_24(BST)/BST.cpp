@@ -85,7 +85,6 @@ Node* deleteNode(Node* root, int value) {
     if (root == nullptr) {
         return nullptr;
     }
-
     if(root->data==value){
          // Node with no children (leaf node)
         if (root->left == nullptr && root->right == nullptr) {
