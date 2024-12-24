@@ -18,7 +18,7 @@ def compute_growth():
         t_end = float(entry_end_time.get())
         
         # Integrate the growth rate function using scipy's quad function
-        result, _ = quad(lambda t: population_growth_rate(t, rate, exp_factor), t_start, t_end
+        result, _ = quad(lambda t: population_growth_rate(t, rate, exp_factor), t_start, t_end)
         
         # Display the result
         messagebox.showinfo("Total Population Increase", f"Total population increase: {result:.2f} individuals")
