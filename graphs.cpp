@@ -32,7 +32,7 @@ public:
                 cout << neighbor << " ";
             }
             cout << endl;
-        }
+        
     }
 };
 
