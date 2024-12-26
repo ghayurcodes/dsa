@@ -21,7 +21,7 @@ struct Node {
 // Comparator for the priority queue
 struct Compare {
     bool operator()(Node* a, Node* b) {
-        return a->freq > b->freq;
+        return  b->freq < a->freq;
     }
 };
 
@@ -46,7 +46,7 @@ void freeTree(Node* root) {
     delete root;
 }
 
-// Compress the file
+
 void compressFile(const string& inputFileName, const string& outputFileName, const string& codebookFileName) {
     ifstream inputFile(inputFileName, ios::binary);
     if (!inputFile) {
@@ -57,13 +57,13 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
     unordered_map<char, int> freq;
     char ch;
 
-    // Count character frequencies
+    
     while (inputFile.get(ch)) {
         freq[ch]++;
     }
 
-    // Create a priority queue for the Huffman tree
-    priority_queue<Node*, vector<Node*>, Compare> pq;
+   
+    priority_queue<Node*, vector<Node*>, Compare> pq;//min heap based
 
     for (const auto& pair : freq) {
         pq.push(new Node(pair.first, pair.second));
@@ -86,7 +86,7 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
     unordered_map<char, string> huffmanCode;
     generateCodes(root, "", huffmanCode);
 
-    // Write the codebook to a file
+   //writing code to file
     ofstream codebookFile(codebookFileName);
     for (const auto& pair : huffmanCode) {
         codebookFile << pair.first << ":" << pair.second << "\n";
@@ -123,9 +123,10 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
     freeTree(root);
 
     cout << "File compressed successfully!" << endl;
+    
 }
 
-// Decompress the file
+
 void decompressFile(const string& compressedFileName, const string& codebookFileName, const string& outputFileName) {
     ifstream compressedFile(compressedFileName, ios::binary);
     if (!compressedFile) {
