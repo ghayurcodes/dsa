@@ -75,7 +75,7 @@ int findm(Node* root) {
     while (root->left != nullptr) {
         root = root->left;
     }
-    return root->data
+    return root->data;
 }
 
 
