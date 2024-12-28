@@ -109,21 +109,20 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
         encodedString += huffmanCode[ch];
     }
     string es=encodedString;
-    outputFile<<es;
-    // outputFil
+    
 
     
-    // int extraBits = 8 - (encodedString.size() % 8);
-    // if (extraBits != 8) {
-    //     encodedString.append(extraBits, '0');
-    // }
+    int extraBits = 8 - (encodedString.size() % 8);
+    if (extraBits != 8) {
+        encodedString.append(extraBits, '0');
+    }
 
-    // outputFile.put(extraBits); // Store extra bits at the beginning
+    outputFile.put(extraBits); // Store extra bits at the beginning
 
-    // for (size_t i = 0; i < encodedString.size(); i += 8) {
-    //     bitset<8> bits(encodedString.substr(i, 8));
-    //     outputFile.put(static_cast<char>(bits.to_ulong()));
-    // }
+    for (size_t i = 0; i < encodedString.size(); i += 8) {
+        bitset<8> bits(encodedString.substr(i, 8));
+        outputFile.put(static_cast<char>(bits.to_ulong()));
+    }
 
     inputFile.close();
     outputFile.close();
@@ -136,7 +135,7 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
 }
 
 
-void decompressFile(const string& compressedFileName, const string& codebookFileName, const string& outputFileName) {
+void decompressFile(const string& compressedFileName, const string& codebookFileName,string outputFileName="") {
     ifstream compressedFile(compressedFileName, ios::binary);//opening requird files
     ifstream codebookFile(codebookFileName);
    
@@ -170,18 +169,38 @@ void decompressFile(const string& compressedFileName, const string& codebookFile
     encodedString = encodedString.substr(0, encodedString.size() - extraBits);
 
     // Decode the binary string
-    ofstream outputFile(outputFileName, ios::binary);
+    
     string currentCode = "";
+    string output_text="";
     for (char bit : encodedString) {
         currentCode += bit;
         if (reverseHuffmanCode.find(currentCode) != reverseHuffmanCode.end()) {
-            outputFile.put(reverseHuffmanCode[currentCode]);
+            // outputFile.put(reverseHuffmanCode[currentCode]);
+            output_text+=reverseHuffmanCode[currentCode];
             currentCode = "";
+            
         }
     }
 
-    outputFile.close();
+    
     cout << "File decompressed successfully!" << endl;
+
+
+    cout<<"\nThe Extracted Text is: "<<output_text<<endl;
+    cout<<"\nWould you like to save this to a file? y/n\n";
+    char opt;
+    cin>>opt;
+
+    if(opt=='y' || opt=='Y'){
+        cout << "Enter output file name: ";
+        cin>>outputFileName;
+        ofstream outputFile(outputFileName+".txt");
+        outputFile<<output_text<<endl;
+        outputFile.close();
+    }
+    else{
+        cout<<"\nok byeee....\n";
+    }
 }
 
 // Main function
@@ -225,10 +244,8 @@ int main() {
         cerr << "\nError opening Codebook file!\n" << endl;
         main();
     }
-        cout << "Enter output file name: ";
-        cin >> outputFileName;
-
-        decompressFile(inputFileName+".txt", codebookFileName+".txt", outputFileName+".txt");
+    
+        decompressFile(inputFileName+".txt", codebookFileName+".txt");
     }
     else if(choice==3){
             cout<<"\nExiting....\n";
