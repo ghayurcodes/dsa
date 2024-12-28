@@ -49,6 +49,8 @@ void freeTree(Node* root) {//for memory effivencyy
 
 void compressFile(const string& inputFileName, const string& outputFileName, const string& codebookFileName) {
     ifstream inputFile(inputFileName, ios::binary);
+    ifstream inputFiletmp(inputFileName);
+
 
     unordered_map<char, int> freq;
     char ch;
@@ -58,8 +60,8 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
         freq[ch]++;
     }
     string orignal_text;
-    getline(inputFile,orignal_text);
-    cout<<"orignal text"<<orignal_text<<endl;
+    getline(inputFiletmp,orignal_text);
+    inputFiletmp.close();
 
    
     priority_queue<Node*, vector<Node*>, Compare> pq;//min heap based
@@ -179,7 +181,9 @@ void decompressFile(const string& compressedFileName, const string& codebookFile
 // Main function
 int main() {
     int choice;
-    cout << "Huffman Coding\n";
+    cout << "\n*************************************\n";
+    cout << "          Huffman Coding Tool       \n";
+    cout << "*************************************\n";
     cout << "1. Compress (Encode)\n";
     cout << "2. Decompress (Decode)\n";
     cout << "3. Exit\n";
@@ -190,7 +194,7 @@ int main() {
     if (choice == 1) {
         cout << "Enter input file name: ";
         cin >> inputFileName;
-        ifstream inputFile(inputFileName);
+        ifstream inputFile(inputFileName+".txt");
         if (!inputFile) {
         cerr << "\nError opening input file!\n" << endl;
         main();}
@@ -199,18 +203,18 @@ int main() {
         cout << "Enter codebook file name: ";
         cin >> codebookFileName;
 
-        compressFile(inputFileName, outputFileName, codebookFileName);
+        compressFile(inputFileName+".txt", outputFileName+".txt", codebookFileName+".txt");
     } else if (choice == 2) {
         cout << "Enter compressed file name: ";
         cin >> inputFileName;
-        ifstream compressedFile(inputFileName);
+        ifstream compressedFile(inputFileName+".txt");
         if (!compressedFile) {
         cerr << "\nError opening compressed file!\n" << endl;
         main();
     }
         cout << "Enter codebook file name: ";
         cin >> codebookFileName;
-        ifstream codeFile(codebookFileName);
+        ifstream codeFile(codebookFileName+".txt");
         if (!codeFile) {
         cerr << "\nError opening Codebook file!\n" << endl;
         main();
@@ -218,7 +222,7 @@ int main() {
         cout << "Enter output file name: ";
         cin >> outputFileName;
 
-        decompressFile(inputFileName, codebookFileName, outputFileName);
+        decompressFile(inputFileName+".txt", codebookFileName+".txt", outputFileName+".txt");
     }
     else if(choice==3){
             cout<<"\nExiting....\n";
