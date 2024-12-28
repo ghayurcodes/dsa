@@ -57,6 +57,9 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
     while (inputFile.get(ch)) {
         freq[ch]++;
     }
+    string orignal_text;
+    getline(inputFile,orignal_text);
+    cout<<"orignal text"<<orignal_text<<endl;
 
    
     priority_queue<Node*, vector<Node*>, Compare> pq;//min heap based
@@ -118,7 +121,9 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
     outputFile.close();
     freeTree(root);
 
-    cout << "File compressed successfully!" << endl;
+    cout << "\nFile compressed successfully!" << endl;
+    cout << "\nOriginal Size (in bits): " << orignal_text.length() * 8 << " bits\n";
+    cout << "Compressed Size (in bits): " << encodedString.length() << " bits\n";
     
 }
 
