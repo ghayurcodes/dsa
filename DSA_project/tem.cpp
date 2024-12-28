@@ -59,7 +59,7 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
     while (inputFile.get(ch)) {
         freq[ch]++;
     }
-    string orignal_text;
+    string orignal_text="";
     getline(inputFiletmp,orignal_text);
     inputFiletmp.close();
 
@@ -105,6 +105,7 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
     while (inputFile.get(ch)) {
         encodedString += huffmanCode[ch];
     }
+    string es=encodedString;
 
     // Pad encodedString to make its length a multiple of 8
     int extraBits = 8 - (encodedString.size() % 8);
@@ -125,7 +126,7 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
 
     cout << "\nFile compressed successfully!" << endl;
     cout << "\nOriginal Size (in bits): " << orignal_text.length() * 8 << " bits\n";
-    cout << "Compressed Size (in bits): " << encodedString.length() << " bits\n";
+    cout << "Compressed Size (in bits): " << es.length() << " bits\n";
     
 }
 
