@@ -167,6 +167,7 @@ void decompressFile(const string& compressedFileName, const string& codebookFile
 
     // Remove the padding
     encodedString = encodedString.substr(0, encodedString.size() - extraBits);
+    cout<<encodedString<<endl;
 
     // Decode the binary string
     
@@ -175,7 +176,6 @@ void decompressFile(const string& compressedFileName, const string& codebookFile
     for (char bit : encodedString) {
         currentCode += bit;
         if (reverseHuffmanCode.find(currentCode) != reverseHuffmanCode.end()) {
-            // outputFile.put(reverseHuffmanCode[currentCode]);
             output_text+=reverseHuffmanCode[currentCode];
             currentCode = "";
             
