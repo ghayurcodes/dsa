@@ -49,10 +49,6 @@ void freeTree(Node* root) {//for memory effivencyy
 
 void compressFile(const string& inputFileName, const string& outputFileName, const string& codebookFileName) {
     ifstream inputFile(inputFileName, ios::binary);
-    if (!inputFile) {
-        cerr << "Error opening input file!" << endl;
-        return;
-    }
 
     unordered_map<char, int> freq;
     char ch;
@@ -128,17 +124,9 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
 
 
 void decompressFile(const string& compressedFileName, const string& codebookFileName, const string& outputFileName) {
-    ifstream compressedFile(compressedFileName, ios::binary);
-    if (!compressedFile) {
-        cerr << "Error opening compressed file!" << endl;
-        return;
-    }
-
+    ifstream compressedFile(compressedFileName, ios::binary);//opening requird files
     ifstream codebookFile(codebookFileName);
-    if (!codebookFile) {
-        cerr << "Error opening codebook file!" << endl;
-        return;
-    }
+   
 
     unordered_map<string, char> reverseHuffmanCode;
     string line;
@@ -196,6 +184,10 @@ int main() {
     if (choice == 1) {
         cout << "Enter input file name: ";
         cin >> inputFileName;
+        ifstream inputFile(inputFileName);
+        if (!inputFile) {
+        cerr << "\nError opening input file!\n" << endl;
+        main();}
         cout << "Enter compressed file name: ";
         cin >> outputFileName;
         cout << "Enter codebook file name: ";
@@ -205,8 +197,18 @@ int main() {
     } else if (choice == 2) {
         cout << "Enter compressed file name: ";
         cin >> inputFileName;
+        ifstream compressedFile(inputFileName);
+        if (!compressedFile) {
+        cerr << "\nError opening compressed file!\n" << endl;
+        main();
+    }
         cout << "Enter codebook file name: ";
         cin >> codebookFileName;
+        ifstream codeFile(codebookFileName);
+        if (!codeFile) {
+        cerr << "\nError opening compressed file!\n" << endl;
+        main();
+    }
         cout << "Enter output file name: ";
         cin >> outputFileName;
 
