@@ -177,6 +177,7 @@ int main() {
     cout << "Huffman Coding\n";
     cout << "1. Compress (Encode)\n";
     cout << "2. Decompress (Decode)\n";
+    cout << "3. Exit\n";
     cout << "Enter your choice: ";
     cin >> choice;
 
@@ -206,13 +207,17 @@ int main() {
         cin >> codebookFileName;
         ifstream codeFile(codebookFileName);
         if (!codeFile) {
-        cerr << "\nError opening compressed file!\n" << endl;
+        cerr << "\nError opening Codebook file!\n" << endl;
         main();
     }
         cout << "Enter output file name: ";
         cin >> outputFileName;
 
         decompressFile(inputFileName, codebookFileName, outputFileName);
+    }
+    else if(choice==3){
+            cout<<"\nExiting....\n";
+            exit(0);
     } else {
         cout << "Invalid choice!" << endl;
     }
