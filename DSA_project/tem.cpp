@@ -38,8 +38,8 @@ void generateCodes(Node* root, const string& str, unordered_map<char, string>& h
     generateCodes(root->right, str + "1", huffmanCode);
 }
 
-// Free the memory allocated for the tree
-void freeTree(Node* root) {
+
+void freeTree(Node* root) {//for memory effivencyy
     if (!root) return;
     freeTree(root->left);
     freeTree(root->right);
