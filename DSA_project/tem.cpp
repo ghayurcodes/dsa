@@ -19,8 +19,9 @@ struct Node {
 };
 
 // Comparator for the priority queue
-struct Compare {
-    bool operator()(Node* a, Node* b) {
+class Compare {           
+    public:                 
+    bool operator()(Node* a, Node* b) {     //function object
         return  b->freq < a->freq;
     }
 };
@@ -51,6 +52,9 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
     ifstream inputFile(inputFileName, ios::binary);
     ifstream inputFiletmp(inputFileName);
 
+    string orignal_text="";
+    getline(inputFiletmp,orignal_text);
+    inputFiletmp.close();
 
     unordered_map<char, int> freq;
     char ch;
@@ -59,9 +63,8 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
     while (inputFile.get(ch)) {
         freq[ch]++;
     }
-    string orignal_text="";
-    getline(inputFiletmp,orignal_text);
-    inputFiletmp.close();
+    
+    
 
    
     priority_queue<Node*, vector<Node*>, Compare> pq;//min heap based
@@ -95,8 +98,8 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
     codebookFile.close();
 
     // Reset input file pointer
-    inputFile.clear();
-    inputFile.seekg(0, ios::beg);
+    inputFile.clear();//clear flags
+    inputFile.seekg(0, ios::beg);//bring pointe rto begining
 
     // Write compressed file
     ofstream outputFile(outputFileName, ios::binary);
@@ -106,19 +109,21 @@ void compressFile(const string& inputFileName, const string& outputFileName, con
         encodedString += huffmanCode[ch];
     }
     string es=encodedString;
+    outputFile<<es;
+    // outputFil
 
-    // Pad encodedString to make its length a multiple of 8
-    int extraBits = 8 - (encodedString.size() % 8);
-    if (extraBits != 8) {
-        encodedString.append(extraBits, '0');
-    }
+    
+    // int extraBits = 8 - (encodedString.size() % 8);
+    // if (extraBits != 8) {
+    //     encodedString.append(extraBits, '0');
+    // }
 
-    outputFile.put(extraBits); // Store extra bits at the beginning
+    // outputFile.put(extraBits); // Store extra bits at the beginning
 
-    for (size_t i = 0; i < encodedString.size(); i += 8) {
-        bitset<8> bits(encodedString.substr(i, 8));
-        outputFile.put(static_cast<char>(bits.to_ulong()));
-    }
+    // for (size_t i = 0; i < encodedString.size(); i += 8) {
+    //     bitset<8> bits(encodedString.substr(i, 8));
+    //     outputFile.put(static_cast<char>(bits.to_ulong()));
+    // }
 
     inputFile.close();
     outputFile.close();
