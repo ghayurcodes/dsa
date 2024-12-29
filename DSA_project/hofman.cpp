@@ -8,7 +8,7 @@
 
 using namespace std;
 
-// Node structure for the Huffman tree
+// Node structure
 struct Node {
     char ch;
     int freq;
