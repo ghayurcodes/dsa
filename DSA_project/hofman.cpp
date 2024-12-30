@@ -167,7 +167,7 @@ void decompressFile(const string& compressedFileName, const string& codebookFile
 
     // Remove the padding
     encodedString = encodedString.substr(0, encodedString.size() - extraBits);
-    cout<<encodedString<<endl;
+    // cout<<encodedString<<endl;
 
     // Decode the binary string
     
@@ -203,56 +203,95 @@ void decompressFile(const string& compressedFileName, const string& codebookFile
     }
 }
 
-// Main function
+
+
 int main() {
-    int choice;
-    cout << "\n*************************************\n";
-    cout << "          Huffman Coding Tool       \n";
-    cout << "*************************************\n";
-    cout << "1. Compress (Encode)\n";
-    cout << "2. Decompress (Decode)\n";
-    cout << "3. Exit\n";
-    cout << "Enter your choice: ";
-    cin >> choice;
+    while (true) {
+        char choice;
+        cout << "\n*************************************\n";
+        cout << "          Huffman Coding Tool       \n";
+        cout << "*************************************\n";
+        cout << "1. Compress (Encode)\n";
+        cout << "2. Decompress (Decode)\n";
+        cout << "3. Exit\n";
 
-    string inputFileName, outputFileName, codebookFileName;
-    if (choice == 1) {
-        cout << "Enter input file name: ";
-        cin >> inputFileName;
-        ifstream inputFile(inputFileName+".txt");
-        if (!inputFile) {
-        cerr << "\nError opening input file!\n" << endl;
-        main();}
-        cout << "Enter compressed file name: ";
-        cin >> outputFileName;
-        cout << "Enter codebook file name: ";
-        cin >> codebookFileName;
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-        compressFile(inputFileName+".txt", outputFileName+".txt", codebookFileName+".txt");
-    } else if (choice == 2) {
-        cout << "Enter compressed file name: ";
-        cin >> inputFileName;
-        ifstream compressedFile(inputFileName+".txt");
-        if (!compressedFile) {
-        cerr << "\nError opening compressed file!\n" << endl;
-        main();
-    }
-        cout << "Enter codebook file name: ";
-        cin >> codebookFileName;
-        ifstream codeFile(codebookFileName+".txt");
-        if (!codeFile) {
-        cerr << "\nError opening Codebook file!\n" << endl;
-        main();
-    }
-    
-        decompressFile(inputFileName+".txt", codebookFileName+".txt");
-    }
-    else if(choice==3){
-            cout<<"\nExiting....\n";
-            exit(0);
-    } else {
-        cout << "Invalid choice!" << endl;
-    }
+        // Validate choice as a digit
+        if (!isdigit(choice)) {
+            cout << "Please enter a valid digit (1, 2, or 3)!\n";
+            continue;
+        }
 
+        // Convert char to integer
+        int option = choice - '0';
+
+        // Variables for filenames
+        string inputFileName, outputFileName, codebookFileName;
+
+        switch (option) {
+            case 1: // 
+            {
+                cout << "Enter input file name (without extension): ";
+                cin >> inputFileName;
+
+                // Open and check input file
+                ifstream inputFile(inputFileName + ".txt");
+                if (!inputFile) {
+                    cerr << "\nError opening input file!\n";
+                    continue;
+                }
+
+                cout << "Enter compressed file name (without extension): ";
+                cin >> outputFileName;
+
+                cout << "Enter codebook file name (without extension): ";
+                cin >> codebookFileName;
+
+                compressFile(inputFileName + ".txt", outputFileName + ".txt", codebookFileName + ".txt");
+                break;
+
+            }
+                
+
+            case 2: 
+
+            {
+                cout << "Enter compressed file name (without extension): ";
+                cin >> inputFileName;
+
+                // Open and check compressed file
+                ifstream compressedFile(inputFileName + ".txt");
+                if (!compressedFile) {
+                    cerr << "\nError opening compressed file!\n";
+                    continue;
+                }
+
+                cout << "Enter codebook file name (without extension): ";
+                cin >> codebookFileName;
+
+                // Open and check codebook file
+                ifstream codeFile(codebookFileName + ".txt");
+                if (!codeFile) {
+                    cerr << "\nError opening codebook file!\n";
+                    continue;
+                }
+
+                decompressFile(inputFileName + ".txt", codebookFileName + ".txt");
+                break;
+            }
+                
+
+            case 3: // Exit
+                cout << "\nExiting...\n";
+                exit(0);
+
+            default:
+                cout << "Invalid choice! Please select 1, 2, or 3.\n";
+                break;
+        }
+    }
     return 0;
 }
+
