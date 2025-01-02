@@ -236,7 +236,7 @@ int main() {
                 cout << "Enter input file name (without extension): ";
                 cin >> inputFileName;
 
-                // Open and check input fil
+                // Open and check input file
                 ifstream inputFile(inputFileName + ".txt");
                 if (!inputFile) {
                     cerr << "\nError opening input file!\n";
