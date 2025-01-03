@@ -242,7 +242,6 @@ int main() {
                     cerr << "\nError opening input file!\n";
                     continue;
                 }
-
                 cout << "Enter compressed file name (without extension): ";
                 cin >> outputFileName;
 
