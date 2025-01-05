@@ -255,7 +255,7 @@ int main() {
             }
                 
 
-            case 2: 
+            case 2:
 
             {
                 cout << "Enter compressed file name (without extension): ";
