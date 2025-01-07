@@ -227,7 +227,7 @@ int main() {
         // Convert char to integer
         int option = choice - '0';
 
-        // Variables for filenames
+        // Variables for filename
         string inputFileName, outputFileName, codebookFileName;
 
         switch (option) {
