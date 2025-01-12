@@ -25,7 +25,7 @@ class heap{
 
         arr[current]=val;
         int index=current;
-        current++;
+        current=current+1;
         while(index!=0){
             int parent=(index-1)/2;
 
