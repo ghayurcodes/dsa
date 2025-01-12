@@ -18,23 +18,22 @@ int findSecondSmallest(Node* root) {
     stack<Node*> st;
     Node* current = root;
     int count = 0;
+    int ele=0;
 
-    while (!st.empty() || current != nullptr) {
-        while (current != nullptr) {
-            st.push(current);
-            current = current->left;
-        }
-
-        current = st.top();
-        st.pop();
-
-        count++;
-        if (count == 2) {
-            return current->data;
-        }
-
-        current = current->right;
+    while (current!=nullptr)
+    {
+        st.push(current);
+        current=current->left;
     }
+    
+
+    while (count!=2) {
+        Node* temp=st.top();
+       st.pop();
+       count++;
+       ele=temp->data;
+    }
+    return ele;
 
     throw runtime_error("Tree does not have enough elements");
 }
