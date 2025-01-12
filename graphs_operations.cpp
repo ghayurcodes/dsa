@@ -41,9 +41,9 @@ public:
         }
 
         // Remove all edges connected to this vertex
-        adjList.erase(adjList.begin() + v);
+        adjList.erase(adjList.begin()+v);
         for (auto &neighbors : adjList) {
-            neighbors.erase(remove(neighbors.begin(), neighbors.end(), v), neighbors.end());
+            neighbors.erase(remove(neighbors.begin(), neighbors.end(),v), neighbors.end());
         }
         vertices--;
 
