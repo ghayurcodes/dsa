@@ -131,8 +131,10 @@ int main() {
 
     int choice, src, dest;
 
-    do {
-        cout << "\nGraph Operations:\n";
+    while(true){
+
+
+cout << "\nGraph Operations:\n";
         cout << "1. Add Vertex\n";
         cout << "2. Update Vertex\n";
         cout << "3. Delete Vertex\n";
@@ -194,11 +196,15 @@ int main() {
                 break;
             case 10:
                 cout << "Exiting program." << endl;
-                break;
+                exit(0);
             default:
                 cout << "Invalid choice. Try again." << endl;
         }
-    } while (choice != 10);
+
+
+    }
+        
+    
 
     return 0;
 }
