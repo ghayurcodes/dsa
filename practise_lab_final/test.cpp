@@ -20,7 +20,6 @@ void viewItems(Node* root);
 Node* deleteItem(Node* root, int id);
 Node* findMin(Node* root);
 Node* updateItem(Node* root, int id, const string& name, double price);
-void freeTree(Node* root);
 
 int main() {
     Node* root = nullptr;
@@ -153,12 +152,4 @@ Node* updateItem(Node* root, int id, const string& name, double price) {
         cout << "Item updated successfully.\n";
     }
     return root;
-}
-
-// Function to free the allocated memory for the tree
-void freeTree(Node* root) {
-    if (!root) return;
-    freeTree(root->left);
-    freeTree(root->right);
-    delete root;
 }
