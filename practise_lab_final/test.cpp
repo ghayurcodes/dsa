@@ -67,7 +67,6 @@ int main() {
             cin >> price;
             root = updateItem(root, id, name, price);
         } else if (choice == 5) {
-            freeTree(root);
             cout << "Exiting...\n";
         } else {
             cout << "Invalid choice. Please try again.\n";
