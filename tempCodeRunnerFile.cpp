@@ -1,9 +1,9 @@
 #include <iostream>
 #include <queue>
-#include <stack>
+#include<stack>
 using namespace std;
 
-// Node class for the binary tree
+// Node class to represent each node in the binary tree
 class Node {
 public:
     int val;
@@ -17,60 +17,97 @@ public:
     }
 };
 
-// Perform BFS on the binary tree
-void bfs(Node* root) {
-    if (!root) return;
-
-    queue<Node*> q;
-    q.push(root);
-
-    cout << "BFS Traversal: ";
-    while (!q.empty()) {
-        Node* current = q.front();
-        q.pop();
-        cout << current->val << " ";
-
-        // Enqueue left and right children
-        if (current->left) q.push(current->left);
-        if (current->right) q.push(current->right);
-    }
-    cout << endl;
+// Function to perform Preorder Traversal (Root, Left, Right)
+void preorder(Node* root) {
+    if (root == nullptr) return;
+    cout << root->val << " ";
+    preorder(root->left);
+    preorder(root->right);
 }
 
-// Perform DFS on the binary tree using an iterative approach
-void dfsIterative(Node* root) {
-    if (!root) return;
+// Function to perform Inorder Traversal (Left, Root, Right)
+void inorder(Node* root) {
+    if (root == nullptr) return;
+    inorder(root->left);
+    cout << root->val << " ";
+    inorder(root->right);
+}
 
-    stack<Node*> st;
-    st.push(root);
+// Function to perform Postorder Traversal (Left, Right, Root)
+void postorder(Node* root) {
+    if (root == nullptr) return;
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->val << " ";
+}
 
-    cout << "DFS Traversal (Iterative): ";
-    while (!st.empty()) {
-        Node* current = st.top();
-        st.pop();
-        cout << current->val << " ";
+// Function to insert elements into the tree level by level
+Node* insertLevelOrder(int arr[], Node* root, int i, int n) {
+    if (i < n) {
+        Node* temp = new Node(arr[i]);
+        root = temp;
 
-        // Push right and then left to stack to process left before right
-        if (current->right) st.push(current->right);
-        if (current->left) st.push(current->left);
+        // Insert left child
+        root->left = insertLevelOrder(arr, root->left, 2 * i + 1, n);
+
+        // Insert right child
+        root->right = insertLevelOrder(arr, root->right, 2 * i + 2, n);
     }
+    return root;
+}
+
+
+
+void dfs(Node* root){
+    stack<Node*> s;
+    s.push(root);
+
+    while(!s.empty()){
+        Node* temp=s.top();
+        s.pop();
+
+        cout<<temp->val<<" ";
+
+        if(temp->right){
+            s.push(temp->right);
+        }
+        if(temp->left){
+            s.push(temp->left);
+        }
+    }
+
+}
+
+// Function to display the tree traversals
+void displayTraversals(Node* root) {
+    cout << "Preorder Traversal: ";
+    preorder(root);
     cout << endl;
+
+    cout << "Inorder Traversal: ";
+    inorder(root);
+    cout << endl;
+
+    cout << "Postorder Traversal: ";
+    postorder(root);
+    cout << endl;
+
+
+    cout<<" DFS: ";
+    dfs(root);
+    cout<<endl;
 }
 
 int main() {
-    // Create a binary tree
-    Node* root = new Node(1);
-    root->left = new Node(2);
-    root->right = new Node(3);
+    // 10 elements given for the tree
+    int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-    root->left->left = new Node(4);
-    root->left->right = new Node(5);
-    root->right->left = new Node(6);
-    root->right->right = new Node(7);
+    // Insert elements into the binary tree
+    Node* root = nullptr;
+    root = insertLevelOrder(arr, root, 0, 10);
 
-    // Perform BFS and DFS
-    bfs(root);
-    dfsIterative(root);
+    // Display the three traversals
+    displayTraversals(root);
 
     return 0;
 }
