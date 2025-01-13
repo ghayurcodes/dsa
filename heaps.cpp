@@ -7,6 +7,57 @@
 
 using namespace std;
 
+
+
+
+
+
+
+
+
+
+void heapify(int a[], int size, int index) {
+    int largest = index;
+    int leftnode = index * 2;
+    int rightnode = index * 2 + 1;
+
+    // Check if left node exists and is larger than the current largest
+    if (leftnode <= size && a[leftnode] > a[largest]) {
+        largest = leftnode;
+    }
+
+    // Check if right node exists and is larger than the current largest
+    if (rightnode <= size && a[rightnode] > a[largest]) {
+        largest = rightnode;
+    }
+
+    // If largest is not the current index, swap and recursively heapify the affected subtree
+    if (largest != index) {
+        swap(a[index], a[largest]);
+        heapify(a, size, largest);  // Recursive call on the subtree
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class heap{
     public:
     int a[20];
@@ -57,53 +108,30 @@ class heap{
         a[1]=a[size];
         //step 2
         size=size-1;
+        heapify(a,20,0);        //step 3 taking root node to corect position
+        // int i=1;
+        // while(i<size){
+        //     int leftnode=i*2;
+        //     int rightnode=i*2+1;
 
-        //step 3 taking root node to corect position
-        int i=1;
-        while(i<size){
-            int leftnode=i*2;
-            int rightnode=i*2+1;
 
-
-            if(leftnode<size && a[leftnode]>a[i]){
-                swap(a[leftnode],a[i]);
-                i=leftnode;
-            }
-            if(rightnode<size && a[rightnode]>a[i]){
-                swap(a[rightnode],a[i]);
-                i=rightnode;
-            }
-            else{
-                return;
-            }
-        }
+        //     if(leftnode<size && a[leftnode]>a[i]){
+        //         swap(a[leftnode],a[i]);
+        //         i=leftnode;
+        //     }
+        //     if(rightnode<size && a[rightnode]>a[i]){
+        //         swap(a[rightnode],a[i]);
+        //         i=rightnode;
+        //     }
+        //     else{
+        //         return;
+        //     }
+        // }
     }
 
 };
 
 
-
-void heapify(int a[], int size, int index) {
-    int largest = index;
-    int leftnode = index * 2;
-    int rightnode = index * 2 + 1;
-
-    // Check if left node exists and is larger than the current largest
-    if (leftnode <= size && a[leftnode] > a[largest]) {
-        largest = leftnode;
-    }
-
-    // Check if right node exists and is larger than the current largest
-    if (rightnode <= size && a[rightnode] > a[largest]) {
-        largest = rightnode;
-    }
-
-    // If largest is not the current index, swap and recursively heapify the affected subtree
-    if (largest != index) {
-        swap(a[index], a[largest]);
-        heapify(a, size, largest);  // Recursive call on the subtree
-    }
-}
 
 
 
