@@ -86,12 +86,15 @@ int main() {
     h.add(10);
     h.add(2);
     h.add(76);
+    h.add(88);
 
     cout << "\tDisplaying:\n";
     h.display();
 
     cout << "\tMin priority:\n";
     cout << h.getminpriority() << endl;
+
+    h.heapify(0);
 
     return 0;
 }
