@@ -1,113 +1,128 @@
 #include <iostream>
-#include <queue>
-#include<stack>
 using namespace std;
 
-// Node class to represent each node in the binary tree
 class Node {
 public:
-    int val;
+    int data;
     Node* left;
     Node* right;
 
-    Node(int value) {
-        val = value;
-        left = nullptr;
-        right = nullptr;
+    Node(int val) {
+        data = val;
+        left = right = nullptr;
     }
 };
 
-// Function to perform Preorder Traversal (Root, Left, Right)
-void preorder(Node* root) {
-    if (root == nullptr) return;
-    cout << root->val << " ";
-    preorder(root->left);
-    preorder(root->right);
-}
+class BinaryTree {
+public:
+    Node* root;
 
-// Function to perform Inorder Traversal (Left, Root, Right)
-void inorder(Node* root) {
-    if (root == nullptr) return;
-    inorder(root->left);
-    cout << root->val << " ";
-    inorder(root->right);
-}
-
-// Function to perform Postorder Traversal (Left, Right, Root)
-void postorder(Node* root) {
-    if (root == nullptr) return;
-    postorder(root->left);
-    postorder(root->right);
-    cout << root->val << " ";
-}
-
-// Function to insert elements into the tree level by level
-Node* insertLevelOrder(int arr[], Node* root, int i, int n) {
-    if (i < n) {
-        Node* temp = new Node(arr[i]);
-        root = temp;
-
-        // Insert left child
-        root->left = insertLevelOrder(arr, root->left, 2 * i + 1, n);
-
-        // Insert right child
-        root->right = insertLevelOrder(arr, root->right, 2 * i + 2, n);
-    }
-    return root;
-}
-
-
-
-void dfs(Node* root){
-    stack<Node*> s;
-    s.push(root);
-
-    while(!s.empty()){
-        Node* temp=s.top();
-        s.pop();
-
-        cout<<temp->val<<" ";
-
-        if(temp->right){
-            s.push(temp->right);
-        }
-        if(temp->left){
-            s.push(temp->left);
-        }
+    BinaryTree() {
+        root = nullptr;
     }
 
-}
+    // Function to insert a node in the binary tree
+    Node* insert(Node* node, int val) {
+        if (node == nullptr) {
+            return new Node(val);
+        }
 
-// Function to display the tree traversals
-void displayTraversals(Node* root) {
-    cout << "Preorder Traversal: ";
-    preorder(root);
-    cout << endl;
+        // Simple level-order insertion for demonstration purposes
+        if (val < node->data) {
+            node->left = insert(node->left, val);
+        } else {
+            node->right = insert(node->right, val);
+        }
 
-    cout << "Inorder Traversal: ";
-    inorder(root);
-    cout << endl;
+        return node;
+    }
 
-    cout << "Postorder Traversal: ";
-    postorder(root);
-    cout << endl;
+    // Delete operation for the binary tree
+    Node* deleteNode(Node* root, int val) {
+        if (root == nullptr) {
+            return root;
+        }
 
+        // If the value is smaller than the root's data, move to the left subtree
+        if (val < root->data) {
+            root->left = deleteNode(root->left, val);
+        }
+        // If the value is greater than the root's data, move to the right subtree
+        else if (val > root->data) {
+            root->right = deleteNode(root->right, val);
+        }
+        // If root is the node to be deleted
+        else {
+            // Case 1: Node has no children (leaf node)
+            if (root->left == nullptr && root->right == nullptr) {
+                delete root;
+                return nullptr;
+            }
+            // Case 2: Node has one child
+            else if (root->left == nullptr) {
+                Node* temp = root->right;
+                delete root;
+                return temp;
+            } else if (root->right == nullptr) {
+                Node* temp = root->left;
+                delete root;
+                return temp;
+            }
+            // Case 3: Node has two children
+            else {
+                // Find the inorder successor (smallest node in the right subtree)
+                Node* temp = findInorderSuccessor(root->right);
+                root->data = temp->data;  // Replace data with the inorder successor's data
+                root->right = deleteNode(root->right, temp->data);  // Delete the inorder successor
+            }
+        }
+        return root;
+    }
 
-    cout<<" DFS: ";
-    dfs(root);
-    cout<<endl;
-}
+    // Function to find the inorder successor (smallest node in the right subtree)
+    Node* findInorderSuccessor(Node* root) {
+        while (root && root->left != nullptr) {
+            root = root->left;
+        }
+        return root;
+    }
+
+    // Inorder traversal to print the tree
+    void inorder(Node* root) {
+        if (root == nullptr) {
+            return;
+        }
+        inorder(root->left);
+        cout << root->data << " ";
+        inorder(root->right);
+    }
+};
 
 int main() {
-    // 10 elements given for the tree
-    int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    BinaryTree tree;
 
-    // Insert elements into the binary tree
-    Node* root = nullptr;
-    root = insertLevelOrder(arr, root, 0, 10);
+    // Building the tree
+    tree.root = tree.insert(tree.root, 50);
+    tree.insert(tree.root, 30);
+    tree.insert(tree.root, 20);
+    tree.insert(tree.root, 40);
+    tree.insert(tree.root, 70);
+    tree.insert(tree.root, 60);
+    tree.insert(tree.root, 80);
 
-    // Display the three traversals
-    displayTraversals(root);
+    // Print the tree before deletion
+    cout << "Original Tree (Inorder): ";
+    tree.inorder(tree.root);
+    cout << endl;
+
+    // Delete a node
+    int valueToDelete = 20;
+    tree.root = tree.deleteNode(tree.root, valueToDelete);
+
+    // Print the tree after deletion
+    cout << "Tree after deleting " << valueToDelete << " (Inorder): ";
+    tree.inorder(tree.root);
+    cout << endl;
 
     return 0;
 }
